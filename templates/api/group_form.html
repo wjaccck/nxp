@@ -1,0 +1,96 @@
+{% extends "webui/index.html" %}
+{% load staticfiles %}
+{% load bootstrap_pagination %}
+{% block username %}
+{{ username }}
+{% endblock %}
+
+
+<!-- END HEADER INNER -->
+{% block content %}
+    <div class="page-content-wrapper">
+    		<div class="page-content">
+			<!-- BEGIN PAGE BREADCRUMB -->
+			<ul class="page-breadcrumb breadcrumb">
+				<li>
+					<a href="{% url 'index' %}">Home</a>
+					<i class="fa fa-circle"></i>
+				</li>
+				<li>
+					<a href="#">{{ item }}</a>
+					<i class="fa fa-circle"></i>
+				</li>
+			</ul>
+			<!-- END PAGE BREADCRUMB -->
+			<!-- END PAGE HEADER-->
+			<!-- BEGIN PAGE CONTENT-->
+			<div class="row">
+				<div class="col-md-12">
+					<!-- BEGIN EXAMPLE TABLE PORTLET-->
+					<div class="portlet box blue">
+						<div class="portlet-title">
+							<div class="caption">
+								<i class="fa fa-edit"></i>{{ type }}
+							</div>
+							<div class="tools">
+								<a href="javascript:;" class="collapse">
+								</a>
+								<a href="javascript:;" class="reload">
+								</a>
+								<a href="javascript:;" class="remove">
+								</a>
+							</div>
+						</div>
+						<div class="portlet-body form">
+                                <form action="." class="form-horizontal form-bordered" method="post">
+                                        {% csrf_token %}
+
+                                            {% for field in form %}
+
+                                                <div class="form-group">
+                                                    <label for="{{ field.id_for_label }}" class="col-md-2 control-label">{{ field.label }}</label>
+                                                    <div class="col-md-8">
+                                                        {{ field }}
+{#                                                        {% if form.errors %}#}
+{#                                                            {% if form.errors|get_digit:field.name %}#}
+{#                                                                <font color="#FF000000"> {{ form.errors|get_digit:field.name }} </font>#}
+{#                                                            {% endif %}#}
+{#                                                        {% endif %}#}
+                                                    </div>
+                                                </div>
+
+                                            {% endfor %}
+
+                                            {% if form.errors and form.errors|get_digit:"__all__" %}
+                                            <div class="alert alert-danger"><p>{{ form.errors|get_digit:"__all__" }}</p></div>
+                                            {% endif %}
+
+                                        <p class="text-center">
+                                            <input type="submit" class="btn btn-primary" value="{{ btnsubmit }}" />
+                                            <a href="{% url 'group-list' %}" class="btn btn-default"> {{ btncancel }} </a>
+                                        </p>
+                                </form>
+						</div>
+					</div>
+					<!-- END EXAMPLE TABLE PORTLET-->
+				</div>
+			</div>
+			<!-- END PAGE CONTENT -->
+		</div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ form.media.js }}
+    <script src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
+<script>
+jQuery(document).ready(function() {
+   Metronic.init(); // init metronic core componets
+   Layout.init(); // init layout
+   Demo.init(); // init demo features
+    Index.init(); // init index page
+ Tasks.initDashboardWidget(); // init tash dashboard widget
+});
+</script>
+{% endblock %}
+

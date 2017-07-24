@@ -1,0 +1,16 @@
+django==1.10.5
+django-filter==0.15.3
+djangorestframework==3.5.4
+django-extensions==1.7.6
+netaddr==0.7.19
+django-cors-headers==2.0.2
+djangorestframework-filters==0.9.1
+django-vanilla-views==1.0.4
+django-bootstrap-pagination==1.6.2
+django-select2==5.8.10
+django-redis==4.7.0
+django-import-export==0.5.1
+django-rest-swagger==2.1.1
+django-debug-toolbar==1.6
+celery<4.0
+django-celery

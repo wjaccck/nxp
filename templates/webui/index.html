@@ -1,0 +1,181 @@
+{% extends "webui/layout.html" %}
+{% load staticfiles %}
+{% block username %}
+{{ username }}
+{% endblock %}
+{% block header %}
+{{ form.media.css }}
+  <style type="text/css">
+    select {
+      width: 200px;
+    }
+  </style>
+    <div class="page-header navbar navbar-fixed-top">
+    <!-- BEGIN HEADER INNER -->
+    <div class="page-header-inner">
+        <!-- BEGIN LOGO -->
+        <div class="page-logo">
+            <a href="{% url "index" %}">
+                <img src="{% static "img/logo1.jpg"  %}" alt="logo" class="logo-default"/>
+            </a>
+            <div class="menu-toggler sidebar-toggler">
+                <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
+            </div>
+        </div>
+        <!-- END LOGO -->
+        <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+        <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
+        </a>
+        <!-- END RESPONSIVE MENU TOGGLER -->
+        <!-- BEGIN PAGE ACTIONS -->
+        <!-- DOC: Remove "hide" class to enable the page header actions -->
+        <!-- END PAGE ACTIONS -->
+        <!-- BEGIN PAGE TOP -->
+        <div class="page-top">
+            <!-- BEGIN HEADER SEARCH BOX -->
+            <!-- DOC: Apply "search-form-expanded" right after the "search-form" class to have half expanded search box -->
+            <!-- END HEADER SEARCH BOX -->
+            <!-- BEGIN TOP NAVIGATION MENU -->
+            <div class="top-menu">
+                <ul class="nav navbar-nav pull-right">
+                    <li class="separator hide">
+                    </li>
+                    <!-- BEGIN NOTIFICATION DROPDOWN -->
+                    <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+                    <!-- END NOTIFICATION DROPDOWN -->
+                    <li class="separator hide">
+                    </li>
+                    <li class="separator hide">
+                    </li>
+                    <!-- BEGIN USER LOGIN DROPDOWN -->
+                    <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+                    <li class="dropdown dropdown-user dropdown-dark">
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+						<span class="username username-hide-on-mobile">
+						{{ username }} </span>
+                            <!-- DOC: Do not remove below empty space(&nbsp;) as its purposely used -->
+                            <img alt="" class="img-circle" src="{% static "assets/admin/layout4/img/avatar9.jpg" %}" />
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-default">
+                            <li>
+                                <a href="page_todo.html">
+                                    <i class="icon-rocket"></i> My Tasks <span class="badge badge-success">
+								7 </span>
+                                </a>
+                            </li>
+                            <li class="divider">
+                            </li>
+                            <li>
+                                <a  href="{% url 'logout' %}" >
+                                    <i class="icon-key"></i> Log Out </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- END USER LOGIN DROPDOWN -->
+                </ul>
+            </div>
+            <!-- END TOP NAVIGATION MENU -->
+        </div>
+        <!-- END PAGE TOP -->
+    </div>
+</div>
+{% endblock %}
+
+{% block menu %}
+<ul class="page-sidebar-menu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+    <li>
+        <a href="{% url 'index' %}">
+        <i class="icon-home"></i>
+        <span class="title">Dashboard</span>
+        </a>
+
+    </li>
+
+        {% if active == 'nginx' %}
+            <li class="active">
+        {% else %}
+            <li>
+        {% endif %}
+        <a href="">
+        <i class="icon-grid"></i>
+        <span class="title">NGINX</span>
+            <ul class="sub-menu">
+                <li>
+                    <a  href="{% url 'group-list' %}">
+                    NGINX组</a>
+                </li>
+                <li>
+                    <a  href="{% url 'site-list' %}">
+                    站点</a>
+                </li>
+                <li>
+                    <a  href="{% url 'upstream-list' %}">
+                    Upstream</a>
+                </li>
+                <li>
+                    <a  href="{% url 'context-list' %}">
+                    Context</a>
+                </li>
+                <li>
+                    <a  href="{% url 'mission-list' %}">
+                    同步任务</a>
+                </li>
+                <li>
+                    <a  href="{% url 'status-list' %}">
+                    状态</a>
+                </li>
+                <li>
+                    <a  href="{% url 'fun-query' %}">
+                    查询</a>
+                </li>
+            </ul>
+        </a>
+    </li>
+
+
+{% endblock %}
+{% block content %}
+    <div class="page-content-wrapper">
+		<div class="page-content">
+            <div class="portlet box blue">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-gift"></i>简要说明
+                    </div>
+                    <div class="tools">
+                        <a href="javascript:;" class="collapse">
+                        </a>
+                        <a href="#" data-toggle="modal" class="config">
+                        </a>
+                        <a href="javascript:;" class="reload">
+                        </a>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <p>
+
+                            本应用主要是为了记录杭州机房接手服务器情况，目前总计有<h4 class="font-red-haze">{{ total_list }}条D记录</h4>。
+
+                    </p>
+                </div>
+                </div>
+
+        </div>
+    </div>
+{% endblock %}
+<!-- END HEADER INNER -->
+
+{% block scripts %}
+{#    <script type="text/javascript" src="http://cdn.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>#}
+
+<script>
+jQuery(document).ready(function() {
+   Metronic.init(); // init metronic core componets
+   Layout.init(); // init layout
+   Demo.init(); // init demo features
+    Index.init(); // init index page
+ Tasks.initDashboardWidget(); // init tash dashboard widget
+});
+</script>
+{% endblock %}
+

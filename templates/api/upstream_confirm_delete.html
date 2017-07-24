@@ -1,0 +1,77 @@
+{% extends "webui/index.html" %}
+{% load webui_extras %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+   <div class="page-content-wrapper">
+    		<div class="page-content">
+			<!-- BEGIN PAGE BREADCRUMB -->
+			<ul class="page-breadcrumb breadcrumb">
+				<li>
+					<a href="{% url 'index' %}">Home</a>
+					<i class="fa fa-circle"></i>
+				</li>
+				<li>
+					<a href="#">{{ item }}</a>
+					<i class="fa fa-circle"></i>
+				</li>
+			</ul>
+			<!-- END PAGE BREADCRUMB -->
+			<!-- END PAGE HEADER-->
+			<!-- BEGIN PAGE CONTENT-->
+			<div class="row">
+				<div class="col-md-12">
+					<!-- BEGIN EXAMPLE TABLE PORTLET-->
+					<div class="portlet box blue">
+						<div class="portlet-title">
+							<div class="caption">
+								<i class="fa fa-edit"></i>{{ type }}
+							</div>
+							<div class="tools">
+								<a href="javascript:;" class="collapse">
+								</a>
+								<a href="javascript:;" class="reload">
+								</a>
+								<a href="javascript:;" class="remove">
+								</a>
+							</div>
+						</div>
+						<div class="portlet-body form">
+                                    <form action="." method="POST" class="form-horizontal">
+            {% csrf_token %}
+
+            <p class="alert alert-warning">
+                {{ delete_confirmation }} {{ name }}?
+{#                {{ delete_confirmation }}#}
+            </p>
+
+            <p class="text-center">
+                <input type="submit" class="btn btn-danger" value="{{ btnsubmit }}" />
+                <a href="{% url 'site-list' %}" class="btn btn-default"> {{ btncancel }} </a>
+            </p>
+
+            {% if form.errors %}
+            <p class="validation-summary-errors">{{ form.errors }}</p>
+            {% endif %}
+        </form>
+
+						</div>
+					</div>
+					<!-- END EXAMPLE TABLE PORTLET-->
+				</div>
+			</div>
+			<!-- END PAGE CONTENT -->
+		</div>
+    </div>
+
+{% else %}
+
+    <div class="alert alert-danger">
+      <p>{{ requirslogin }}</p>
+    </div>
+
+{% endif %}
+
+{% endblock %}
