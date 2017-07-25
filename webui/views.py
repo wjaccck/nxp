@@ -242,7 +242,7 @@ def Generate_conf(req, site_id):
             else:
                 upstream_tmp_conf=open(upstream_tmp_file.format(m.name),'w')
                 m_content=upstream_content.replace('upstream_name',m.name)
-                m_content=m_content.replace('back_end','\r\n    '.join([ "server {0}:{1};".format(x.name,m.port) for x in m.hosts.all()]))
+                m_content=m_content.replace('back_end','\r\\n    '.join([ "server {0}:{1};".format(x.name,m.port) for x in m.hosts.all()]))
                 upstream_tmp_conf.write(m_content)
                 upstream_tmp_conf.close()
                 logger.info("create upstream conf {0}".format(upstream_tmp_file.format(m.name)))
