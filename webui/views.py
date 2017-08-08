@@ -191,7 +191,7 @@ class Site_context_ListViewSet(Base_ListViewSet):
             pass
 
         if name:
-            return self.model.objects.filter(site__name__icontains=name)
+            return self.model.objects.filter(site__name__istartswith=name)
         else:
             return self.model.objects.all()
                         #
