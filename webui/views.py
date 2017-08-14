@@ -121,7 +121,7 @@ class Site_ListViewSet(Base_ListViewSet):
         if name:
             return self.model.objects.filter(name__icontains=name)
         else:
-            return self.model.objects.all().order_by("modified_date")
+            return self.model.objects.all().order_by("-modified_date")
 
 #
 
