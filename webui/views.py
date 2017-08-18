@@ -594,17 +594,19 @@ def Codis_queryView(req):
             group_offline=[]
             group_slave=[]
             for m in redis_instrance:
-                group_master.extend(Redis_group.objects.filter(master=m))
+                for n in Redis_group.objects.filter(master=m):
+                    group_master.append({"group":n,"host":host_name,"port":m.port})
+            for m in redis_instrance:
+                for n in Redis_group.objects.filter(offline=m):
+                    group_offline.append({"group":n,"host":host_name,"port":m.port})
 
             for m in redis_instrance:
-                group_offline.extend(Redis_group.objects.filter(offline=m))
+                for n in Redis_group.objects.filter(slave=m):
+                    group_slave.append({"group":n,"host":host_name,"port":m.port})
 
-            for m in redis_instrance:
-                group_slave.extend(Redis_group.objects.filter(slave=m))
-
-            codis_master=[{"codis":x.codis_group.all(),"group":x.name,"host":host_name,"name":"master"} for x in list(set(group_master))]
-            codis_offline=[{"codis":x.codis_group.all(),"group":x.name,"host":host_name,"name":"offline"} for x in list(set(group_offline))]
-            codis_slave=[{"codis":x.codis_group.all(),"group":x.name,"host":host_name,"name":"slave"} for x in list(set(group_slave))]
+            codis_master=[{"codis":x.get("group").codis_group.all(),"group":x.get("group"),"host":x.get("host"),"name":"master","port":x.get("port")} for x in group_master]
+            codis_offline=[{"codis":x.get("group").codis_group.all(),"group":x.get("group"),"host":x.get("host"),"name":"offline","port":x.get("port")} for x in group_master]
+            codis_slave=[{"codis":x.get("group").codis_group.all(),"group":x.get("group"),"host":x.get("host"),"name":"slave","port":x.get("port")} for x in group_master]
 
             response = render(req, 'api/query-detail.html', {"username": req.user.last_name,
                                                              "active": "redis",
