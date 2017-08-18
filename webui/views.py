@@ -582,7 +582,7 @@ def Codis_detailView(req,codis_id):
 def Codis_queryView(req):
     if req.user.is_authenticated():
         try:
-            name = req.GET['keyword']
+            name = req.GET['name']
             host = Ipv4Address.objects.get(name=name)
         except:
             host=None
