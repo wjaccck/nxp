@@ -587,6 +587,7 @@ def Codis_queryView(req):
         except:
             host=None
 
+        if host:
             redis_instrance=Redis_instance.objects.filter(host=host)
             host_name=host.name
             group_master=[]
