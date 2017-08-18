@@ -66,4 +66,4 @@ class MissionTask(BaseTask):
     def run(self):
         for m in Codis.objects.all():
             if m.admin_http:
-                Codis_info().apply_async(args=(m.id))
+                Codis_info().apply_async(args=(m.id,))
