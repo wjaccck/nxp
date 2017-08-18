@@ -21,14 +21,17 @@ class Codis_info(BaseTask):
         group_info=Codis_admin_info(codis.admin_http).group()
         for m in group_info:
             group_name="{0}{1}".format(codis.name,m.get('id'))
-            Redis_group.objects.get_or_create(name=group_name)
-            group=Redis_group.objects.get(name=group_name)
+            group,group_status=Redis_group.objects.get_or_create(name=group_name)
+            if group_status:
+                logger.info("{0} add to {1}".format(group_name,codis.name))
             group.slave.clear()
             group.offline.clear()
             for n in m.get('servers'):
-                redis_instance=Redis_instance.objects.get_or_create(host=Ipv4Address.objects.get(name=n.get('addr').split(':')[0]),
+                redis_instance,redis_instance_status=Redis_instance.objects.get_or_create(host=Ipv4Address.objects.get(name=n.get('addr').split(':')[0]),
                                                                     port=n.get('addr').split(':')[1]
                                                                     )
+                if redis_instance_status:
+                    logger.info("{0}:{1} add to {2}".format(redis_instance.host.name,redis_instance.port, group_name))
                 if n.get('type').lower()=="master":
                     group.master=redis_instance
                     group.save()
