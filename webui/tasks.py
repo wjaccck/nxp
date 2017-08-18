@@ -20,7 +20,7 @@ class Codis_info(BaseTask):
         codis=Codis.objects.get(id=codis_id)
         group_info=Codis_admin_info(codis.admin_http).group()
         for m in group_info:
-            group_name="{0}{1}".format(codis.name,m.get('id'))
+            group_name="{0}_{1}".format(codis.name,m.get('id'))
             group,group_status=Redis_group.objects.get_or_create(name=group_name)
             if group_status:
                 logger.info("{0} add to {1}".format(group_name,codis.name))
