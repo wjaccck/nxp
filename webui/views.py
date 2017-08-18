@@ -481,7 +481,7 @@ class Redis_instance_ListViewSet(Base_ListViewSet):
             pass
 
         if name:
-            return self.model.objects.filter(name__icontains=name).order_by("-modified_date")
+            return self.model.objects.filter(host__name__istartswith=name).order_by("-modified_date")
         else:
             return self.model.objects.all().order_by("-modified_date")
 
