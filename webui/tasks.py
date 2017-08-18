@@ -33,7 +33,7 @@ class Codis_info(BaseTask):
                     group.master=redis_instance
                     group.save()
                 elif n.get('type').lower()=="slave":
-                    group.salve.add(redis_instance)
+                    group.slave.add(redis_instance)
                 elif n.get('type').lower()=="offline":
                     group.offline.add(redis_instance)
                 else:
