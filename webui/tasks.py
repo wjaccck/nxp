@@ -26,8 +26,8 @@ class Codis_info(BaseTask):
             group.slave.clear()
             group.offline.clear()
             for n in m.get('servers'):
-                redis_instance=Redis_instance.objects.get_or_create(host=Ipv4Address.objects.get(name=n.get('addr').split()[0]),
-                                                                    port=n.get('addr').split()[1]
+                redis_instance=Redis_instance.objects.get_or_create(host=Ipv4Address.objects.get(name=n.get('addr').split(':')[0]),
+                                                                    port=n.get('addr').split(':')[1]
                                                                     )
                 if n.get('type').lower()=="master":
                     group.master=redis_instance
