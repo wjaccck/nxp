@@ -145,10 +145,3 @@ class Codis_admin_info(object):
     #             print check_url
     #             print check_result
     #             print "{0}/{1}".format(check_result.get('used_memory'),check_result.get('maxmemory'))
-
-all_groups=[
-    "http://10.0.8.228:29939"
-]
-for m in all_groups:
-    check_redis(m)
-# http://10.0.8.229:29938/api/redis/10.0.8.144:9938/stat?group_id=1&type=master
