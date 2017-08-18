@@ -132,6 +132,30 @@
         </a>
     </li>
 
+        {% if active == 'redis' %}
+        <li class="active">
+        {% else %}
+        <li>
+        {% endif %}
+        <a href="">
+        <i class="icon-grid"></i>
+        <span class="title">REDIS</span>
+            <ul class="sub-menu">
+                <li>
+                    <a  href="{% url 'codis-list' %}">
+                    CODIS</a>
+                </li>
+                <li>
+                    <a  href="{% url 'redis-group-list' %}">
+                    GROUP</a>
+                </li>
+                <li>
+                    <a  href="{% url 'redis-instance-list' %}">
+                    INSTANCE</a>
+                </li>
+            </ul>
+        </a>
+    </li>
 
 {% endblock %}
 {% block content %}

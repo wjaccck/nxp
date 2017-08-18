@@ -1,0 +1,123 @@
+{% extends "webui/index.html" %}
+{% load staticfiles %}
+{% load bootstrap_pagination %}
+{% load webui_extras %}
+{% block username %}
+{{ username }}
+{% endblock %}
+
+<!-- END HEADER INNER -->
+{% block content %}
+    <div class="page-content-wrapper">
+    		<div class="page-content">
+			<!-- BEGIN PAGE BREADCRUMB -->
+			<ul class="page-breadcrumb breadcrumb">
+				<li>
+					<a href="{% url 'index' %}">Home</a>
+					<i class="fa fa-circle"></i>
+				</li>
+				<li>
+					<a href="#">{{ item }}</a>
+					<i class="fa fa-circle"></i>
+				</li>
+			</ul>
+            <div class="col-sm-3 col-md-3 pull-right">
+{#            <a href="{% url 'webui-application-list' 1 %}">query</a>#}
+            <form action="" method="get" class="navbar-from" role="search">
+                <div class="input-group">
+                    <input type="text" name="keyword" />
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit">搜索</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+			<!-- END PAGE BREADCRUMB -->
+			<!-- END PAGE HEADER-->
+			<!-- BEGIN PAGE CONTENT-->
+			<div class="row">
+
+				<div class="col-md-12">
+					<!-- BEGIN EXAMPLE TABLE PORTLET-->
+					<div class="portlet box blue">
+						<div class="portlet-title">
+							<div class="caption">
+								<i class="fa fa-edit"></i>{{ type }}
+							</div>
+							<div class="tools">
+
+								<a href="javascript:;" class="collapse">
+								</a>
+								<a href="javascript:;" class="reload">
+								</a>
+								<a href="javascript:;" class="remove">
+								</a>
+							</div>
+						</div>
+
+                        <div class="portlet-body">
+                        {% if user.is_superuser %}
+                            <a href="{% url 'redis-instance-create' %}" class="btn btn-success">{{ create }}</a>
+                        {% endif %}
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+{#							<table class="table table-striped table-hover table-bordered" id="sample_editable_1">#}
+							<thead>
+							<tr>
+								<th>
+									 ID
+								</th>
+								<th>
+									 HOST
+								</th>
+                                <th>
+									 PORT
+								</th>
+								<th>
+									 VERSION
+								</th>
+                                <th>
+									 创建日期
+								</th>
+							</tr>
+							</thead>
+							<tbody>
+                                {% for m in object_list  %}
+                                    <tr>
+                                        <td>{{ m.id }}</td>
+                                        <td>{{ m.host }}</td>
+                                        <td>{{ m.port }}</td>
+                                        <td>{{ m.version }}</td>
+                                        <td>{{ m.created_date |date:'Y-m-d H:i:s' }}</td>
+{#                                        <td><a  href="{% url 'get-detail' m.id %}">详情</a></td>#}
+                                    </tr>
+                                {% endfor %}
+							</tbody>
+							</table>
+                            {% bootstrap_paginate page_obj range=10 show_prev_next="false" show_first_last="true" %}
+                            <div>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}. Size {{ page_obj.paginator.per_page }}.Total {{ page_obj.paginator.count }}</div>
+						</div>
+						</div>
+					</div>
+					<!-- END EXAMPLE TABLE PORTLET-->
+				</div>
+			</div>
+			<!-- END PAGE CONTENT -->
+		</div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+{#    <script type="text/javascript" src="http://cdn.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>#}
+
+<script>
+jQuery(document).ready(function() {
+   Metronic.init(); // init metronic core componets
+   Layout.init(); // init layout
+   Demo.init(); // init demo features
+    Index.init(); // init index page
+ Tasks.initDashboardWidget(); // init tash dashboard widget
+});
+</script>
+{% endblock %}
+

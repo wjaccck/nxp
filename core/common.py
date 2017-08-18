@@ -3,6 +3,7 @@ import logging
 logger = logging.getLogger("nxp")
 import commands
 import paramiko
+import requests
 
 pkey='/root/.ssh/id_rsa'
 head_file="/opt/app/nxp/templates/nginx/head.conf"
@@ -117,3 +118,37 @@ class Cmd_ssh(object):
         #     return self._passwd_ssh(cmd)
     def upload(self,local_file,remote_file):
         return self._upload(local_file,remote_file)
+
+
+
+class Codis_admin_info(object):
+    def __init__(self,admin_http):
+        self.admin_http=admin_http
+        self.header={"Content-Type": "application/json"}
+    def _get(self,url):
+        conn=requests.get(url,headers=self.header)
+        return conn.json()
+    def group(self):
+        url="{0}/api/server_groups".format(self.admin_http)
+        result=self._get(url)
+        return result
+    # def _check_redis(group_url):
+    #     url="{0}/api/server_groups".format(group_url)
+    #     result=get(url)
+    #     print result
+    #     for m in result:
+    #         for n in m.get('servers'):
+    #             check_url=None
+    #             check_result=None
+    #             check_url="{0}/api/redis/{1}/stat?group_id={2}&type={3}".format(group_url,n.get('addr'),n.get('group_id'),n.get('type'))
+    #             check_result=get(check_url)
+    #             print check_url
+    #             print check_result
+    #             print "{0}/{1}".format(check_result.get('used_memory'),check_result.get('maxmemory'))
+
+all_groups=[
+    "http://10.0.8.228:29939"
+]
+for m in all_groups:
+    check_redis(m)
+# http://10.0.8.229:29938/api/redis/10.0.8.144:9938/stat?group_id=1&type=master

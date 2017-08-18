@@ -446,87 +446,112 @@ def Fun_queryView(req):
         response = redirect('login')
     return response
 
-        # class Mission_CreateViewSet(Base_CreateViewSet):
-#     model = Mission
-#     form_class = forms.MissionFrom
-#     template_name = 'api/mission_form.html'
-#     success_url = reverse_lazy('mission-list')
-#
-# class Mission_ListViewSet(Base_ListViewSet):
-#     Mission.objects.all().count()
-#     model = Mission
-#     template_name = 'api/mission.html'
-#     paginate_by = 10
-#
-#     def get_queryset(self):
-#         name = None
-#         try:
-#             name = self.request.GET['keyword']
-#         except:
-#             pass
-#
-#         if name:
-#             return self.model.objects.filter(project__name__icontains=name)
-#         else:
-#             return self.model.objects.all()
-#
-# class Version_historyViewSet(Base_ListViewSet):
-#     Version_history.objects.all().count()
-#     model = Version_history
-#     template_name = 'api/version.html'
-#     paginate_by = 10
-#
-#     def get_queryset(self):
-#         name = None
-#         try:
-#             name = self.request.GET['keyword']
-#         except:
-#             pass
-#
-#         if name:
-#             return self.model.objects.filter(project__name__icontains=name)
-#         else:
-#             return self.model.objects.all()
-#
-# class Progress_ViewSet(Base_ListViewSet):
-#     Progress.objects.all().count()
-#     model = Progress
-#     template_name = 'api/progress.html'
-#     paginate_by = 10
-#
-#     def get_queryset(self):
-#         name = None
-#         try:
-#             name = self.request.GET['keyword']
-#         except:
-#             pass
-#
-#         if name:
-#             return self.model.objects.filter(mission__id=name)
-#         else:
-#             return self.model.objects.all()
-#
-# def run_job(req,job_id):
-#     if req.user.is_authenticated():
-#         mission=Mission.objects.get(id=job_id)
-#         if mission.status.name=='undo':
-#             mission.status=Status.objects.get(name='in_queue')
-#             mission.save()
-#             MissionTask().apply_async(args=(job_id,)) ## 调用后台任务
-#             response = redirect('mission-list')
-#         else:
-#             response=HttpResponseBadRequest('this job is already done or processing')
-#     else:
-#         response =redirect('login')
-#     return response
-# #
-# def reset_job(req,job_id):
-#     if req.user.is_authenticated():
-#         mission=Mission.objects.get(id=job_id)
-#         mission.status=Status.objects.get(name='undo')
-#         mission.save()
-#         Progress.objects.filter(mission=mission).update(status=Status.objects.get(name='undo'))
-#         response = redirect('mission-list')
-#     else:
-#         response =redirect('login')
-#     return response
+
+#### redis views
+
+
+
+class Redis_instance_CreateViewSet(Base_CreateViewSet):
+    model = Redis_instance
+    form_class = forms.Redis_instanceForm
+    template_name = 'api/redis_instance_form.html'
+    success_url = reverse_lazy('redis-instance-list')
+
+class Redis_instance_UpdateViewSet(Base_UpdateViewSet):
+    model = Redis_instance
+    form_class = forms.Redis_instanceForm
+    template_name = 'api/redis_instance_form.html'
+    success_url = reverse_lazy('redis-instance-list')
+
+class Redis_instance_DeleteViewSet(Base_DeleteViewSet):
+    model = Redis_instance
+    success_url = reverse_lazy('redis-instance-list')
+
+class Redis_instance_ListViewSet(Base_ListViewSet):
+    Redis_instance.objects.all().count()
+    model = Redis_instance
+    template_name = 'api/redis_instance.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        name = None
+        try:
+            name = self.request.GET['keyword']
+        except:
+            pass
+
+        if name:
+            return self.model.objects.filter(name__icontains=name).order_by("-modified_date")
+        else:
+            return self.model.objects.all().order_by("-modified_date")
+
+
+class Redis_group_CreateViewSet(Base_CreateViewSet):
+    model = Redis_group
+    form_class = forms.Redis_groupForm
+    template_name = 'api/redis_group_form.html'
+    success_url = reverse_lazy('redis-group-list')
+
+class Redis_group_UpdateViewSet(Base_UpdateViewSet):
+    model = Redis_group
+    form_class = forms.Redis_groupForm
+    template_name = 'api/redis_group_form.html'
+    success_url = reverse_lazy('redis-group-list')
+
+class Redis_group_DeleteViewSet(Base_DeleteViewSet):
+    model = Redis_group
+    success_url = reverse_lazy('redis-group-list')
+
+class Redis_group_ListViewSet(Base_ListViewSet):
+    Redis_group.objects.all().count()
+    model = Redis_group
+    template_name = 'api/redis_group.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        name = None
+        try:
+            name = self.request.GET['keyword']
+        except:
+            pass
+
+        if name:
+            return self.model.objects.filter(name__icontains=name).order_by("-modified_date")
+        else:
+            return self.model.objects.all().order_by("-modified_date")
+
+class Codis_CreateViewSet(Base_CreateViewSet):
+    model = Codis
+    form_class = forms.CodisForm
+    template_name = 'api/codis_form.html'
+    success_url = reverse_lazy('codis-list')
+
+class Codis_UpdateViewSet(Base_UpdateViewSet):
+    model = Codis
+    form_class = forms.CodisForm
+    template_name = 'api/codis_form.html'
+    success_url = reverse_lazy('codis-list')
+
+class Codis_DeleteViewSet(Base_DeleteViewSet):
+    model = Codis
+    success_url = reverse_lazy('codis-list')
+
+class Codis_ListViewSet(Base_ListViewSet):
+    Codis.objects.all().count()
+    model = Codis
+    template_name = 'api/codis.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        name = None
+        try:
+            name = self.request.GET['keyword']
+        except:
+            pass
+
+        if name:
+            return self.model.objects.filter(name__icontains=name).order_by("-modified_date")
+        else:
+            return self.model.objects.all().order_by("-modified_date")
+
+            #

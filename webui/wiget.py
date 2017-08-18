@@ -49,3 +49,21 @@ class UpstreamSelect2Widget(BaseModelSelect2Widget):
         'name__istartswith',
         'pk__startswith',
     ]
+
+class Redis_instanceSelect2Widget(BaseModelSelect2Widget):
+    search_fields = [
+        'name__istartswith',
+        'pk__startswith',
+    ]
+
+class Redis_instanceMultipleWidget(BaseModelSelect2MultipleWidget):
+    search_fields = [
+        'name__istartswith',
+        'pk__startswith',
+    ]
+
+class Redis_groupMultipleWidget(BaseModelSelect2MultipleWidget):
+    search_fields = [
+        'name__istartswith',
+        'pk__startswith',
+    ]

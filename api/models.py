@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
-from abstract.models import CommonModel,UniqueNameDescModel,ITEM_BASE,PUBLISH_BASE,NGINX_BASE
+from abstract.models import CommonModel,UniqueNameDescModel,NGINX_BASE,REDIS_BASE
 
 # from core.common import content
 class Ipv4Address(UniqueNameDescModel):
@@ -85,3 +85,45 @@ class Nxp_mission(CommonModel,NGINX_BASE):
     @staticmethod
     def verbose():
         return u'更新过程'
+
+
+class Redis_instance(CommonModel,REDIS_BASE):
+    host=models.ForeignKey(Ipv4Address,related_name='redis_host')
+    port=models.CharField(max_length=5)
+    version=models.CharField(blank=True,max_length=10)
+    def __unicode__(self):
+        return "{0}:{1}".format(self.host.name,self.port)
+
+    @staticmethod
+    def verbose():
+        return u'Redis实例'
+
+class Redis_group(CommonModel,REDIS_BASE):
+    name=models.CharField(max_length=25,db_index=True)
+    master=models.ForeignKey(Redis_instance,related_name='group_master',blank=True,null=True)
+    slave=models.ManyToManyField(Redis_instance,related_name='group_slave',blank=True)
+    offline=models.ManyToManyField(Redis_instance,related_name='group_offline',blank=True)
+
+    def __unicode__(self):
+        return self.name
+    @staticmethod
+    def verbose():
+        return u'Redis组'
+
+class Codis(CommonModel,REDIS_BASE):
+    name=models.CharField(max_length=25,db_index=True)
+    admin_http=models.URLField(blank=True)
+    member=models.ManyToManyField(Redis_group,related_name='codis_group')
+
+    def __unicode__(self):
+        return self.name
+
+    @staticmethod
+    def verbose():
+        return u'Codis'
+
+# class Sentinel(CommonModel,REDIS_BASE):
+#     name=models.CharField(max_length=50)
+#     member=models.ManyToManyField(Redis_group)
+#     def __unicode__(self):
+#         return self.name

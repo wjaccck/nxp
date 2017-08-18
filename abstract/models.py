@@ -66,3 +66,13 @@ class NGINX_BASE(models.Model):
 
     class Meta:
         abstract=True
+
+
+class REDIS_BASE(models.Model):
+    pass
+    @staticmethod
+    def father():
+        return u'redis'
+
+    class Meta:
+        abstract=True

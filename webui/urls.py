@@ -30,6 +30,30 @@ urlpatterns = [
     url(r'^upstream/create/$', login_required(views.Upstream_CreateViewSet.as_view()), name='upstream-create'),
     url(r'^upstream/delete/(?P<pk>\d+)/$', login_required(views.Upstream_DeleteViewSet.as_view()), name='upstream-delete'),
 
+    ### redis-instance
+    url(r'^redis-instance/$', login_required(views.Redis_instance_ListViewSet.as_view()), name='redis-instance-list'),
+    url(r'^redis-instance/update/(?P<pk>\d+)/$', login_required(views.Redis_instance_UpdateViewSet.as_view()),
+        name='redis-instance-update'),
+    url(r'^redis-instance/create/$', login_required(views.Redis_instance_CreateViewSet.as_view()), name='redis-instance-create'),
+    url(r'^redis-instance/delete/(?P<pk>\d+)/$', login_required(views.Redis_instance_DeleteViewSet.as_view()),
+        name='redis-instance-delete'),
+
+    ### redis-group
+    url(r'^redis-group/$', login_required(views.Redis_group_ListViewSet.as_view()), name='redis-group-list'),
+    url(r'^redis-group/update/(?P<pk>\d+)/$', login_required(views.Redis_group_UpdateViewSet.as_view()),
+        name='redis-group-update'),
+    url(r'^redis-group/create/$', login_required(views.Redis_group_CreateViewSet.as_view()), name='redis-group-create'),
+    url(r'^redis-group/delete/(?P<pk>\d+)/$', login_required(views.Redis_group_DeleteViewSet.as_view()),
+        name='redis-group-delete'),
+
+    ### codis
+    url(r'^codis/$', login_required(views.Codis_ListViewSet.as_view()), name='codis-list'),
+    url(r'^codis/update/(?P<pk>\d+)/$', login_required(views.Codis_UpdateViewSet.as_view()),
+        name='codis-update'),
+    url(r'^codis/create/$', login_required(views.Codis_CreateViewSet.as_view()), name='codis-create'),
+    url(r'^codis/delete/(?P<pk>\d+)/$', login_required(views.Codis_DeleteViewSet.as_view()),
+        name='codis-delete'),
+
     ### context
     url(r'^context/$', login_required(views.Site_context_ListViewSet.as_view()), name='context-list'),
     url(r'^context/update/(?P<pk>\d+)/$', login_required(views.Site_context_UpdateViewSet.as_view()),
