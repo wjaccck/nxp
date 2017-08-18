@@ -577,3 +577,44 @@ def Codis_detailView(req,codis_id):
     else:
         response = redirect('login')
     return response
+
+
+def Codis_queryView(req):
+    if req.user.is_authenticated():
+        try:
+            name = req.GET['keyword']
+            host = Ipv4Address.objects.get(name=name)
+        except:
+            host=None
+
+        if host:
+            redis_instrance=Redis_instance.objects.filter(host=host)
+            host_name=host.name
+            group_master=[]
+            group_offline=[]
+            group_slave=[]
+            for m in redis_instrance:
+                group_master.extend(Redis_group.objects.filter(master=m))
+
+            for m in redis_instrance:
+                group_offline.extend(Redis_group.objects.filter(offline=m))
+
+            for m in redis_instrance:
+                group_slave.extend(Redis_group.objects.filter(slave=m))
+
+            codis_master=[{"codis":x.codis_group.all(),"group":x.name,"host":host_name,"name":"master"} for x in list(set(group_master))]
+            codis_offline=[{"codis":x.codis_group.all(),"group":x.name,"host":host_name,"name":"offline"} for x in list(set(group_offline))]
+            codis_slave=[{"codis":x.codis_group.all(),"group":x.name,"host":host_name,"name":"slave"} for x in list(set(group_slave))]
+
+            response = render(req, 'api/query-detail.html', {"username": req.user.last_name,
+                                                             "active": "redis",
+                                                             "codis_master": codis_master,
+                                                             "codis_slave": codis_slave,
+                                                             "codis_offline": codis_offline,
+                                                             }
+                              )
+        else:
+            response = HttpResponseBadRequest("not existed this codis")
+    else:
+        response = redirect('login')
+    return response
