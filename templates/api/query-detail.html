@@ -80,6 +80,28 @@
                                 </tr>
                                 {% endfor %}
                             {% endfor %}
+                            {% for codis_m in codis_slave %}
+                                {% for codis_m_n in codis_m.codis %}
+                                <tr>
+                                    <td>{{ codis_m_n.name }}</td>
+                                    <td>{{ codis_m.name }}</td>
+                                    <td>{{ codis_m.group }}</td>
+                                    <td>{{ codis_m.host }}</td>
+                                    <td>{{ codis_m.port }}</td>
+                                </tr>
+                                {% endfor %}
+                            {% endfor %}
+                            {% for codis_m in codis_offline %}
+                                {% for codis_m_n in codis_m.codis %}
+                                <tr>
+                                    <td>{{ codis_m_n.name }}</td>
+                                    <td>{{ codis_m.name }}</td>
+                                    <td>{{ codis_m.group }}</td>
+                                    <td>{{ codis_m.host }}</td>
+                                    <td>{{ codis_m.port }}</td>
+                                </tr>
+                                {% endfor %}
+                            {% endfor %}
                             </tbody>
 							</table>
 						</div>
