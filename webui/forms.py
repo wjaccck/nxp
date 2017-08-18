@@ -153,7 +153,6 @@ class CodisForm(forms.ModelForm):
     name = forms.CharField(label='名称', required=True,max_length=50, widget=forms.TextInput({'class': 'form-control'}))
     admin_http = forms.URLField(label='admin地址', required=False,max_length=50, widget=forms.TextInput({'class': 'form-control'}))
 
-    Codis.objects.ge
     class Meta:
         fields = (
             'name',
