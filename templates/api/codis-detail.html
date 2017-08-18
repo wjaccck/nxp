@@ -58,20 +58,21 @@
 							</tr>
 							</thead>
 							<tbody>
-                                <tr>
                                 {% for m in all_info  %}
-                                    <td>{{ m.name }}</td>
-                                    <td>{{ m.master }}</td>
-                                    <td>
-                                        {% for n in m.slave.all %}
-                                            {{ n }}<br>
-                                        {% endfor %}
-                                    </td>
-                                    <td>
-                                        {% for n in m.offline.all %}
-                                            {{ n }}<br>
-                                        {% endfor %}
-                                    </td>
+                                    <tr>
+                                        <td>{{ m.name }}</td>
+                                        <td>{{ m.master }}</td>
+                                        <td>
+                                            {% for n in m.slave.all %}
+                                                {{ n }}<br>
+                                            {% endfor %}
+                                        </td>
+                                        <td>
+                                            {% for n in m.offline.all %}
+                                                {{ n }}<br>
+                                            {% endfor %}
+                                        </td>
+                                    <tr>
                                 {% endfor %}
                                 <tr>
                             </tbody>
