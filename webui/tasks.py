@@ -21,7 +21,8 @@ class Codis_info(BaseTask):
         group_info=Codis_admin_info(codis.admin_http).group()
         for m in group_info:
             group_name="{0}{1}".format(codis.name,m.get('id'))
-            group=Redis_group.objects.get_or_create(name=group_name)
+            Redis_group.objects.get_or_create(name=group_name)
+            group=Redis_group.objects.get(name=group_name)
             group.slave.clear()
             group.offline.clear()
             for n in m.get('servers'):
