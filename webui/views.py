@@ -587,7 +587,6 @@ def Codis_queryView(req):
         except:
             host=None
 
-        if host:
             redis_instrance=Redis_instance.objects.filter(host=host)
             host_name=host.name
             group_master=[]
@@ -614,7 +613,13 @@ def Codis_queryView(req):
                                                              }
                               )
         else:
-            response = HttpResponseBadRequest("not existed this codis")
+            response = render(req, 'api/query-detail.html', {"username": req.user.last_name,
+                                                             "active": "redis",
+                                                             "codis_master": [],
+                                                             "codis_slave": [],
+                                                             "codis_offline": [],
+                                                             }
+                              )
     else:
         response = redirect('login')
     return response
