@@ -98,8 +98,8 @@
 
                                         </td>
                                         <td>{{ m.created_date |date:'Y-m-d H:i:s' }}</td>
-{#                                        <td><a  href="{% url 'get-detail' m.id %}">详情</a></td>#}
-                                        <td><a>详情</a></td>
+                                        <td><a  href="{% url 'get-codis-detail' m.id %}">详情</a></td>
+{#                                        <td><a>详情</a></td>#}
                                     </tr>
                                 {% endfor %}
 							</tbody>

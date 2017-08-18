@@ -72,6 +72,7 @@ urlpatterns = [
     # url(r'^progress/$', login_required(views.Progress_ViewSet.as_view()), name='progress-list'),
     # #
     url(r'^detail/(?P<site_id>\d+)/$', login_required(views.Get_detail), name='get-detail'),
+    url(r'^codis-detail/(?P<codis_id>\d+)/$', login_required(views.Codis_detailView), name='get-codis-detail'),
 
     url(r'^conf/(?P<site_id>\d+)/$', login_required(views.Generate_conf), name='get-conf'),
 

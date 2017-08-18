@@ -555,3 +555,25 @@ class Codis_ListViewSet(Base_ListViewSet):
             return self.model.objects.all().order_by("-modified_date")
 
             #
+
+
+def Codis_detailView(req,codis_id):
+    if req.user.is_authenticated():
+        try:
+            codis=Codis.objects.get(id=codis_id)
+        except:
+            codis=None
+
+        if codis:
+            all_info=codis.member.all()
+            response = render(req, 'api/codis-detail.html', {"username": req.user.last_name,
+                                                             "active": "redis",
+                                                             "all_info": all_info,
+                                                             "codis": codis.name
+                                                             }
+                              )
+        else:
+            response = HttpResponseBadRequest("not existed this codis")
+    else:
+        response = redirect('login')
+    return response
