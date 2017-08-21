@@ -2,6 +2,7 @@
 from celery import Task as T
 from core.common import logger,Codis_admin_info
 from api.models import *
+import redis
 import time
 
 class BaseTask(T):
@@ -15,6 +16,21 @@ class BaseTask(T):
         pass
 
 class Codis_info(BaseTask):
+
+    def _get_instance(self,host,port):
+        redis_instance,redis_instance_status=Redis_instance.objects.get_or_create(
+            host=Ipv4Address.objects.get(name=host),
+            port=port
+        )
+        return redis_instance
+
+    def _get_group(self,name):
+        redis_group,redis_group_status=Redis_group.objects.get_or_create(name=name)
+        return redis_group
+
+    def _get_sentinel(self,name):
+        sentinel,sentinel_status=Sentinel.objects.get_or_create(name=name)
+        return sentinel
 
     def run(self,codis_id=None):
         codis=Codis.objects.get(id=codis_id)
@@ -44,22 +60,65 @@ class Codis_info(BaseTask):
 
             codis.member.add(group)
 
+class Sentinel_info(BaseTask):
 
-# [
-# {u'servers':
-# [{u'group_id': 1, u'type': u'slave', u'addr': u'10.0.8.146:9939'},
-# {u'group_id': 1, u'type': u'master', u'addr': u'10.0.8.144:9939'}],
-# u'id': 1,
-#  u'product_name':
-#  u'codis_9939'},
-# {u'servers':
-# [{u'group_id': 2, u'type': u'master', u'addr': u'10.0.8.176:9939'},
-# {u'group_id': 2, u'type': u'offline', u'addr': u'10.0.8.145:9939'}],
-#  u'id': 2,
-# u'product_name': u'codis_9939'}
-# ]
+    def _get_instance(self,host,port):
+        redis_instance,redis_instance_status=Redis_instance.objects.get_or_create(
+            host=Ipv4Address.objects.get(name=host),
+            port=port
+        )
+        return redis_instance
+
+    def _get_group(self,name):
+        redis_group,redis_group_status=Redis_group.objects.get_or_create(name=name)
+        return redis_group
+
+    def _get_sentinel(self,name):
+        sentinel,sentinel_status=Sentinel.objects.get_or_create(name=name)
+        return sentinel
+
+    def _get_slave(self,host,port,db):
+        master=redis.Redis(host=host, port=port, db=db)
+        master_info=master.info()
+        slaves=[master_info.get(x).split(',') for x in master_info.keys() if x.startswith('slave')]
+        slave_group=[]
+        for m in [{"host":x[0],"port":x[1]} for x in slaves if x[2]=='online']:
+            m_redis_instance=self._get_instance(host=m.get('host'),port=m.get('port'))
+            slave_group.append(m_redis_instance)
+        return slave_group
 
 
+    def run(self, host,port,db):
+        sentinel = redis.Redis(host=host, port=port, db=db)
+        sentinel_info = sentinel.info()
+        sentinel_group = [sentinel.get(x) for x in sentinel_info.keys() if x.startswith('master')]
+        all_sentinel = {}
+
+        sentinel_group_name = ['_'.join(x.get('name').split('_')[:-1]) for x in sentinel_group]
+        for m in list(set(sentinel_group_name)):
+            m_group = []
+            for n in sentinel_group:
+                if m == '_'.join(n.get('name').split('_')[:-1]):
+                    m_group.append(n)
+            all_sentinel[m]=m_group
+
+        for k in all_sentinel.keys():
+            m_sentinel=self._get_sentinel(name=k)
+            m_sentinel.member.clear()
+            for p in all_sentinel.get(k):
+                m_sentinel_group=self._get_group(name=p.get('name'))
+                m_sentinel.member.add(m_sentinel_group)
+                m_host=p.get('address').split(':')[0]
+                m_port=p.get('address').split(':')[1]
+                m_sentinel_group.master=self._get_instance(
+                    host=m_host,
+                    port=m_port
+                )
+                m_sentinel_group.save()
+                m_sentinel_group.slave.clear()
+                slaves=self._get_slave(m_host,m_port,0)
+                for m in slaves:
+                    m_sentinel_group.slave.add(m)
 
 class MissionTask(BaseTask):
 

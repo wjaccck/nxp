@@ -22,6 +22,9 @@ upstream_online_file="/opt/nginx/conf/upstream/{0}.conf"
 vhost_online_file="/opt/nginx/conf/vhost.d/{0}.conf"
 ssl_vhost_online_file="/opt/nginx/conf/vhost.d/ssl.{0}.conf"
 
+###
+sentinel_host=[{"host":"10.0.8.119","port":"26379","db":0}]
+
 def get_file_content(file_path):
     with open(file_path, 'r') as f:
         content=f.read()
