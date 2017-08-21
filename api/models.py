@@ -99,7 +99,7 @@ class Redis_instance(CommonModel,REDIS_BASE):
         return u'Redis实例'
 
 class Redis_group(CommonModel,REDIS_BASE):
-    name=models.CharField(max_length=25,db_index=True)
+    name=models.CharField(max_length=100)
     master=models.ForeignKey(Redis_instance,related_name='group_master',blank=True,null=True)
     slave=models.ManyToManyField(Redis_instance,related_name='group_slave',blank=True)
     offline=models.ManyToManyField(Redis_instance,related_name='group_offline',blank=True)
@@ -122,6 +122,17 @@ class Codis(CommonModel,REDIS_BASE):
     def verbose():
         return u'Codis'
 
+class Sentinel(CommonModel, REDIS_BASE):
+    name = models.CharField(max_length=100)
+    from_host = models.CharField(max_length=25)
+    member = models.ManyToManyField(Redis_group, related_name='sentinel_group', blank=True, null=True)
+
+    def __unicode__(self):
+        return self.name
+
+    @staticmethod
+    def verbose():
+        return u'Sentinel'
 # class Sentinel(CommonModel,REDIS_BASE):
 #     name=models.CharField(max_length=50)
 #     member=models.ManyToManyField(Redis_group)
