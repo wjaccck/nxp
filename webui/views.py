@@ -645,16 +645,24 @@ def Codis_queryView(req):
             for m in redis_instrance:
                 for n in Redis_group.objects.filter(slave=m):
                     group_slave.append({"group":n,"host":host_name,"port":m.port})
-
+            # codis
             codis_master=[{"codis":x.get("group").codis_group.all(),"group":x.get("group"),"host":x.get("host"),"name":"master","port":x.get("port")} for x in group_master]
             codis_offline=[{"codis":x.get("group").codis_group.all(),"group":x.get("group"),"host":x.get("host"),"name":"offline","port":x.get("port")} for x in group_offline]
             codis_slave=[{"codis":x.get("group").codis_group.all(),"group":x.get("group"),"host":x.get("host"),"name":"slave","port":x.get("port")} for x in group_slave]
+
+            #sentinel
+            sentinel_master=[{"sentinel":x.get("group").sentinel_group.all(),"group":x.get("group"),"host":x.get("host"),"name":"master","port":x.get("port")} for x in group_master]
+            sentinel_offline=[{"sentinel":x.get("group").sentinel_group.all(),"group":x.get("group"),"host":x.get("host"),"name":"offline","port":x.get("port")} for x in group_offline]
+            sentinel_slave=[{"sentinel":x.get("group").sentinel_group.all(),"group":x.get("group"),"host":x.get("host"),"name":"slave","port":x.get("port")} for x in group_slave]
 
             response = render(req, 'api/query-detail.html', {"username": req.user.last_name,
                                                              "active": "redis",
                                                              "codis_master": codis_master,
                                                              "codis_slave": codis_slave,
                                                              "codis_offline": codis_offline,
+                                                             "sentinel_master": sentinel_master,
+                                                             "sentinel_slave": sentinel_slave,
+                                                             "sentinel_offline": sentinel_offline,
                                                              }
                               )
         else:
@@ -663,6 +671,9 @@ def Codis_queryView(req):
                                                              "codis_master": [],
                                                              "codis_slave": [],
                                                              "codis_offline": [],
+                                                             "sentinel_master": [],
+                                                             "sentinel_slave": [],
+                                                             "sentinel_offline": [],
                                                              }
                               )
     else:
