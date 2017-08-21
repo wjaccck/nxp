@@ -8,11 +8,6 @@
 {% block content %}
     <div class="page-content-wrapper">
         <div class="page-content">
-			<!-- BEGIN PAGE BREADCRUMB -->
-			<ul class="page-breadcrumb breadcrumb">
-			</ul>
-			<!-- END PAGE BREADCRUMB -->
-			<!-- END PAGE HEADER-->
 			<!-- BEGIN PAGE CONTENT-->
             <div class="col-sm-3 col-md-3 pull-right">
                 <form action="" method="get" class="navbar-from" role="search">
@@ -24,6 +19,7 @@
                     </div>
                 </form>
             </div>
+
 			<div class="row">
 
 				<div class="col-md-12">
@@ -48,24 +44,24 @@
                             <div class="table-responsive">
                                 <table class="table table-bordered">
                                     <thead>
-                                    <tr>
-                                        <th>
-                                             CODIS-SENTINEL
-                                        </th>
-                                        <th>
-                                             TYPE
-                                        </th>
-                                        <th>
-                                             GROUP
-                                        </th>
-                                        <th>
-                                             HOST
-                                        </th>
-                                        <th>
-                                             PORT
-                                        </th>
-                                    </tr>
-                                </thead>
+                                        <tr>
+                                            <th>
+                                                 CODIS-SENTINEL
+                                            </th>
+                                            <th>
+                                                 TYPE
+                                            </th>
+                                            <th>
+                                                 GROUP
+                                            </th>
+                                            <th>
+                                                 HOST
+                                            </th>
+                                            <th>
+                                                 PORT
+                                            </th>
+                                        </tr>
+                                    </thead>
                                     <tbody>
                                     {% for codis_m in codis_master %}
                                         {% for codis_m_n in codis_m.codis %}
@@ -145,16 +141,15 @@
 						</div>
 					</div>
 					<!-- END EXAMPLE TABLE PORTLET-->
-				</div>
-			</div>
+				<!--</div>-->
+			    </div>
+            </div>
 			<!-- END PAGE CONTENT -->
 		</div>
     </div>
 {% endblock %}
 
 {% block scripts %}
-{#    <script type="text/javascript" src="http://cdn.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>#}
-
 <script>
 jQuery(document).ready(function() {
    Metronic.init(); // init metronic core componets
