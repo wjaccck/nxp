@@ -80,12 +80,23 @@ class Sentinel_info(BaseTask):
     def _get_slave(self,host,port,db):
         master=redis.Redis(host=host, port=port, db=db)
         master_info=master.info()
-        slaves=[master_info.get(x).split(',') for x in master_info.keys() if x.startswith('slave')]
+        slave_info=[master_info.get(x) for x in master_info.keys() if x.startswith('slave')]
+        slaves=[]
+        for n in slave_info:
+            if isinstance(n,dict):
+                slaves.append(n)
+            elif isinstance(n,str):
+                slaves.append({"ip":n[0],"port":n[1],"state":n[2]})
+            else:
+                print "not this type {0}".format(type(n))
+        # slaves=[master_info.get(x).split(',') for x in master_info.keys() if x.startswith('slave')]
         slave_group=[]
-        for m in [{"host":x[0],"port":x[1]} for x in slaves if x[2]=='online']:
-            m_redis_instance=self._get_instance(host=m.get('host'),port=m.get('port'))
+        #for m in [x for x in slaves if x.get('stat')=='online']:
+        for m in slaves:
+            m_redis_instance=self._get_instance(host=m.get('ip'),port=m.get('port'))
             slave_group.append(m_redis_instance)
         return slave_group
+
 
 
     def run(self, host,port,db):
@@ -117,8 +128,8 @@ class Sentinel_info(BaseTask):
                 m_sentinel_group.save()
                 m_sentinel_group.slave.clear()
                 slaves=self._get_slave(m_host,m_port,0)
-                for m in slaves:
-                    m_sentinel_group.slave.add(m)
+                for n in slaves:
+                    m_sentinel_group.slave.add(n)
 
 class MissionTask(BaseTask):
 
