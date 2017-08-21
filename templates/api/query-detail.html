@@ -50,7 +50,7 @@
 							<thead>
 							<tr>
 								<th>
-									 CODIS
+									 CODIS&SENTINEL
 								</th>
                                 <th>
 									 TYPE
@@ -100,7 +100,7 @@
                                 </tr>
                                 {% endfor %}
                             {% endfor %}
-                            {% for sentine_m in sentine_master %}
+                            {% for sentinel_m in sentinel_master %}
                                 {% for sentinel_m_n in sentinel_m.sentinel %}
                                 <tr>
                                     <td>{{ sentinel_m_n.name }}</td>
@@ -111,7 +111,7 @@
                                 </tr>
                                 {% endfor %}
                             {% endfor %}
-                            {% for sentine_m in sentine_slave %}
+                            {% for sentinel_m in sentinel_slave %}
                                 {% for sentinel_m_n in sentinel_m.sentinel %}
                                 <tr>
                                     <td>{{ sentinel_m_n.name }}</td>
