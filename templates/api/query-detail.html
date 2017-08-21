@@ -25,6 +25,7 @@
                         </div>
                     </form>
                 </div>
+            </div>
 			<div class="row">
 
 				<div class="col-md-12">
@@ -46,98 +47,103 @@
 						</div>
 
                         <div class="portlet-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered">
-{#							<table class="table table-striped table-hover table-bordered" id="sample_editable_1">#}
-							<thead>
-							<tr>
-								<th>
-									 CODIS-SENTINEL
-								</th>
-                                <th>
-									 TYPE
-								</th>
-								<th>
-									 GROUP
-								</th>
-                                <th>
-									 HOST
-								</th>
-                                <th>
-									 PORT
-								</th>
-							</tr>
-							</thead>
-							<tbody>
-                            {% for codis_m in codis_master %}
-                                {% for codis_m_n in codis_m.codis %}
-                                <tr>
-                                    <td>{{ codis_m_n.name }}</td>
-                                    <td>{{ codis_m.name }}</td>
-                                    <td>{{ codis_m.group }}</td>
-                                    <td>{{ codis_m.host }}</td>
-                                    <td>{{ codis_m.port }}</td>
-                                </tr>
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th>
+                                             CODIS-SENTINEL
+                                        </th>
+                                        <th>
+                                             TYPE
+                                        </th>
+                                        <th>
+                                             GROUP
+                                        </th>
+                                        <th>
+                                             HOST
+                                        </th>
+                                        <th>
+                                             PORT
+                                        </th>
+                                    </tr>
+                                </thead>
+                                    <tbody>
+                                {% for codis_m in codis_master %}
+                                    {% for codis_m_n in codis_m.codis %}
+                                    <tr>
+                                        <td>{{ codis_m_n.name }}</td>
+                                        <td>{{ codis_m.name }}</td>
+                                        <td>{{ codis_m.group }}</td>
+                                        <td>{{ codis_m.host }}</td>
+                                        <td>{{ codis_m.port }}</td>
+                                    </tr>
+                                    {% endfor %}
                                 {% endfor %}
-                            {% endfor %}
-                            {% for codis_m in codis_slave %}
-                                {% for codis_m_n in codis_m.codis %}
-                                <tr>
-                                    <td>{{ codis_m_n.name }}</td>
-                                    <td>{{ codis_m.name }}</td>
-                                    <td>{{ codis_m.group }}</td>
-                                    <td>{{ codis_m.host }}</td>
-                                    <td>{{ codis_m.port }}</td>
-                                </tr>
+
+                                {% for codis_m in codis_slave %}
+                                    {% for codis_m_n in codis_m.codis %}
+                                    <tr>
+                                        <td>{{ codis_m_n.name }}</td>
+                                        <td>{{ codis_m.name }}</td>
+                                        <td>{{ codis_m.group }}</td>
+                                        <td>{{ codis_m.host }}</td>
+                                        <td>{{ codis_m.port }}</td>
+                                    </tr>
+                                    {% endfor %}
                                 {% endfor %}
-                            {% endfor %}
-                            {% for codis_m in codis_offline %}
-                                {% for codis_m_n in codis_m.codis %}
-                                <tr>
-                                    <td>{{ codis_m_n.name }}</td>
-                                    <td>{{ codis_m.name }}</td>
-                                    <td>{{ codis_m.group }}</td>
-                                    <td>{{ codis_m.host }}</td>
-                                    <td>{{ codis_m.port }}</td>
-                                </tr>
+
+                                {% for codis_m in codis_offline %}
+                                    {% for codis_m_n in codis_m.codis %}
+                                    <tr>
+                                        <td>{{ codis_m_n.name }}</td>
+                                        <td>{{ codis_m.name }}</td>
+                                        <td>{{ codis_m.group }}</td>
+                                        <td>{{ codis_m.host }}</td>
+                                        <td>{{ codis_m.port }}</td>
+                                    </tr>
+                                    {% endfor %}
                                 {% endfor %}
-                            {% endfor %}
-                            {% for sentinel_m in sentinel_master %}
-                                {% for sentinel_m_n in sentinel_m.sentinel %}
-                                <tr>
-                                    <td>{{ sentinel_m_n.name }}</td>
-                                    <td>{{ sentinel_m.name }}</td>
-                                    <td>{{ sentinel_m.group }}</td>
-                                    <td>{{ sentinel_m.host }}</td>
-                                    <td>{{ sentinel_m.port }}</td>
-                                </tr>
+
+                                {% for sentinel_m in sentinel_master %}
+                                    {% for sentinel_m_n in sentinel_m.sentinel %}
+                                    <tr>
+                                        <td>{{ sentinel_m_n.name }}</td>
+                                        <td>{{ sentinel_m.name }}</td>
+                                        <td>{{ sentinel_m.group }}</td>
+                                        <td>{{ sentinel_m.host }}</td>
+                                        <td>{{ sentinel_m.port }}</td>
+                                    </tr>
+                                    {% endfor %}
                                 {% endfor %}
-                            {% endfor %}
-                            {% for sentinel_m in sentinel_slave %}
-                                {% for sentinel_m_n in sentinel_m.sentinel %}
-                                <tr>
-                                    <td>{{ sentinel_m_n.name }}</td>
-                                    <td>{{ sentinel_m.name }}</td>
-                                    <td>{{ sentinel_m.group }}</td>
-                                    <td>{{ sentinel_m.host }}</td>
-                                    <td>{{ sentinel_m.port }}</td>
-                                </tr>
+
+                                {% for sentinel_m in sentinel_slave %}
+                                    {% for sentinel_m_n in sentinel_m.sentinel %}
+                                    <tr>
+                                        <td>{{ sentinel_m_n.name }}</td>
+                                        <td>{{ sentinel_m.name }}</td>
+                                        <td>{{ sentinel_m.group }}</td>
+                                        <td>{{ sentinel_m.host }}</td>
+                                        <td>{{ sentinel_m.port }}</td>
+                                    </tr>
+                                    {% endfor %}
                                 {% endfor %}
-                            {% endfor %}
-                            {% for sentinel_m in sentinel_offline %}
-                                {% for sentinel_m_n in sentinel_m.sentinel %}
-                                <tr>
-                                    <td>{{ sentinel_m_n.name }}</td>
-                                    <td>{{ sentinel_m.name }}</td>
-                                    <td>{{ sentinel_m.group }}</td>
-                                    <td>{{ sentinel_m.host }}</td>
-                                    <td>{{ sentinel_m.port }}</td>
-                                </tr>
-                                {% endfor %}
-                            {% endfor %
-                            </tbody>
-							</table>
-						</div>
+
+                                {% for sentinel_m in sentinel_offline %}
+                                    {% for sentinel_m_n in sentinel_m.sentinel %}
+                                    <tr>
+                                        <td>{{ sentinel_m_n.name }}</td>
+                                        <td>{{ sentinel_m.name }}</td>
+                                        <td>{{ sentinel_m.group }}</td>
+                                        <td>{{ sentinel_m.host }}</td>
+                                        <td>{{ sentinel_m.port }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                {% endfor %
+
+                                </tbody>
+                                </table>
+                            </div>
 						</div>
 					</div>
 					<!-- END EXAMPLE TABLE PORTLET-->
