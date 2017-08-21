@@ -111,6 +111,17 @@
                                 </tr>
                                 {% endfor %}
                             {% endfor %}
+                            {% for sentine_m in sentine_slave %}
+                                {% for sentinel_m_n in sentinel_m.sentinel %}
+                                <tr>
+                                    <td>{{ sentinel_m_n.name }}</td>
+                                    <td>{{ sentine_m.name }}</td>
+                                    <td>{{ sentine_m.group }}</td>
+                                    <td>{{ sentine_m.host }}</td>
+                                    <td>{{ sentine_m.port }}</td>
+                                </tr>
+                                {% endfor %}
+                            {% endfor %}
                             </tbody>
 							</table>
 						</div>
