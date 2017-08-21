@@ -124,7 +124,7 @@ class Codis(CommonModel,REDIS_BASE):
 
 class Sentinel(CommonModel, REDIS_BASE):
     name = models.CharField(max_length=100)
-    from_host = models.CharField(max_length=25)
+    # from_host = models.CharField(max_length=25)
     member = models.ManyToManyField(Redis_group, related_name='sentinel_group', blank=True)
 
     def __unicode__(self):
