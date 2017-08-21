@@ -91,7 +91,7 @@ class Sentinel_info(BaseTask):
     def run(self, host,port,db):
         sentinel = redis.Redis(host=host, port=port, db=db)
         sentinel_info = sentinel.info()
-        sentinel_group = [sentinel.get(x) for x in sentinel_info.keys() if x.startswith('master')]
+        sentinel_group = [sentinel_info.get(x) for x in sentinel_info.keys() if x.startswith('master')]
         all_sentinel = {}
 
         sentinel_group_name = ['_'.join(x.get('name').split('_')[:-1]) for x in sentinel_group]
