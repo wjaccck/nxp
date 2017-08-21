@@ -31,7 +31,7 @@
 					<div class="portlet box blue">
 						<div class="portlet-title">
                             <div class="caption">
-								<i class="fa"></i>{
+								<i class="fa"></i>
                             </div>
                             <div class="tools">
 
@@ -97,6 +97,17 @@
                                     <td>{{ codis_m.group }}</td>
                                     <td>{{ codis_m.host }}</td>
                                     <td>{{ codis_m.port }}</td>
+                                </tr>
+                                {% endfor %}
+                            {% endfor %}
+                            {% for sentine_m in sentine_master %}
+                                {% for sentinel_m_n in sentinel_m.sentinel %}
+                                <tr>
+                                    <td>{{ sentinel_m_n.name }}</td>
+                                    <td>{{ sentine_m.name }}</td>
+                                    <td>{{ sentine_m.group }}</td>
+                                    <td>{{ sentine_m.host }}</td>
+                                    <td>{{ sentine_m.port }}</td>
                                 </tr>
                                 {% endfor %}
                             {% endfor %}
