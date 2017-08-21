@@ -54,6 +54,14 @@ urlpatterns = [
     url(r'^codis/delete/(?P<pk>\d+)/$', login_required(views.Codis_DeleteViewSet.as_view()),
         name='codis-delete'),
 
+    ### sentinel
+    url(r'^sentinel/$', login_required(views.Sentinel_ListViewSet.as_view()), name='sentinel-list'),
+    # url(r'^codis/update/(?P<pk>\d+)/$', login_required(views.Codis_UpdateViewSet.as_view()),
+    #     name='codis-update'),
+    # url(r'^codis/create/$', login_required(views.Codis_CreateViewSet.as_view()), name='codis-create'),
+    # url(r'^codis/delete/(?P<pk>\d+)/$', login_required(views.Codis_DeleteViewSet.as_view()),
+    #     name='codis-delete'),
+
     ### context
     url(r'^context/$', login_required(views.Site_context_ListViewSet.as_view()), name='context-list'),
     url(r'^context/update/(?P<pk>\d+)/$', login_required(views.Site_context_UpdateViewSet.as_view()),
@@ -73,6 +81,7 @@ urlpatterns = [
     # #
     url(r'^detail/(?P<site_id>\d+)/$', login_required(views.Get_detail), name='get-detail'),
     url(r'^codis-detail/(?P<codis_id>\d+)/$', login_required(views.Codis_detailView), name='get-codis-detail'),
+    url(r'^sentinel-detail/(?P<sentinel_id>\d+)/$', login_required(views.Sentinel_detailView), name='get-sentinel-detail'),
     url(r'^query-redis/$', login_required(views.Codis_queryView), name='query-redis'),
 
     url(r'^conf/(?P<site_id>\d+)/$', login_required(views.Generate_conf), name='get-conf'),

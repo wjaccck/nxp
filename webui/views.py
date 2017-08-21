@@ -556,6 +556,25 @@ class Codis_ListViewSet(Base_ListViewSet):
 
             #
 
+class Sentinel_ListViewSet(Base_ListViewSet):
+    Sentinel.objects.all().count()
+    model = Sentinel
+    template_name = 'api/sentinel.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        name = None
+        try:
+            name = self.request.GET['keyword']
+        except:
+            pass
+
+        if name:
+            return self.model.objects.filter(name__icontains=name).order_by("-modified_date")
+        else:
+            return self.model.objects.all().order_by("-modified_date")
+
+
 
 def Codis_detailView(req,codis_id):
     if req.user.is_authenticated():
@@ -578,6 +597,29 @@ def Codis_detailView(req,codis_id):
         response = redirect('login')
     return response
 
+
+
+
+def Sentinel_detailView(req,sentinel_id):
+    if req.user.is_authenticated():
+        try:
+            sentinel=Sentinel.objects.get(id=sentinel_id)
+        except:
+            sentinel=None
+
+        if sentinel:
+            all_info=sentinel.member.all()
+            response = render(req, 'api/sentinel-detail.html', {"username": req.user.last_name,
+                                                             "active": "redis",
+                                                             "all_info": all_info,
+                                                             "sentinel": sentinel.name
+                                                             }
+                              )
+        else:
+            response = HttpResponseBadRequest("not existed this sentinel")
+    else:
+        response = redirect('login')
+    return response
 
 def Codis_queryView(req):
     if req.user.is_authenticated():

@@ -86,13 +86,14 @@ class Sentinel_info(BaseTask):
             if isinstance(n,dict):
                 slaves.append(n)
             elif isinstance(n,str):
-                slaves.append({"ip":n[0],"port":n[1],"state":n[2]})
+                n_slave_str_line=n.split(',')
+                slaves.append({"ip":n_slave_str_line[0],"port":n_slave_str_line[1],"state":n_slave_str_line[2]})
             else:
-                print "not this type {0}".format(type(n))
+                logger.error("{0} not support this type {1}".format(n,type(n)))
         # slaves=[master_info.get(x).split(',') for x in master_info.keys() if x.startswith('slave')]
         slave_group=[]
-        #for m in [x for x in slaves if x.get('stat')=='online']:
-        for m in slaves:
+        for m in [x for x in slaves if x.get('state')=='online']:
+        # for m in slaves:
             m_redis_instance=self._get_instance(host=m.get('ip'),port=m.get('port'))
             slave_group.append(m_redis_instance)
         return slave_group
