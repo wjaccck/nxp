@@ -197,6 +197,40 @@ class Site_context_ListViewSet(Base_ListViewSet):
                         #
 
 
+class Docker_app_CreateViewSet(Base_CreateViewSet):
+    model = Docker_app
+    form_class = forms.Docker_appForm
+    template_name = 'api/docker_form.html'
+    success_url = reverse_lazy('docker-list')
+
+class Docker_app_UpdateViewSet(Base_UpdateViewSet):
+    model = Docker_app
+    form_class = forms.Docker_appForm
+    template_name = 'api/context_form.html'
+    success_url = reverse_lazy('docker-list')
+
+class Docker_app_DeleteViewSet(Base_DeleteViewSet):
+    model = Docker_app
+    success_url = reverse_lazy('docker-list')
+
+class Docker_app_ListViewSet(Base_ListViewSet):
+    Docker_app.objects.all().count()
+    model = Docker_app
+    template_name = 'api/docker.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        name = None
+        try:
+            name = self.request.GET['keyword']
+        except:
+            pass
+
+        if name:
+            return self.model.objects.filter(host__name__istartswith=name)
+        else:
+            return self.model.objects.all()
+
 
 def Get_detail(req,site_id):
     if req.user.is_authenticated():
@@ -242,7 +276,8 @@ def Generate_conf(req, site_id):
             else:
                 upstream_tmp_conf=open(upstream_tmp_file.format(m.name),'w')
                 m_content=upstream_content.replace('upstream_name',m.name)
-                m_content=m_content.replace('back_end','\n    '.join([ "server {0}:{1};".format(x.name,m.port) for x in m.hosts.all()]))
+                back_end_list=[ "server {0}:{1};".format(x.name,m.port) for x in m.hosts.all()]+["server {0}:{1};".format(x.host.name,x.port) for x in m.docker_list.all()]
+                m_content=m_content.replace('back_end','\n    '.join(back_end_list))
                 upstream_tmp_conf.write(m_content)
                 upstream_tmp_conf.close()
                 logger.info("create upstream conf {0}".format(upstream_tmp_file.format(m.name)))

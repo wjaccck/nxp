@@ -73,10 +73,12 @@ class UpstreamForm(forms.ModelForm):
             'name',
             'port',
             'hosts',
+            'docker_list',
             'direct_status',
         )
         widgets = {
             'hosts': UpstreamModelSelect2MultipleWidget,
+            'docker_list': Docker_appMultipleWidget,
         }
         model = Upstream
         exclude = ['created_date', 'modified_date','status']
@@ -163,4 +165,20 @@ class CodisForm(forms.ModelForm):
             'member': Redis_groupMultipleWidget,
         }
         model = Codis
+        exclude = ['created_date', 'modified_date',]
+
+
+
+class Docker_appForm(forms.ModelForm):
+    port = forms.CharField(label='端口', required=True,max_length=10, widget=forms.TextInput({'class': 'form-control'}))
+
+    class Meta:
+        fields = (
+            'host',
+            'port',
+        )
+        widgets = {
+            'host': Docker_appSelect2Widget,
+        }
+        model = Docker_app
         exclude = ['created_date', 'modified_date',]

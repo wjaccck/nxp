@@ -1,5 +1,7 @@
 {% extends "webui/index.html" %}
 {% load staticfiles %}
+{% load bootstrap_pagination %}
+{% load webui_extras %}
 {% block username %}
 {{ username }}
 {% endblock %}
@@ -10,7 +12,26 @@
     		<div class="page-content">
 			<!-- BEGIN PAGE BREADCRUMB -->
 			<ul class="page-breadcrumb breadcrumb">
+				<li>
+					<a href="{% url 'index' %}">Home</a>
+					<i class="fa fa-circle"></i>
+				</li>
+				<li>
+					<a href="#">{{ item }}</a>
+					<i class="fa fa-circle"></i>
+				</li>
 			</ul>
+            <div class="col-sm-3 col-md-3 pull-right">
+{#            <a href="{% url 'webui-application-list' 1 %}">query</a>#}
+            <form action="" method="get" class="navbar-from" role="search">
+                <div class="input-group">
+                    <input type="text" name="keyword" />
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit">搜索</button>
+                    </div>
+                </div>
+            </form>
+        </div>
 			<!-- END PAGE BREADCRUMB -->
 			<!-- END PAGE HEADER-->
 			<!-- BEGIN PAGE CONTENT-->
@@ -20,10 +41,10 @@
 					<!-- BEGIN EXAMPLE TABLE PORTLET-->
 					<div class="portlet box blue">
 						<div class="portlet-title">
-                            <div class="caption">
-								<i class="fa"></i>项目:{{ site }}
-                            </div>
-                            <div class="tools">
+							<div class="caption">
+								<i class="fa fa-edit"></i>{{ type }}
+							</div>
+							<div class="tools">
 
 								<a href="javascript:;" class="collapse">
 								</a>
@@ -36,7 +57,7 @@
 
                         <div class="portlet-body">
                         {% if user.is_superuser %}
-                            <a href="{% url 'get-conf' site_id %}" class="btn btn-success">预览</a>
+                            <a href="{% url 'docker-create' %}" class="btn btn-success">{{ create }}</a>
                         {% endif %}
                         <div class="table-responsive">
                             <table class="table table-bordered">
@@ -44,36 +65,32 @@
 							<thead>
 							<tr>
 								<th>
-									 CONTEXT
-								</th>
-                                <th>
-									 UPSTREAM
+									 ID
 								</th>
 								<th>
-									 BACKEND
+									 HOST
+								</th>
+                                <th>
+									 PORT
+								</th>
+                                <th>
+									 创建日期
 								</th>
 							</tr>
 							</thead>
 							<tbody>
-                                {% for m in detail %}
+                                {% for m in object_list  %}
                                     <tr>
-                                            <td>{{ m.context }}</td>
-                                            <td>{{ m.upstream }}</td>
-                                            <td>{% if m.upstream.direct_status %}
-                                                    {{ m.upstream }}
-                                                {% else %}
-                                                    {% for n in m.upstream.hosts.all %}
-                                                        {{ n }}:{{ m.upstream.port }}<br>
-                                                    {% endfor %}
-                                                    {% for p in m.upstream.docker_list.all %}
-                                                        {{ p }}<br>
-                                                    {% endfor %}
-                                                {% endif %}
-                                            </td>
+                                        <td>{{ m.id }}</td>
+                                        <td>{{ m.host }}</td>
+                                        <td>{{ m.port }}</td>
+                                        <td>{{ m.created_date |date:'Y-m-d H:i:s' }}</td>
                                     </tr>
                                 {% endfor %}
-                            </tbody>
+							</tbody>
 							</table>
+                            {% bootstrap_paginate page_obj range=10 show_prev_next="false" show_first_last="true" %}
+                            <div>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}. Size {{ page_obj.paginator.per_page }}.Total {{ page_obj.paginator.count }}</div>
 						</div>
 						</div>
 					</div>

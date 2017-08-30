@@ -17,6 +17,8 @@ class Ipv4Network(UniqueNameDescModel):
         ordering = ['name', ]
 
 
+
+
 class Status(CommonModel,NGINX_BASE):
     name=models.CharField(max_length=50,unique=True)
 
@@ -26,6 +28,17 @@ class Status(CommonModel,NGINX_BASE):
     @staticmethod
     def verbose():
         return u'状态'
+
+
+class Docker_app(CommonModel, NGINX_BASE):
+    host = models.ForeignKey(Ipv4Address)
+    port = models.CharField(max_length=10)
+
+    def __unicode__(self):
+        return "{0}:{1}".format(self.host.name, self.port)
+    @staticmethod
+    def verbose():
+        return u'Docker'
 
 class Group(CommonModel,NGINX_BASE):
     name=models.CharField(max_length=50,unique=True)
@@ -43,6 +56,7 @@ class Upstream(CommonModel,NGINX_BASE):
     direct_status=models.BooleanField(blank=True)
     hosts=models.ManyToManyField(Ipv4Address,blank=True,related_name='upstream_host')
     port=models.CharField(max_length=20,blank=True)
+    docker_list=models.ManyToManyField(Docker_app,blank=True,related_name='docker_app')
     status=models.ForeignKey(Status)
 
     def __unicode__(self):
@@ -133,6 +147,7 @@ class Sentinel(CommonModel, REDIS_BASE):
     @staticmethod
     def verbose():
         return u'Sentinel'
+
 # class Sentinel(CommonModel,REDIS_BASE):
 #     name=models.CharField(max_length=50)
 #     member=models.ManyToManyField(Redis_group)

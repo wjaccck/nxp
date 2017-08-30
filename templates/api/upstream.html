@@ -79,6 +79,9 @@
 									 端口
 								</th>
                                 <th>
+									 Docker
+								</th>
+                                <th>
 									 状态
 								</th>
                                 <th>
@@ -106,6 +109,11 @@
                                             {% endfor %}
                                         </td>
                                         <td>{{ m.port }}</td>
+                                        <td>
+                                            {% for n in m.docker_list.all %}
+                                                {{ n }}<br>
+                                            {% endfor %}
+                                        </td>
                                         <td>{{ m.status }}</td>
                                         <td>{{ m.created_date |date:'Y-m-d H:i:s' }}</td>
                                         {% if user.is_superuser %}

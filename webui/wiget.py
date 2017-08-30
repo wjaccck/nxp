@@ -67,3 +67,15 @@ class Redis_groupMultipleWidget(BaseModelSelect2MultipleWidget):
         'name__istartswith',
         'pk__startswith',
     ]
+
+class Docker_appSelect2Widget(BaseModelSelect2Widget):
+    search_fields = [
+        'name__istartswith',
+        'pk__startswith',
+    ]
+
+class Docker_appMultipleWidget(BaseModelSelect2MultipleWidget):
+    search_fields = [
+        'host__name__istartswith',
+        'pk__startswith',
+    ]
