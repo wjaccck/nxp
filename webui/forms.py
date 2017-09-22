@@ -96,6 +96,7 @@ class Site_contextForm(forms.ModelForm):
             'site',
             'context',
             'upstream',
+            'default_proxy_set',
             'extra_parametres',
         )
         widgets = {

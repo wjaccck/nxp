@@ -8,6 +8,16 @@ from .models import *
 from .serializers import *
 # from rest_framework_filters.backends import DjangoFilterBackend
 
+
+class Codis_ApiViewSet(viewsets.ModelViewSet):
+    http_method_names = [ 'get','post']
+    queryset = Codis.objects.all()
+    serializer_class = CodisSerializer
+    permission_classes = (permissions.DjangoModelPermissions,)
+    filter_backends = (filters.DjangoFilterBackend, filters.SearchFilter, )
+    filter_fields = ('name',)
+    search_fields = ('^name', )
+
 class Ipv4Address_ApiViewSet(viewsets.ModelViewSet):
     """
     This viewset automatically provides `list`, `create`, `retrieve`,

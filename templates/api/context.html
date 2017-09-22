@@ -76,6 +76,9 @@
 									 UPSTREAM
 								</th>
                                 <th>
+									 DEFAULT_PROXY_SET
+								</th>
+                                <th>
                                      EXTRA_PARAMETRES
 								</th>
 {#                                <th>#}
@@ -98,6 +101,7 @@
                                         <td>{{ m.site }}</td>
                                         <td>{{ m.context }}</td>
                                         <td>{{ m.upstream }}</td>
+                                        <td>{{ m.default_proxy_set }}</td>
                                         {% autoescape off %}
                                         <td>{{ m.extra_parametres | change_word }}</td>
                                         {% endautoescape %}

@@ -15,6 +15,7 @@ class Base_ListViewSet(ListView):
         context['create'] = u'创建'
         context['btnsubmit'] = u'提交'
         context['btncancel'] = u'取消'
+        context['group'] = u'admin'
         context['item']=self.model.verbose()
         context['username']=self.request.user.last_name
         context['is_superuser']=self.request.user.is_superuser

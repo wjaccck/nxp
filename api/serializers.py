@@ -2,7 +2,7 @@
 from rest_framework import serializers
 from netaddr import *
 from abstract.serializers import CommonHyperlinkedModelSerializer
-from .models import Ipv4Address, Ipv4Network
+from .models import *
 
 
 class IPv4AddressSerializer(CommonHyperlinkedModelSerializer):
@@ -31,3 +31,21 @@ class IPv4NetworkSerializer(CommonHyperlinkedModelSerializer):
             raise serializers.ValidationError('Network mask is missing!')
 
         return super(IPv4NetworkSerializer, self).validate(attrs)
+
+
+class CodisSerializer(serializers.HyperlinkedModelSerializer):
+    member=serializers.SlugRelatedField(queryset=Redis_group.objects.all(), many=True,slug_field='name')
+    detail=serializers.SerializerMethodField()
+    class Meta:
+        model = Codis
+        fields='__all__'
+
+    def get_detail(self,obj):
+        groups=obj.member.all()
+        result=[]
+        for m in groups:
+            t_result={}
+            t_result[m.name]={"master":m.master.__str__(),"slave":[y.__str__() for y in m.slave.all()]}
+            result.append(t_result)
+        # return [{"x":{"master":x.master,"slave":x.slave.all(),"offline":x.offline.all()}} for x in groups]
+        return result
