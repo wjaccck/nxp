@@ -72,7 +72,10 @@ class Site(CommonModel,NGINX_BASE):
     https=models.BooleanField()
 
     def __unicode__(self):
-        return self.name
+        if self.https:
+            return "https://{0}".format(self.name)
+        else:
+            return "http://{0}".format(self.name)
     @staticmethod
     def verbose():
         return u'server_name'
