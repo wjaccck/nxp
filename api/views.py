@@ -18,6 +18,15 @@ class Codis_ApiViewSet(viewsets.ModelViewSet):
     filter_fields = ('name',)
     search_fields = ('^name', )
 
+class Sentinel_ApiViewSet(viewsets.ModelViewSet):
+    http_method_names = [ 'get','post']
+    queryset = Sentinel.objects.all()
+    serializer_class = SentinelSerializer
+    permission_classes = (permissions.DjangoModelPermissions,)
+    filter_backends = (filters.DjangoFilterBackend, filters.SearchFilter, )
+    filter_fields = ('name',)
+    search_fields = ('^name', )
+
 class Ipv4Address_ApiViewSet(viewsets.ModelViewSet):
     """
     This viewset automatically provides `list`, `create`, `retrieve`,

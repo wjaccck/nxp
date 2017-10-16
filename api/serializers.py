@@ -45,7 +45,30 @@ class CodisSerializer(serializers.HyperlinkedModelSerializer):
         result=[]
         for m in groups:
             t_result={}
-            t_result[m.name]={"master":m.master.__str__(),"slave":[y.__str__() for y in m.slave.all()]}
+            t_result[m.name]={"master":m.master.__str__(),
+                              "slave":[x.__str__() for x in m.slave.all()],
+                              "offline": [y.__str__() for y in m.offline.all()],
+                              }
+            result.append(t_result)
+        # return [{"x":{"master":x.master,"slave":x.slave.all(),"offline":x.offline.all()}} for x in groups]
+        return result
+
+class SentinelSerializer(serializers.HyperlinkedModelSerializer):
+    member=serializers.SlugRelatedField(queryset=Redis_group.objects.all(), many=True,slug_field='name')
+    detail=serializers.SerializerMethodField()
+    class Meta:
+        model = Sentinel
+        fields='__all__'
+
+    def get_detail(self,obj):
+        groups=obj.member.all()
+        result=[]
+        for m in groups:
+            t_result={}
+            t_result[m.name]={"master":m.master.__str__(),
+                              "slave":[y.__str__() for y in m.slave.all()],
+                              "offline": [y.__str__() for y in m.offline.all()],
+                              }
             result.append(t_result)
         # return [{"x":{"master":x.master,"slave":x.slave.all(),"offline":x.offline.all()}} for x in groups]
         return result

@@ -8,5 +8,6 @@ router = routers.DefaultRouter()
 router.register(r'ipv4address', views.Ipv4Address_ApiViewSet)
 router.register(r'ipv4network', views.Ipv4Network_ApiViewSet)
 router.register(r'codis', views.Codis_ApiViewSet)
+router.register(r'sentinel', views.Sentinel_ApiViewSet)
 
 urlpatterns = router.urls
