@@ -277,6 +277,8 @@ def Generate_conf(req, site_id):
                 upstream_tmp_conf=open(upstream_tmp_file.format(m.name),'w')
                 m_content=upstream_content.replace('upstream_name',m.name)
                 back_end_list=[ "server {0}:{1};".format(x.name,m.port) for x in m.hosts.all()]+["server {0}:{1};".format(x.host.name,x.port) for x in m.docker_list.all()]
+                if m.ip_hash:
+                    back_end_list.insert(0,'ip_hash;')
                 m_content=m_content.replace('back_end','\n    '.join(back_end_list))
                 upstream_tmp_conf.write(m_content)
                 upstream_tmp_conf.close()

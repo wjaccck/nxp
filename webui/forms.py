@@ -71,6 +71,7 @@ class UpstreamForm(forms.ModelForm):
     name = forms.CharField(label='组名', max_length=50, widget=forms.TextInput({'class': 'form-control'}))
     port = forms.CharField(label='端口', required=False,max_length=50, widget=forms.TextInput({'class': 'form-control'}))
     direct_status = forms.BooleanField(label='是否为代理域名', required=False)
+    ip_hash = forms.BooleanField(label='是否为ip_hash', required=False)
 
     def save(self, commit=True):
         instance = super(UpstreamForm, self).save(commit=False)
@@ -86,6 +87,7 @@ class UpstreamForm(forms.ModelForm):
             'hosts',
             'docker_list',
             'direct_status',
+            'ip_hash',
         )
         widgets = {
             'hosts': UpstreamModelSelect2MultipleWidget,

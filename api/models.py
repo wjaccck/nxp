@@ -53,11 +53,12 @@ class Group(CommonModel,NGINX_BASE):
 
 class Upstream(CommonModel,NGINX_BASE):
     name=models.CharField(max_length=50,unique=True)
-    direct_status=models.BooleanField(blank=True)
+    direct_status=models.BooleanField(default=False)
     hosts=models.ManyToManyField(Ipv4Address,blank=True,related_name='upstream_host')
     port=models.CharField(max_length=20,blank=True)
     docker_list=models.ManyToManyField(Docker_app,blank=True,related_name='docker_app')
     status=models.ForeignKey(Status)
+    ip_hash=models.BooleanField(default=False)
 
     def __unicode__(self):
         return self.name

@@ -73,6 +73,9 @@
 									 是否为代理域名
 								</th>
                                 <th>
+									 是否为IP_HASH
+								</th>
+                                <th>
 									 后端服务器
 								</th>
                                 <th>
@@ -103,6 +106,7 @@
                                         <td>{{ m.id }}</td>
                                         <td>{{ m.name }}</td>
                                         <td>{{ m.direct_status | https_status }}</td>
+                                        <td>{{ m.ip_hash | https_status }}</td>
                                         <td>
                                             {% for n in m.hosts.all %}
                                                 {{ n.name }}<br>
