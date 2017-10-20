@@ -240,7 +240,7 @@ class Redis_taskForm(forms.ModelForm):
         )
         widgets = {
             'master_ip': Redis_task_masterSelect2Widget,
-            'redis_host': Redis_task_redisSelect2Widget,
+            'redis_ip': Redis_task_redisSelect2Widget,
         }
         model = Redis_task
         exclude = ['created_date', 'modified_date','status','result']
