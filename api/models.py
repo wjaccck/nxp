@@ -165,3 +165,5 @@ class Redis_task(CommonModel,REDIS_BASE):
     @staticmethod
     def verbose():
         return u'Redis-Task'
+    class Meta:
+        ordering = ['created_date', ]
