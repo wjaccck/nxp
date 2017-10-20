@@ -154,9 +154,9 @@ class Sentinel(CommonModel, REDIS_BASE):
         return u'Sentinel'
 
 class Redis_task(CommonModel,REDIS_BASE):
-    master_ip=models.ForeignKey(Ipv4Address,blank=True)
+    master_ip=models.ForeignKey(Ipv4Address,blank=True,related_name='redis_master_ip')
     master_port=models.CharField(max_length=10,blank=True)
-    redis_ip=models.ForeignKey(Ipv4Address)
+    redis_ip=models.ForeignKey(Ipv4Address,related_name='redis_instance_ip')
     redis_port=models.CharField(max_length=10)
     size=models.CharField(max_length=10)
     result=models.TextField(blank=True)
