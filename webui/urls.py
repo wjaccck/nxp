@@ -62,6 +62,10 @@ urlpatterns = [
     url(r'^docker/delete/(?P<pk>\d+)/$', login_required(views.Docker_app_DeleteViewSet.as_view()),
         name='docker-delete'),
 
+    ### redis-task
+    url(r'^redis-task/$', login_required(views.Redis_tas_ListViewSet.as_view()), name='redis-task-list'),
+    url(r'^redis-task/create/$', login_required(views.Redis_task_CreateViewSet.as_view()), name='redis-task-create'),
+
     ### sentinel
     url(r'^sentinel/$', login_required(views.Sentinel_ListViewSet.as_view()), name='sentinel-list'),
     # url(r'^codis/update/(?P<pk>\d+)/$', login_required(views.Codis_UpdateViewSet.as_view()),

@@ -196,3 +196,51 @@ class Docker_appForm(forms.ModelForm):
         }
         model = Docker_app
         exclude = ['created_date', 'modified_date',]
+
+# class Redis_task(CommonModel,REDIS_BASE):
+#     master_ip=models.ForeignKey(Ipv4Address,blank=True)
+#     master_port=models.CharField(max_length=10,blank=True)
+#     redis_host=models.ForeignKey(Ipv4Address)
+#     redis_port=models.CharField(max_length=10)
+#     size=models.CharField(max_length=10)
+#     result=models.TextField(blank=True)
+#     status=models.ForeignKey(Status)
+
+class Redis_taskForm(forms.ModelForm):
+    master_port = forms.CharField(label='master端口', required=False,max_length=10, widget=forms.TextInput({'class': 'form-control'}))
+    redis_port = forms.CharField(label='实例端口', required=True,max_length=10, widget=forms.TextInput({'class': 'form-control'}))
+    size = forms.CharField(label='占用内存', required=True,max_length=10, widget=forms.TextInput({'class': 'form-control'}))
+
+    def clean(self):
+        cleaned_data = super(Redis_taskForm,self).clean()
+        master_ip = cleaned_data.get('master_ip')
+        master_port = cleaned_data.get('master_port')
+        redis_ip = cleaned_data.get('redis_ip')
+        redis_port = cleaned_data.get('redis_port')
+        if Redis_instance.objects.filter(host=redis_ip,port=redis_port).__len__()==0:
+            if Redis_instance.objects.filter(host=master_ip,port=master_port).__len__()==0:
+                self._errors['port'] = self.error_class([u"master实例不存在"])
+            else:
+                return cleaned_data
+        else:
+            self._errors['port'] = self.error_class([u"该服务器端口已被占用"])
+
+    def save(self, commit=True):
+        instance = super(Redis_taskForm, self).save(commit=False)
+        instance.status = Status.objects.get(name='undo')
+        return instance.save()
+
+    class Meta:
+        fields = (
+            'master_ip',
+            'master_port',
+            'redis_ip',
+            'redis_port',
+            'size',
+        )
+        widgets = {
+            'master_ip': Docker_appSelect2Widget,
+            'redis_host': Docker_appSelect2Widget,
+        }
+        model = Docker_app
+        exclude = ['created_date', 'modified_date','status','result']

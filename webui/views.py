@@ -232,6 +232,33 @@ class Docker_app_ListViewSet(Base_ListViewSet):
             return self.model.objects.all()
 
 
+
+class Redis_task_CreateViewSet(Base_CreateViewSet):
+    model = Redis_task
+    form_class = forms.Redis_taskForm
+    template_name = 'api/redis_task_form.html'
+    success_url = reverse_lazy('redis-task-list')
+
+class Redis_tas_ListViewSet(Base_ListViewSet):
+    Redis_task.objects.all().count()
+    model = Redis_task
+    template_name = 'api/redis_task.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        name = None
+        try:
+            name = self.request.GET['keyword']
+        except:
+            pass
+
+        if name:
+            return self.model.objects.filter(redis_host__name__istartswith=name)
+        else:
+            return self.model.objects.all()
+
+
+
 def Get_detail(req,site_id):
     if req.user.is_authenticated():
         site=Site.objects.get(id=site_id)

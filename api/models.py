@@ -153,8 +153,11 @@ class Sentinel(CommonModel, REDIS_BASE):
     def verbose():
         return u'Sentinel'
 
-# class Sentinel(CommonModel,REDIS_BASE):
-#     name=models.CharField(max_length=50)
-#     member=models.ManyToManyField(Redis_group)
-#     def __unicode__(self):
-#         return self.name
+class Redis_task(CommonModel,REDIS_BASE):
+    master_ip=models.ForeignKey(Ipv4Address,blank=True)
+    master_port=models.CharField(max_length=10,blank=True)
+    redis_ip=models.ForeignKey(Ipv4Address)
+    redis_port=models.CharField(max_length=10)
+    size=models.CharField(max_length=10)
+    result=models.TextField(blank=True)
+    status=models.ForeignKey(Status)
