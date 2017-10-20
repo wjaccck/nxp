@@ -191,6 +191,6 @@ class Run_ansible_redis_task(BaseTask):
                 logger.error(result_data)
                 task.status.status=Status.objects.get(name='failed')
                 task.status.result=result_data
-                task.status.save()
+                task.save()
         else:
             logger.error("{0} wrong status".format(redis_task_id))
