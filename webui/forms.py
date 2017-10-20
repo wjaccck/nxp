@@ -218,8 +218,11 @@ class Redis_taskForm(forms.ModelForm):
         redis_ip = cleaned_data.get('redis_ip')
         redis_port = cleaned_data.get('redis_port')
         if Redis_instance.objects.filter(host=redis_ip,port=redis_port).__len__()==0:
-            if Redis_instance.objects.filter(host=master_ip,port=master_port).__len__()==0:
-                self._errors['port'] = self.error_class([u"master实例不存在"])
+            if master_ip and master_port:
+                if Redis_instance.objects.filter(host=master_ip,port=master_port).__len__()==0:
+                    self._errors['master_ip'] = self.error_class([u"master实例不存在"])
+                else:
+                    return cleaned_data
             else:
                 return cleaned_data
         else:
