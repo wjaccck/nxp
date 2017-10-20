@@ -143,6 +143,12 @@ class MissionTask(BaseTask):
 
 class Run_ansible_redis_task(BaseTask):
 
+    def _get_instance(self,host,port):
+        redis_instance,redis_instance_status=Redis_instance.objects.get_or_create(
+            host=Ipv4Address.objects.get(name=host),
+            port=port
+        )
+        return redis_instance
 
     def run(self,redis_task_id):
         task=Redis_task.objects.get(id=redis_task_id)
@@ -187,6 +193,7 @@ class Run_ansible_redis_task(BaseTask):
                 task.status=Status.objects.get(name='done')
                 task.result='done'
                 task.save()
+                self._get_instance(task.redis_ip.name,task.redis_port)
             else:
                 logger.error(result_data)
                 task.status=Status.objects.get(name='failed')
