@@ -161,3 +161,7 @@ class Redis_task(CommonModel,REDIS_BASE):
     size=models.CharField(max_length=10)
     result=models.TextField(blank=True)
     status=models.ForeignKey(Status)
+
+    @staticmethod
+    def verbose():
+        return u'Redis-Task'
