@@ -242,5 +242,5 @@ class Redis_taskForm(forms.ModelForm):
             'master_ip': Docker_appSelect2Widget,
             'redis_host': Docker_appSelect2Widget,
         }
-        model = Docker_app
+        model = Redis_task
         exclude = ['created_date', 'modified_date','status','result']
