@@ -1,6 +1,6 @@
 #coding=utf-8
 from celery import Task as T
-from core.common import logger,Codis_admin_info
+from core.common import logger,Codis_admin_info,ANSRunner
 from api.models import *
 import redis
 import time
@@ -138,3 +138,59 @@ class MissionTask(BaseTask):
         for m in Codis.objects.all():
             if m.admin_http:
                 Codis_info().apply_async(args=(m.id,))
+
+
+
+class Run_ansible_redis_task(BaseTask):
+
+
+    def run(self,redis_task_id):
+        task=Redis_task.objects.get(id=redis_task_id)
+        if task.status.name=='in_queue':
+            task.status=Status.objects.get(name='processing')
+            task.save()
+            resource = [{"hostname": task.redis_ip.name,"username": "root", "ssh_key":"/root/.ssh/id_rsa"}]
+            if task.master_ip:
+                playbook_path = '/home/admin/scripts/redis_shihui/slave.yml'
+                parametres={
+                    "host":[task.redis_ip.name],
+                    "master_ip":task.master_ip.name,
+                    "master_port":task.master_port,
+                    "ip":task.redis_ip.name,
+                    "port":task.redis_port,
+                    "maxmemory":task.size
+                }
+            else:
+                playbook_path='/home/admin/scripts/redis_shihui/master.yml'
+                parametres = {
+                    "host": [task.redis_ip.name],
+                    "ip": task.redis_ip.name,
+                    "port": task.redis_port,
+                    "maxmemory": task.size
+                }
+            rbt = ANSRunner(resource)
+            rbt.run_playbook(
+                playbook_path=playbook_path,
+                extra_vars=parametres
+            )
+            result_data = rbt.get_playbook_result()
+            logger.info({"resource":resource,"result":result_data,"exec_id":redis_task_id})
+            publish_status=True
+            if result_data.get('failed'):
+                publish_status=False
+            if result_data.get('skipped'):
+                publish_status = False
+            if result_data.get('unreachable'):
+                publish_status = False
+
+            if publish_status:
+                task.status=Status.objects.get(name='done')
+                task.result='done'
+                task.save()
+            else:
+                logger.error(result_data)
+                task.status.status=Status.objects.get(name='failed')
+                task.status.result=result_data
+                task.status.save()
+        else:
+            logger.error("{0} wrong status".format(redis_task_id))

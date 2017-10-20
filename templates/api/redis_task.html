@@ -107,7 +107,11 @@
                                         <td>{{ m.size }}</td>
                                         <td>{{ m.status }}</td>
                                         <td>{{ m.result }}</td>
-                                        <td><a>详情</a></td>
+                                        {% if m.status.name == 'undo' %}
+                                            <td><a href="{% url 'run-redis-task' m.id %}">执行</a></td>
+                                        {% else %}
+                                            <td>不可操作</td>
+                                        {% endif %}
                                         <td>{{ m.created_date |date:'Y-m-d H:i:s' }}</td>
 {#                                        <td><a  href="{% url 'get-detail' m.id %}">详情</a></td>#}
                                     </tr>

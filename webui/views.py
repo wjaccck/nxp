@@ -11,7 +11,7 @@ from core.common import getComStr,head_file,tail_file,context_file,upstream_file
     upstream_online_file,shihui_https_file,hiwemeet_https_file,ssl_vhost_online_file,ssl_vhost_release_file,ssl_vhost_tmp_file
 from django.http import HttpResponse,HttpResponseBadRequest,StreamingHttpResponse
 import operator
-# from tasks import MissionTask
+from tasks import Run_ansible_redis_task
 from vanilla import TemplateView
 from abstract.views import Base_CreateViewSet, Base_ListViewSet, Base_UpdateViewSet,Base_DeleteViewSet
 
@@ -257,6 +257,17 @@ class Redis_tas_ListViewSet(Base_ListViewSet):
         else:
             return self.model.objects.all()
 
+
+def Run_redis_task(req,redis_task_id):
+    if req.user.is_authenticated():
+        Run_ansible_redis_task().apply_async(args=(redis_task_id,))
+        task=Redis_task.objects.get(id=redis_task_id)
+        task.status=Status.objects.get(name='in_queue')
+        task.save()
+        response = redirect('redis-task-list')
+    else:
+        response =redirect('login')
+    return response
 
 
 def Get_detail(req,site_id):

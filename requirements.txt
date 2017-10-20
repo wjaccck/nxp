@@ -14,3 +14,4 @@ django-rest-swagger==2.1.1
 django-debug-toolbar==1.6
 celery<4.0
 django-celery
+ansible==2.3.2.0
