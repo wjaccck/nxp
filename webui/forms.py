@@ -235,11 +235,11 @@ class Redis_taskForm(forms.ModelForm):
 
     class Meta:
         fields = (
-            'master_ip',
-            'master_port',
             'redis_ip',
             'redis_port',
             'size',
+            'master_ip',
+            'master_port',
         )
         widgets = {
             'master_ip': Redis_task_masterSelect2Widget,
