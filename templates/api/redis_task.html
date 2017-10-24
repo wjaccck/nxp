@@ -67,12 +67,6 @@
 								<th>
 									 ID
 								</th>
-								<th>
-									 MASTER_IP
-								</th>
-                                <th>
-									 MASTER_PORT
-								</th>
                                 <th>
 									 REDIS_IP
 								</th>
@@ -81,6 +75,12 @@
 								</th>
 								<th>
 									 SIZE
+								</th>
+								<th>
+									 MASTER_IP
+								</th>
+                                <th>
+									 MASTER_PORT
 								</th>
                                 <th>
 									 STATUS
@@ -100,11 +100,11 @@
                                 {% for m in object_list  %}
                                     <tr>
                                         <td>{{ m.id }}</td>
-                                        <td>{{ m.master_ip }}</td>
-                                        <td>{{ m.master_port }}</td>
                                         <td>{{ m.redis_ip }}</td>
                                         <td>{{ m.redis_port }}</td>
                                         <td>{{ m.size }}</td>
+                                        <td>{{ m.master_ip }}</td>
+                                        <td>{{ m.master_port }}</td>
                                         <td>{{ m.status }}</td>
                                         <td>{{ m.result }}</td>
                                         {% if m.status.name == 'undo' %}
