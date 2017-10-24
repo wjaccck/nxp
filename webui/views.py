@@ -260,10 +260,10 @@ class Redis_tas_ListViewSet(Base_ListViewSet):
 
 def Run_redis_task(req,redis_task_id):
     if req.user.is_authenticated():
-        Run_ansible_redis_task().apply_async(args=(redis_task_id,))
         task=Redis_task.objects.get(id=redis_task_id)
         task.status=Status.objects.get(name='in_queue')
         task.save()
+        Run_ansible_redis_task().apply_async(args=(redis_task_id,))
         response = redirect('redis-task-list')
     else:
         response =redirect('login')
