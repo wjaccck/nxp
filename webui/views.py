@@ -16,6 +16,11 @@ from vanilla import TemplateView
 from abstract.views import Base_CreateViewSet, Base_ListViewSet, Base_UpdateViewSet,Base_DeleteViewSet
 
 
+class tt(TemplateView):
+    def ge
+
+
+
 def index(req):
     if req.user.is_authenticated():
 
@@ -375,10 +380,11 @@ def Conf_check(req, site_id):
         detail = [x for x in Site_context.objects.filter(site=site)]
         upstreams=[ x.upstream for x in detail if x.upstream.status.name=='undo']
         for m in upstreams:
-            result=getComStr("rsync -av {0} {1}".format(upstream_tmp_file.format(m.name), upstream_release_file.format(m.name)))
-            if result.get('retcode') != 0:
-                all_status=False
-                logger.error(result)
+            if not m.direct_status:
+                result=getComStr("rsync -av {0} {1}".format(upstream_tmp_file.format(m.name), upstream_release_file.format(m.name)))
+                if result.get('retcode') != 0:
+                    all_status=False
+                    logger.error(result)
         # if site.https:
         #     result=getComStr("rsync -av {0} {1}".format(ssl_vhost_release_file.format(site.name),ssl_vhost_online_file.format(site.name)))
         # else:
