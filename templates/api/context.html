@@ -79,6 +79,9 @@
 									 DEFAULT_PROXY_SET
 								</th>
                                 <th>
+									 LUA_STATUS
+								</th>
+                                <th>
                                      EXTRA_PARAMETRES
 								</th>
 {#                                <th>#}
@@ -102,6 +105,7 @@
                                         <td>{{ m.context }}</td>
                                         <td>{{ m.upstream }}</td>
                                         <td>{{ m.default_proxy_set }}</td>
+                                        <td>{{ m.lua_status }}</td>
                                         {% autoescape off %}
                                         <td>{{ m.extra_parametres | change_word }}</td>
                                         {% endautoescape %}

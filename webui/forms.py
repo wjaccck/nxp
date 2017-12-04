@@ -110,6 +110,7 @@ class Site_contextForm(forms.ModelForm):
             'context',
             'upstream',
             'default_proxy_set',
+            'lua_status',
             'extra_parametres',
         )
         widgets = {

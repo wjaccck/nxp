@@ -87,6 +87,7 @@ class Site_context(CommonModel,NGINX_BASE):
     upstream=models.ForeignKey(Upstream,related_name='context_upstream')
     default_proxy_set=models.BooleanField(default=True)
     extra_parametres=models.TextField(blank=True)
+    lua_status=models.BooleanField(default=True)
     status=models.ForeignKey(Status)
     @staticmethod
     def verbose():
