@@ -333,12 +333,12 @@ def Generate_conf(req, site_id):
             m_content=context_content.replace('context_path',m.context)
             m_content=m_content.replace('upstream_name',m.upstream.name)
             m_parametres=[x.strip() for x in m.extra_parametres.split(';')]
+            if m.lua_status:
+                m_parametres.append('log_by_lua_file /opt/nginx/conf/status/kafka.lua')
             if m.default_proxy_set:
                 m_parametres.insert(0,'include proxy_conf')
             m_content=m_content.replace('extra_parametres',';\r\n        '.join(m_parametres))
             vhost_tmp_conf.write(m_content)
-            if m.lua_status:
-                vhost_tmp_conf.write(';\r\n        log_by_lua_file /opt/nginx/conf/status/kafka.lua;')
 
         vhost_tmp_conf.write(tail_content)
         vhost_tmp_conf.close()
