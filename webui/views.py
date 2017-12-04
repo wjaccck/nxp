@@ -16,10 +16,6 @@ from vanilla import TemplateView
 from abstract.views import Base_CreateViewSet, Base_ListViewSet, Base_UpdateViewSet,Base_DeleteViewSet
 
 
-class tt(TemplateView):
-    def ge
-
-
 
 def index(req):
     if req.user.is_authenticated():
