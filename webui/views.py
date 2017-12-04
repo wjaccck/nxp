@@ -192,7 +192,7 @@ class Site_context_ListViewSet(Base_ListViewSet):
             pass
 
         if name:
-            return self.model.objects.filter(site__name__istartswith=name)
+            return self.model.objects.filter(site__name__istartswith=name).order_by("-modified_date")
         else:
             return self.model.objects.all()
                         #
