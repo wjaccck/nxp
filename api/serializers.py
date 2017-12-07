@@ -96,7 +96,7 @@ class SiteSerializer(serializers.HyperlinkedModelSerializer):
             if m.upstream.direct_status:
                 t_result['app_info']=[]
             else:
-                t_result['app_info']=m.upstream.docker_list.all()+["{0}:{1}".format(x,m.port) for x in m.upstream.hosts.all()]
+                t_result['app_info']=m.upstream.docker_list.all()+["{0}:{1}".format(x,m.upstream.port) for x in m.upstream.hosts.all()]
             result.append(t_result)
         # return [{"x":{"master":x.master,"slave":x.slave.all(),"offline":x.offline.all()}} for x in groups]
         return result
