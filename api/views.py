@@ -8,6 +8,14 @@ from .models import *
 from .serializers import *
 # from rest_framework_filters.backends import DjangoFilterBackend
 
+class Site_ApiViewSet(viewsets.ModelViewSet):
+    http_method_names = [ 'get']
+    queryset = Site.objects.all()
+    serializer_class = SiteSerializer
+    permission_classes = (permissions.DjangoModelPermissions,)
+    filter_backends = (filters.DjangoFilterBackend, filters.SearchFilter, )
+    filter_fields = ('name',)
+    search_fields = ('^name', )
 
 class Codis_ApiViewSet(viewsets.ModelViewSet):
     http_method_names = [ 'get','post']
