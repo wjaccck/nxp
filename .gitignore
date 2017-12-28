@@ -1,0 +1,12 @@
+*.pyc
+*.json
+*.log
+*.zip
+*.sqlite3
+.idea/dataSources.local.xml
+.idea/dataSources.xml
+.idea/dataSources/
+api/migrations/
+env/
+static/
+nxp/settings.py

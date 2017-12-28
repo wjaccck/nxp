@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="90be86d3-dafa-4421-84c0-535ac5021a8e" name="nxp" url="http://10.120.180.40">
+        <fileTransfer host="10.120.180.40" port="22" rootFolder="/opt/app/nxp" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
