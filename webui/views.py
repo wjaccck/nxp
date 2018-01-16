@@ -296,7 +296,6 @@ def Generate_conf(req, site_id):
             vhost_tmp_conf = open(vhost_tmp_file.format(site.name), 'w')
             vhost_tmp_conf.write(content.replace('http_host', site.name))
             vhost_tmp_conf.close()
-            file_list.append(vhost_tmp_file.format(site.name))
         else:
             detail = [x for x in Site_context.objects.filter(site=site)]
             ## get template for nginx vhost and upstream
