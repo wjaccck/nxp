@@ -52,12 +52,13 @@ class SiteForm(forms.ModelForm):
         https = cleaned_data.get('https')
         group = cleaned_data.get('group')
         redirect_status = cleaned_data.get('redirect_status')
-        if Site.objects.filter(name=name,https=https,group=group).__len__()==0:
-            return cleaned_data
-        else:
-            self._errors['name'] = self.error_class([u"该站点在本组已有配置"])
         if https and redirect_status:
             self._errors['redirect_status'] = self.error_class([u"不可做http至https的重定向"])
+        else:
+            if Site.objects.filter(name=name,https=https,group=group).__len__()==0:
+                return cleaned_data
+            else:
+                self._errors['name'] = self.error_class([u"该站点在本组已有配置"])
 
     class Meta:
         fields = (
