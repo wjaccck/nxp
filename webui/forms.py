@@ -44,21 +44,26 @@ class SiteForm(forms.ModelForm):
 
     name = forms.CharField(label='域名', max_length=50, widget=forms.TextInput({'class': 'form-control'}))
     https = forms.BooleanField(label='是否为https',required=False)
+    redirect_status = forms.BooleanField(label='是否为重定向至https',required=False)
 
     def clean(self):
         cleaned_data = super(SiteForm,self).clean()
         name = cleaned_data.get('name')
         https = cleaned_data.get('https')
         group = cleaned_data.get('group')
+        redirect_status = cleaned_data.get('redirect_status')
         if Site.objects.filter(name=name,https=https,group=group).__len__()==0:
             return cleaned_data
         else:
             self._errors['name'] = self.error_class([u"该站点在本组已有配置"])
+        if https and redirect_status:
+            self._errors['redirect_status'] = self.error_class([u"不可做http至https的重定向"])
 
     class Meta:
         fields = (
             'name',
             'https',
+            'redirect_status',
             'group'
         )
         widgets = {

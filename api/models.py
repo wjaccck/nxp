@@ -71,6 +71,7 @@ class Site(CommonModel,NGINX_BASE):
     name=models.CharField(max_length=50)
     group=models.ForeignKey(Group,related_name='site_group')
     https=models.BooleanField()
+    redirect_status=models.BooleanField(default=False)
 
     def __unicode__(self):
         if self.https:

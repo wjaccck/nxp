@@ -74,6 +74,9 @@
 									 HTTPS
 								</th>
                                 <th>
+									 重定向至HTTPS
+								</th>
+                                <th>
 									 所属NGINX组
 								</th>
                                 <th>
@@ -95,6 +98,7 @@
                                         <td>{{ m.id }}</td>
                                         <td>{{ m.name }}</td>
                                         <td>{{ m.https | https_status }}</td>
+                                        <td>{{ m.redirect_status | https_status }}</td>
                                         <td>{{ m.group }}</td>
                                         <td>{{ m.created_date |date:'Y-m-d H:i:s' }}</td>
                                         {% if user.is_superuser %}
