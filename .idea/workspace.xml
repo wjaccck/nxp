@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a8356791-8dff-4783-a146-d6e83154db82" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/api/site_headers.html" afterPath="$PROJECT_DIR$/templates/api/site_headers.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webui/views.py" afterPath="$PROJECT_DIR$/webui/views.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,11 +17,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/webui/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="379" column="48" lean-forward="false" selection-start-line="379" selection-start-column="48" selection-end-line="379" selection-end-column="48" />
+            <state relative-caret-position="275">
+              <caret line="340" column="81" lean-forward="false" selection-start-line="340" selection-start-column="81" selection-end-line="340" selection-end-column="81" />
               <folding>
                 <element signature="e#14#44#0" expanded="true" />
                 <element signature="e#2869#2998#0" expanded="false" />
@@ -47,7 +46,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="site_headers.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="site_headers.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/api/site_headers.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="375">
@@ -87,21 +86,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/webui/forms.py">
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/api/models.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="225">
-              <caret line="80" column="23" lean-forward="false" selection-start-line="80" selection-start-column="13" selection-end-line="80" selection-end-column="23" />
+              <caret line="86" column="14" lean-forward="false" selection-start-line="86" selection-start-column="4" selection-end-line="86" selection-end-column="14" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="wiget.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/webui/wiget.py">
+      <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/webui/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="400">
-              <caret line="46" column="36" lean-forward="false" selection-start-line="46" selection-start-column="6" selection-end-line="46" selection-end-column="36" />
+            <state relative-caret-position="225">
+              <caret line="80" column="23" lean-forward="false" selection-start-line="80" selection-start-column="13" selection-end-line="80" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -192,8 +191,8 @@
         <option value="$PROJECT_DIR$/templates/webui/index.html" />
         <option value="$PROJECT_DIR$/templates/api/site_headers_confirm_delete.html" />
         <option value="$PROJECT_DIR$/templates/api/site_headers_form.html" />
-        <option value="$PROJECT_DIR$/webui/views.py" />
         <option value="$PROJECT_DIR$/templates/api/site_headers.html" />
+        <option value="$PROJECT_DIR$/webui/views.py" />
       </list>
     </option>
   </component>
@@ -267,38 +266,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="templatetags" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="nxp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="nxp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="nxp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="nxp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="api" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -922,16 +889,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="86" column="14" lean-forward="false" selection-start-line="86" selection-start-column="4" selection-end-line="86" selection-end-column="14" />
-          <folding>
-            <element signature="e#14#53#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/webui/wiget.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="400">
@@ -990,23 +947,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/webui/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="379" column="48" lean-forward="false" selection-start-line="379" selection-start-column="48" selection-end-line="379" selection-end-column="48" />
-          <folding>
-            <element signature="e#14#44#0" expanded="true" />
-            <element signature="e#2869#2998#0" expanded="false" />
-            <element signature="e#3050#3179#0" expanded="false" />
-            <element signature="e#3231#3287#0" expanded="false" />
-            <element signature="e#3336#3777#0" expanded="false" />
-            <element signature="e#5970#6121#0" expanded="false" />
-            <element signature="e#6181#6332#0" expanded="false" />
-            <element signature="e#6392#6459#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/webui/templatetags/webui_extras.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="95">
@@ -1020,6 +960,31 @@
         <state relative-caret-position="375">
           <caret line="90" column="80" lean-forward="true" selection-start-line="90" selection-start-column="80" selection-end-line="90" selection-end-column="80" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="86" column="14" lean-forward="false" selection-start-line="86" selection-start-column="4" selection-end-line="86" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webui/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="340" column="81" lean-forward="false" selection-start-line="340" selection-start-column="81" selection-end-line="340" selection-end-column="81" />
+          <folding>
+            <element signature="e#14#44#0" expanded="true" />
+            <element signature="e#2869#2998#0" expanded="false" />
+            <element signature="e#3050#3179#0" expanded="false" />
+            <element signature="e#3231#3287#0" expanded="false" />
+            <element signature="e#3336#3777#0" expanded="false" />
+            <element signature="e#5970#6121#0" expanded="false" />
+            <element signature="e#6181#6332#0" expanded="false" />
+            <element signature="e#6392#6459#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
