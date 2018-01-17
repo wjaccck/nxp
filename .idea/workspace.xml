@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a8356791-8dff-4783-a146-d6e83154db82" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webui/views.py" afterPath="$PROJECT_DIR$/webui/views.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,8 +21,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/webui/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="275">
-              <caret line="340" column="81" lean-forward="false" selection-start-line="340" selection-start-column="81" selection-end-line="340" selection-end-column="81" />
+            <state relative-caret-position="425">
+              <caret line="343" column="72" lean-forward="true" selection-start-line="343" selection-start-column="72" selection-end-line="343" selection-end-column="72" />
               <folding>
                 <element signature="e#14#44#0" expanded="true" />
                 <element signature="e#2869#2998#0" expanded="false" />
@@ -973,8 +974,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/webui/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="340" column="81" lean-forward="false" selection-start-line="340" selection-start-column="81" selection-end-line="340" selection-end-column="81" />
+        <state relative-caret-position="425">
+          <caret line="343" column="72" lean-forward="true" selection-start-line="343" selection-start-column="72" selection-end-line="343" selection-end-column="72" />
           <folding>
             <element signature="e#14#44#0" expanded="true" />
             <element signature="e#2869#2998#0" expanded="false" />
