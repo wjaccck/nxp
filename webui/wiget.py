@@ -44,6 +44,12 @@ class SiteModelSelect2Widget(BaseModelSelect2Widget):
         'pk__startswith',
     ]
 
+class Site_headersModelSelect2Widget(BaseModelSelect2Widget):
+    search_fields = [
+        'name__istartswith',
+        'pk__startswith',
+    ]
+
 class UpstreamSelect2Widget(BaseModelSelect2Widget):
     search_fields = [
         'name__istartswith',

@@ -73,6 +73,21 @@ class SiteForm(forms.ModelForm):
         model = Site
         exclude = ['created_date', 'modified_date']
 
+class Site_headersForm(forms.ModelForm):
+
+    class Meta:
+        fields = (
+            'site',
+            'extra_conf',
+        )
+        widgets = {
+            'site': Site_headersModelSelect2Widget,
+        }
+        model = Site_headers
+        exclude = ['created_date', 'modified_date']
+
+
+
 class UpstreamForm(forms.ModelForm):
     name = forms.CharField(label='组名', max_length=50, widget=forms.TextInput({'class': 'form-control'}))
     port = forms.CharField(label='端口', required=False,max_length=50, widget=forms.TextInput({'class': 'form-control'}))

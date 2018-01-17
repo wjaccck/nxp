@@ -82,6 +82,13 @@ class Site(CommonModel,NGINX_BASE):
     def verbose():
         return u'server_name'
 
+class Site_headers(CommonModel,NGINX_BASE):
+    site=models.ForeignKey(Site)
+    extra_conf=models.TextField(blank=True)
+    @staticmethod
+    def verbose():
+        return u'site_headers'
+
 class Site_context(CommonModel,NGINX_BASE):
     site=models.ForeignKey(Site)
     context=models.CharField(max_length=200)

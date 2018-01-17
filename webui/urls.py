@@ -18,11 +18,17 @@ urlpatterns = [
     url(r'^group/update/(?P<pk>\d+)/$', login_required(views.Group_UpdateViewSet.as_view()), name='group-update'),
     url(r'^group/create/$', login_required(views.Group_CreateViewSet.as_view()), name='group-create'),
 
-    ### project
+    ### site
     url(r'^site/$', login_required(views.Site_ListViewSet.as_view()), name='site-list'),
     url(r'^site/update/(?P<pk>\d+)/$', login_required(views.Site_UpdateViewSet.as_view()), name='site-update'),
     url(r'^site/create/$', login_required(views.Site_CreateViewSet.as_view()), name='site-create'),
     url(r'^site/delete/(?P<pk>\d+)/$', login_required(views.Site_DeleteViewSet.as_view()), name='site-delete'),
+
+    ### site headers
+    url(r'^site-headers/$', login_required(views.Site_headers_ListViewSet.as_view()), name='site-headers-list'),
+    url(r'^site-headers/update/(?P<pk>\d+)/$', login_required(views.Site_headers_UpdateViewSet.as_view()), name='site-headers-update'),
+    url(r'^site-headers/create/$', login_required(views.Site_headers_CreateViewSet.as_view()), name='site-headers-create'),
+    url(r'^site-headers/delete/(?P<pk>\d+)/$', login_required(views.Site_headers_DeleteViewSet.as_view()), name='site-headers-delete'),
 
     ### upstream
     url(r'^upstream/$', login_required(views.Upstream_ListViewSet.as_view()), name='upstream-list'),

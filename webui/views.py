@@ -89,6 +89,9 @@ class Group_ListViewSet(Base_ListViewSet):
             return self.model.objects.all()
 #
 
+
+
+
 class Site_CreateViewSet(Base_CreateViewSet):
     model = Site
     form_class = forms.SiteForm
@@ -123,6 +126,44 @@ class Site_ListViewSet(Base_ListViewSet):
             return self.model.objects.filter(name__icontains=name).order_by("-modified_date")
         else:
             return self.model.objects.all().order_by("-modified_date")
+
+#
+
+class Site_headers_CreateViewSet(Base_CreateViewSet):
+    model = Site_headers
+    form_class = forms.Site_headersForm
+    template_name = 'api/site_headers_form.html'
+    success_url = reverse_lazy('site-headers-list')
+
+class Site_headers_UpdateViewSet(Base_UpdateViewSet):
+    model = Site_headers
+    form_class = forms.Site_headersForm
+    template_name = 'api/site_headers_form.html'
+    success_url = reverse_lazy('site-headers-list')
+
+class Site_headers_DeleteViewSet(Base_DeleteViewSet):
+    model = Site_headers
+    success_url = reverse_lazy('site-headers-list')
+
+
+class Site_headers_ListViewSet(Base_ListViewSet):
+    Site_headers.objects.all().count()
+    model = Site_headers
+    template_name = 'api/site_headers.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        name = None
+        try:
+            name = self.request.GET['keyword']
+        except:
+            pass
+
+        if name:
+            return self.model.objects.filter(site__name__icontains=name).order_by("-modified_date")
+        else:
+            return self.model.objects.all().order_by("-modified_date")
+
 
 #
 
