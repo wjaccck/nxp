@@ -378,8 +378,8 @@ def Generate_conf(req, site_id):
 
             vhost_tmp_conf.write(head_content.replace('http_host',site.name))
             vhost_tmp_conf.write('\r\n        ')
-            for m in Site_headers.objects.filter(site=site):
-                vhost_tmp_conf.write(';\r\n        '.join(m.extra_conf.__str__().splite(';')))
+            for n in Site_headers.objects.filter(site=site):
+                vhost_tmp_conf.write(';\r\n        '.join(n.extra_conf.splite(';')))
             for m in detail:
                 m_content=context_content.replace('context_path',m.context)
                 m_content=m_content.replace('upstream_name',m.upstream.name)
