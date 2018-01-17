@@ -336,7 +336,6 @@ def Generate_conf(req, site_id):
             content = get_file_content(redirect_file)
             vhost_tmp_conf = open(vhost_tmp_file.format(site.name), 'w')
             vhost_tmp_conf.write(content.replace('http_host', site.name))
-            vhost_tmp_conf.write('\r\n        ')
             for m in Site_headers.objects.filter(site=site):
                 vhost_tmp_conf.write(';\r\n        '.join(m.extra_conf.__str__().split(';')))
             vhost_tmp_conf.close()
@@ -377,7 +376,6 @@ def Generate_conf(req, site_id):
                 vhost_tmp_conf=open(vhost_tmp_file.format(site.name),'w')
 
             vhost_tmp_conf.write(head_content.replace('http_host',site.name))
-            vhost_tmp_conf.write('\r\n        ')
             for n in Site_headers.objects.filter(site=site):
                 vhost_tmp_conf.write(';\r\n        '.join(n.extra_conf.split(';')))
             for m in detail:
