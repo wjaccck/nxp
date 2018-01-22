@@ -521,9 +521,9 @@ class Tran_missionViewSet(Base_ListViewSet):
             pass
 
         if name:
-            return self.model.objects.filter(mark=name)
+            return self.model.objects.filter(mark=name).order_by("-modified_date")
         else:
-            return self.model.objects.all()
+            return self.model.objects.all().order_by("-modified_date")
 
 def Run_mission(req, mission_id):
     if req.user.is_authenticated():

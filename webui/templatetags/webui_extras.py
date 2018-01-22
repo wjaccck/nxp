@@ -24,7 +24,6 @@ def change_file(value):
 @register.filter(name='https_status')
 def change_https(value):
     if value:
-        print value
         return u'是'
     else:
         return u'否'
