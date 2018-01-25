@@ -49,8 +49,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/webui/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="400">
-              <caret line="265" column="0" lean-forward="true" selection-start-line="265" selection-start-column="0" selection-end-line="265" selection-end-column="0" />
+            <state relative-caret-position="-25">
+              <caret line="234" column="0" lean-forward="true" selection-start-line="234" selection-start-column="0" selection-end-line="234" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -741,6 +741,21 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2650">
           <caret line="106" column="74" lean-forward="false" selection-start-line="106" selection-start-column="74" selection-end-line="106" selection-end-column="74" />
+          <folding>
+            <marker date="1512378407639" expanded="true" signature="248:4843" ph="..." />
+            <marker date="1512378407639" expanded="true" signature="281:4832" ph="..." />
+            <marker date="1512378407639" expanded="true" signature="1177:4794" ph="..." />
+            <marker date="1512378407639" expanded="true" signature="1206:4784" ph="..." />
+            <marker date="1512378407639" expanded="true" signature="1283:4734" ph="..." />
+            <marker date="1512378407639" expanded="true" signature="1676:4722" ph="..." />
+            <marker date="1512378407639" expanded="true" signature="1833:4709" ph="..." />
+            <marker date="1512378407639" expanded="true" signature="1898:4453" ph="..." />
+            <marker date="1512378407639" expanded="true" signature="2010:2939" ph="..." />
+            <marker date="1512378407639" expanded="true" signature="2022:2923" ph="..." />
+            <marker date="1512378407639" expanded="true" signature="2357:2392" ph="..." />
+            <marker date="1512378407639" expanded="true" signature="2954:4437" ph="..." />
+            <marker date="1512378407639" expanded="true" signature="3055:4376" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -799,6 +814,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="409">
           <caret line="101" column="62" lean-forward="false" selection-start-line="101" selection-start-column="62" selection-end-line="101" selection-end-column="62" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -939,8 +955,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/webui/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="265" column="0" lean-forward="true" selection-start-line="265" selection-start-column="0" selection-end-line="265" selection-end-column="0" />
+        <state relative-caret-position="-25">
+          <caret line="234" column="0" lean-forward="true" selection-start-line="234" selection-start-column="0" selection-end-line="234" selection-end-column="0" />
           <folding />
         </state>
       </provider>
