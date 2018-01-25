@@ -24,7 +24,7 @@ def index(req):
         upstream_count=Upstream.objects.all().count()
         all_machine=[]
         for m in Upstream.objects.all():
-            all_machine.extend(m.hosts)
+            all_machine.extend(m.hosts.all())
             all_machine.extend([x.host for x in m.docker_list.all()])
         machine_count=list(set(all_machine)).__len__()
         public_count=Site.objects.filter(group=Group.objects.get(name='public')).count()
