@@ -203,6 +203,74 @@
                     </p>
                 </div>
                 </div>
+                			<div class="row margin-top-10">
+				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+{#                    <a href="{% url 'dc-list' %}">#}
+                        <div class="dashboard-stat2">
+                            <div class="display">
+                                <div class="number">
+                                    <small>公网NGINX</small>
+                                    <br>
+
+                                    </br>
+
+                                </div>
+                            </div>
+                        </div>
+{#                    </a>#}
+				</div>
+				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+{#                    <a href="{% url 'app-list' %}">#}
+                        <div class="dashboard-stat2">
+                            <div class="display">
+                                <div class="number">
+{#                                    <h3 class="font-red-haze">{{ app_list }}</h3>#}
+                                    <small>内网NGINX</small>
+                                    <br>
+
+                                    </br>
+                                </div>
+                            </div>
+                        </div>
+{#                    </a>#}
+				</div>
+				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+{#                    <a href="{% url 'env-list' %}">#}
+                        <div class="dashboard-stat2">
+                            <div class="display">
+                                <div class="number">
+{#                                    <h3 class="font-blue-sharp">{{ env_list }}</h3>#}
+                                    <small>预发布NGINX</small>
+                                    <br>
+                                    10.0.8.29
+                                    183.136.160.243
+                                    </br>
+                                </div>
+                            </div>
+                        </div>
+{#                    </a>#}
+				</div>
+				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+{#					<a href="{% url 'module-list' %}">#}
+                        <div class="dashboard-stat2">
+                            <div class="display">
+                                <div class="number">
+{#                                    <h3 class="font-purple-soft">{{ module_list }}</h3>#}
+                                    <small>配置详情</small>
+                                    <br>
+                                    HTTP站点:{{ http_count }}
+                                    HTTPS站点:{{ https_count }}
+                                    UPSTREAM数量:{{ upstream_count }}
+                                    涉及服务器:{{ machine_count }}
+                                    </br>
+
+                                </div>
+                            </div>
+					    </div>
+{#                    </a>#}
+				</div>
+			</div>
+
 
         </div>
     </div>
