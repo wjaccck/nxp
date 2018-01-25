@@ -25,14 +25,18 @@ def index(req):
         all_machine=[]
         for m in Upstream.objects.all():
             all_machine.extend(m.hosts)
-            all_machine.extend([x.host for x in m.docker_list])
+            all_machine.extend([x.host for x in m.docker_list.all()])
         machine_count=list(set(all_machine)).__len__()
+        public_count=Site.objects.filter(group=Group.objects.get(name='public')).count()
+        intra_count=Site.objects.filter(group=Group.objects.get(name='intra')).count()
         response = render(req,'webui/index.html',{"username":req.user.last_name,
                                                   "active":"index",
                                                   "http_count":http_count,
                                                   "https_count":https_count,
                                                   "upstream_count":upstream_count,
-                                                  "machine_count":machine_count
+                                                  "machine_count":machine_count,
+                                                  "public_count":public_count,
+                                                  "intra_count":intra_count
                                                   }
                           )
     else:
