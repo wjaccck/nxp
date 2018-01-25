@@ -19,9 +19,20 @@ from abstract.views import Base_CreateViewSet, Base_ListViewSet, Base_UpdateView
 
 def index(req):
     if req.user.is_authenticated():
-
+        http_count=Site.objects.filter(https=False).count()
+        https_count=Site.objects.filter(https=True).count()
+        upstream_count=Upstream.objects.all().count()
+        all_machine=[]
+        for m in Upstream.objects.all():
+            all_machine.extend(m.hosts)
+            all_machine.extend([x.host for x in m.docker_list])
+        machine_count=list(set(all_machine)).__len__()
         response = render(req,'webui/index.html',{"username":req.user.last_name,
-                                                  "active":"index"
+                                                  "active":"index",
+                                                  "http_count":http_count,
+                                                  "https_count":https_count,
+                                                  "upstream_count":upstream_count,
+                                                  "machine_count":machine_count
                                                   }
                           )
     else:
