@@ -4,7 +4,6 @@ from core.common import logger,Codis_admin_info,ANSRunner
 from api.models import *
 import redis
 import time
-
 class BaseTask(T):
     error_info = None
     logger = logger
