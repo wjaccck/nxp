@@ -88,7 +88,9 @@
                                     <tr>
                                         <td>{{ m.id }}</td>
                                         <td>{{ m.site }}</td>
+                                        {% autoescape off %}
                                         <td>{{ m.extra_conf | change_word }}</td>
+                                        {% endautoescape %}
                                         <td>{{ m.created_date |date:'Y-m-d H:i:s' }}</td>
                                         {% if user.is_superuser %}
                                         <td>
