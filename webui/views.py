@@ -397,7 +397,11 @@ def Generate_conf(req, site_id):
                 vhost_tmp_conf.write(';\r\n        '.join(n.extra_conf.split(';')))
             for m in detail:
                 m_content=context_content.replace('context_path',m.context)
-                m_content=m_content.replace('upstream_name',m.upstream.name)
+                if m.proxy_path:
+                    m_upstream_name=m.upstream.name.strip()+m.proxy_path.strip()
+                else:
+                    m_upstream_name=m.upstream.name
+                m_content=m_content.replace('upstream_name',m_upstream_name)
                 m_parametres=[x.strip() for x in m.extra_parametres.split(';')]
                 if m.default_proxy_set:
                     m_parametres.insert(0,'include proxy_conf')

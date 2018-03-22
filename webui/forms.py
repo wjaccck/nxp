@@ -119,7 +119,8 @@ class UpstreamForm(forms.ModelForm):
 
 class Site_contextForm(forms.ModelForm):
     context = forms.CharField(label='context_path', max_length=200, widget=forms.TextInput({'class': 'form-control'}))
-    
+    proxy_path = forms.CharField(label='proxy_path', max_length=200, widget=forms.TextInput({'class': 'form-control'}))
+
     def save(self, commit=True):
         instance = super(Site_contextForm, self).save(commit=False)
         instance.status = Status.objects.get(name='undo')
@@ -130,6 +131,7 @@ class Site_contextForm(forms.ModelForm):
             'site',
             'context',
             'upstream',
+            'proxy_path',
             'default_proxy_set',
             'lua_status',
             'extra_parametres',
