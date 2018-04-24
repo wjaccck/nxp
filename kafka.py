@@ -15,8 +15,7 @@ from webui.tasks import Http_info
 def get_timestamp(timestring):
     tmp_timestamp=timestring.split('.')[0]
     timestamp = time.mktime(time.strptime(tmp_timestamp, '%Y-%m-%dT%H:%M:%S'))+28800
-    datetime_struct = datetime.datetime.fromtimestamp(timestamp)
-    return datetime_struct
+    return timestamp
 def Insert_model(data):
     t_date_time=get_timestamp(data.get('@timestamp'))
     t_clientip=data.get('clientip')
