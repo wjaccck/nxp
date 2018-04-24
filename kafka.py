@@ -38,3 +38,5 @@ def Kafka_consumer():
             Insert_model(json.loads(message.value))
 
 
+if __name__ == "__main__":
+    Kafka_consumer()
