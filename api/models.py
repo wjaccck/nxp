@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from abstract.models import CommonModel,UniqueNameDescModel,NGINX_BASE,REDIS_BASE
-
+import time,datetime
 # from core.common import content
 class Ipv4Address(UniqueNameDescModel):
 
@@ -177,3 +177,23 @@ class Redis_task(CommonModel,REDIS_BASE):
         return u'Redis-Task'
     class Meta:
         ordering = ['-created_date', ]
+
+class Http_request_history(CommonModel,NGINX_BASE):
+    host=models.IPAddressField()
+    status=models.IntegerField()
+    date_time=models.DateField()
+    clientip=models.IPAddressField()
+    domain=models.CharField(max_length=50,db_index=True)
+
+    @staticmethod
+    def verbose():
+        return u'http_request_history'
+
+class Http_statistics(CommonModel,NGINX_BASE):
+    domain=models.CharField(max_length=50)
+    success_status=models.IntegerField()
+    client_err_status=models.IntegerField()
+    server_status=models.IntegerField()
+    @staticmethod
+    def verbose():
+        return u'http_statistics'

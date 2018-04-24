@@ -3,7 +3,7 @@ from celery import Task as T
 from core.common import logger,Codis_admin_info,ANSRunner
 from api.models import *
 import redis
-import time
+import datetime
 class BaseTask(T):
     error_info = None
     logger = logger
@@ -13,6 +13,18 @@ class BaseTask(T):
 
     def run(self, *args, **kwargs):
         pass
+
+class Http_info(BaseTask):
+
+    def run(self, domain,host,clientip,timestamp,status):
+        date_time = datetime.datetime.fromtimestamp(timestamp)
+        Http_request_history.objects.create(
+            host=host,
+            status=status,
+            clientip=clientip,
+            domain=domain,
+            date_time=date_time
+        )
 
 class Codis_info(BaseTask):
 
