@@ -179,10 +179,10 @@ class Redis_task(CommonModel,REDIS_BASE):
         ordering = ['-created_date', ]
 
 class Http_request_history(CommonModel,NGINX_BASE):
-    host=models.IPAddressField()
+    host=models.GenericIPAddressField(protocol='both')
     status=models.IntegerField()
     date_time=models.DateField()
-    clientip=models.IPAddressField()
+    clientip=models.GenericIPAddressField(protocol='both')
     domain=models.CharField(max_length=50,db_index=True)
 
     @staticmethod
