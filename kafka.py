@@ -17,12 +17,15 @@ def get_timestamp(timestring):
     timestamp = time.mktime(time.strptime(tmp_timestamp, '%Y-%m-%dT%H:%M:%S'))+28800
     return timestamp
 def Insert_model(data):
-    t_date_time=get_timestamp(data.get('@timestamp'))
-    t_clientip=data.get('clientip')
-    t_host=data.get('host')
-    t_domain=data.get('http_host')
-    t_status=data.get('status')
-    Http_info().apply_async(args=(t_domain,t_host,t_clientip,t_date_time,t_status))
+    try:
+        t_date_time=get_timestamp(data.get('@timestamp'))
+        t_clientip=data.get('clientip')
+        t_host=data.get('host')
+        t_domain=data.get('http_host')
+        t_status=int(data.get('status'))
+        Http_info().apply_async(args=(t_domain,t_host,t_clientip,t_date_time,t_status))
+    except Exception as e:
+        print e
 
 def Kafka_consumer():
     client = KafkaClient(hosts="10.0.8.71:9092,10.0.8.72:9092,10.0.8.73:9092")
