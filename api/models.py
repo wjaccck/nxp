@@ -189,16 +189,16 @@ class Http_request_history(CommonModel,NGINX_BASE):
     def verbose():
         return u'http_request_history'
 
-class Http_statistics(CommonModel,NGINX_BASE):
-    host=models.CharField(max_length=20,blank=True)
-    group=models.CharField(max_length=10,db_index=True,blank=True)
-    daytime=models.CharField(max_length=8,db_index=True,blank=True)
-    scheme=models.CharField(max_length=10,blank=True)
-    domain=models.CharField(max_length=50,db_index=True)
-    success_status=models.IntegerField()
-    client_err_status=models.IntegerField()
-    server_err_status=models.IntegerField()
-    Unknown_status=models.IntegerField(blank=True)
-    @staticmethod
-    def verbose():
-        return u'http_statistics'
+# class Http_statistics(CommonModel,NGINX_BASE):
+#     host=models.CharField(max_length=20)
+#     group=models.CharField(max_length=10,db_index=True)
+#     daytime=models.CharField(max_length=8,db_index=True)
+#     scheme=models.CharField(max_length=10,blank=True)
+#     domain=models.CharField(max_length=50,db_index=True)
+#     success_status=models.IntegerField()
+#     client_err_status=models.IntegerField()
+#     server_err_status=models.IntegerField()
+#     Unknown_status=models.IntegerField(default=0)
+#     @staticmethod
+#     def verbose():
+#         return u'http_statistics'
