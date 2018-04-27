@@ -35,6 +35,15 @@ class Sentinel_ApiViewSet(viewsets.ModelViewSet):
     filter_fields = ('name',)
     search_fields = ('^name', )
 
+class Request_count_ApiViewSet(viewsets.ModelViewSet):
+    http_method_names = [ 'get','post']
+    queryset = Http_statistics.objects.all()
+    serializer_class = Request_countSerializer
+    permission_classes = (permissions.DjangoModelPermissions,)
+    filter_backends = (filters.DjangoFilterBackend, filters.SearchFilter, )
+    filter_fields = ('group','host','daytime','domain')
+    search_fields = ('^domain', )
+
 class Ipv4Address_ApiViewSet(viewsets.ModelViewSet):
     """
     This viewset automatically provides `list`, `create`, `retrieve`,

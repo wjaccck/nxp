@@ -100,3 +100,8 @@ class SiteSerializer(serializers.HyperlinkedModelSerializer):
             result.append(t_result)
         # return [{"x":{"master":x.master,"slave":x.slave.all(),"offline":x.offline.all()}} for x in groups]
         return result
+
+class Request_countSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Http_statistics
+        fields='__all__'
