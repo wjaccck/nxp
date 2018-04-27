@@ -190,6 +190,7 @@ class Http_request_history(CommonModel,NGINX_BASE):
         return u'http_request_history'
 
 class Http_statistics(CommonModel,NGINX_BASE):
+    daytime=models.CharField(max_length=8,db_index=True,blank=True)
     scheme=models.CharField(max_length=10,blank=True)
     domain=models.CharField(max_length=50,db_index=True)
     success_status=models.IntegerField()
