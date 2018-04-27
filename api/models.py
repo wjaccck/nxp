@@ -193,7 +193,7 @@ class Http_statistics(CommonModel,NGINX_BASE):
     domain=models.CharField(max_length=50)
     success_status=models.IntegerField()
     client_err_status=models.IntegerField()
-    server_status=models.IntegerField()
+    server_err_status=models.IntegerField()
     @staticmethod
     def verbose():
         return u'http_statistics'

@@ -24,8 +24,9 @@ def Insert_model(data):
         t_domain=data.get('http_host')
         t_status=int(data.get('status'))
         Http_info().apply_async(args=(t_domain,t_host,t_clientip,t_date_time,t_status))
+        print "done"
     except Exception as e:
-        print e
+        print str(e)
 
 def Kafka_consumer():
     client = KafkaClient(hosts="10.0.8.71:9092,10.0.8.72:9092,10.0.8.73:9092")
@@ -33,7 +34,7 @@ def Kafka_consumer():
     balanced_consumer = topic.get_balanced_consumer(
     consumer_group='django-nginx',
     auto_commit_enable=True,
-    zookeeper_connect='10.0.8.39:2181,10.0.8.40:2181'
+    zookeeper_connect='10.0.8.39:2181,10.0.8.40:2181,10.0.8.87:2181'
     )
     for message in balanced_consumer:
         if message is not None:
