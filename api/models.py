@@ -190,7 +190,8 @@ class Http_request_history(CommonModel,NGINX_BASE):
         return u'http_request_history'
 
 class Http_statistics(CommonModel,NGINX_BASE):
-    domain=models.CharField(max_length=50)
+    scheme=models.CharField(max_length=10,blank=True)
+    domain=models.CharField(max_length=50,db_index=True)
     success_status=models.IntegerField()
     client_err_status=models.IntegerField()
     server_err_status=models.IntegerField()
