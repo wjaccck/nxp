@@ -843,36 +843,36 @@ def Http_request_countView(req):
                 data=Http_statistics.objects.filter(daytime=daytime,domain=domain)
             else:
                 data = Http_statistics.objects.filter(daytime=daytime)
-            unknown_data=[x.Unknown_status+x.success_status+x.client_err_status for x in data]
-            return sum(unknown_data)
+            total_data=[x.Unknown_status+x.success_status+x.client_err_status for x in data]
+            return int(sum(total_data))
         def get_unknown(daytime,domain=None):
             if domain:
                 data=Http_statistics.objects.filter(daytime=daytime,domain=domain)
             else:
                 data = Http_statistics.objects.filter(daytime=daytime)
             unknown_data=[x.Unknown_status for x in data]
-            return sum(unknown_data)
+            return int(sum(unknown_data))
         def get_success(daytime,domain=None):
             if domain:
                 data=Http_statistics.objects.filter(daytime=daytime,domain=domain)
             else:
                 data = Http_statistics.objects.filter(daytime=daytime)
             success_data=[x.success_status for x in data]
-            return sum(success_data)
+            return int(sum(success_data))
         def get_client_err(daytime,domain=None):
             if domain:
                 data=Http_statistics.objects.filter(daytime=daytime,domain=domain)
             else:
                 data = Http_statistics.objects.filter(daytime=daytime)
             client_err_data=[x.client_err_status for x in data]
-            return sum(client_err_data)
+            return int(sum(client_err_data))
         def get_server_err(daytime,domain=None):
             if domain:
                 data=Http_statistics.objects.filter(daytime=daytime,domain=domain)
             else:
                 data = Http_statistics.objects.filter(daytime=daytime)
             server_err_data=[x.server_err_status for x in data]
-            return sum(server_err_data)
+            return int(sum(server_err_data))
 
         time_line=[]
         for m in range(1,8):
