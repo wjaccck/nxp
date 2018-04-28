@@ -14,7 +14,7 @@ import operator
 from tasks import Run_ansible_redis_task
 from vanilla import TemplateView
 from abstract.views import Base_CreateViewSet, Base_ListViewSet, Base_UpdateViewSet,Base_DeleteViewSet
-
+from datetime import timedelta, datetime
 
 
 def index(req):
@@ -828,6 +828,73 @@ def Codis_queryView(req):
                                                              "sentinel_offline": [],
                                                              }
                               )
+    else:
+        response = redirect('login')
+    return response
+
+def Http_request_countView(req):
+    if req.user.is_authenticated():
+        try:
+            name=req.GET['domain']
+        except:
+            name=None
+        def get_total(daytime,domain=None):
+            if domain:
+                data=Http_statistics.objects.filter(daytime=daytime,domain=domain)
+            else:
+                data = Http_statistics.objects.filter(daytime=daytime)
+            unknown_data=[x.Unknown_status+x.success_status+x.client_err_status for x in data]
+            return sum(unknown_data)
+        def get_unknown(daytime,domain=None):
+            if domain:
+                data=Http_statistics.objects.filter(daytime=daytime,domain=domain)
+            else:
+                data = Http_statistics.objects.filter(daytime=daytime)
+            unknown_data=[x.Unknown_status for x in data]
+            return sum(unknown_data)
+        def get_success(daytime,domain=None):
+            if domain:
+                data=Http_statistics.objects.filter(daytime=daytime,domain=domain)
+            else:
+                data = Http_statistics.objects.filter(daytime=daytime)
+            success_data=[x.success_status for x in data]
+            return sum(success_data)
+        def get_client_err(daytime,domain=None):
+            if domain:
+                data=Http_statistics.objects.filter(daytime=daytime,domain=domain)
+            else:
+                data = Http_statistics.objects.filter(daytime=daytime)
+            client_err_data=[x.client_err_status for x in data]
+            return sum(client_err_data)
+        def get_server_err(daytime,domain=None):
+            if domain:
+                data=Http_statistics.objects.filter(daytime=daytime,domain=domain)
+            else:
+                data = Http_statistics.objects.filter(daytime=daytime)
+            server_err_data=[x.server_err_status for x in data]
+            return sum(server_err_data)
+
+        time_line=[]
+        for m in range(1,8):
+            p_day = datetime.today() + timedelta(-1)
+            p_day_format = p_day.strftime('%Y%m%d')
+            time_line.append(p_day_format)
+
+        unknown_count=[get_unknown(x,name) for x in time_line]
+        client_err_count=[get_client_err(x,name) for x in time_line]
+        server_err_count=[get_server_err(x,name) for x in time_line]
+        success_count=[get_success(x,name) for x in time_line]
+        total_count=[get_total(x,name) for x in time_line]
+        response = render(req, 'api/chart.html', {
+                                                    "username": req.user.last_name,
+                                                    "category": time_line,
+                                                    "unknown_count":unknown_count,
+                                                    "client_err_count":client_err_count,
+                                                    "server_err_count":server_err_count,
+                                                    "success_count":success_count,
+                                                    "total_count":total_count
+                                                   }
+                          )
     else:
         response = redirect('login')
     return response
