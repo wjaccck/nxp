@@ -2,7 +2,22 @@
 <!-- END HEADER INNER -->
 {% block content %}
     <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
-    <div id="main" style="height:400px"></div>
+    <div class="page-content-wrapper">
+    		<div class="page-content">
+                <div class="col-sm-3 col-md-3 pull-right">
+{#            <a href="{% url 'webui-application-list' 1 %}">query</a>#}
+            <form action="" method="get" class="navbar-from" role="search">
+                <div class="input-group">
+                    <input type="text" name="domain" />
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit">搜索</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+                <div id="main" style="height:400px"></div>
+            </div>
+    </div>
 {% endblock %}
 {% block scripts %}
     <!-- ECharts单文件引入 -->
