@@ -876,7 +876,7 @@ def Http_request_countView(req):
 
         time_line=[]
         for m in range(1,8):
-            p_day = datetime.today() + timedelta(-1)
+            p_day = datetime.today() + timedelta(-m)
             p_day_format = p_day.strftime('%Y%m%d')
             time_line.append(p_day_format)
 
@@ -886,7 +886,6 @@ def Http_request_countView(req):
         success_count=[get_success(x,name) for x in time_line]
         total_count=[get_total(x,name) for x in time_line]
         response = render(req, 'api/chart.html', {
-                                                    "username": req.user.last_name,
                                                     "category": time_line,
                                                     "unknown_count":unknown_count,
                                                     "client_err_count":client_err_count,
