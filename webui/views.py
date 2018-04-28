@@ -835,7 +835,7 @@ def Codis_queryView(req):
 def Http_request_countView(req):
     if req.user.is_authenticated():
         try:
-            name=req.GET['domain']
+            name=req.GET['domain'].strip()
         except:
             name=None
         def get_total(daytime,domain=None):
