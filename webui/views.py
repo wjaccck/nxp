@@ -887,6 +887,7 @@ def Http_request_countView(req):
         total_count=[get_total(x,name) for x in time_line]
         response = render(req, 'api/chart.html', {
                                                     "timeline": time_line,
+                                                    "domain":name,
                                                     "active": "nginx",
                                                     "unknown_count":unknown_count,
                                                     "client_err_count":client_err_count,
