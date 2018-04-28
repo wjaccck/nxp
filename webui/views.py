@@ -843,7 +843,7 @@ def Http_request_countView(req):
                 data=Http_statistics.objects.filter(daytime=daytime,domain=domain)
             else:
                 data = Http_statistics.objects.filter(daytime=daytime)
-            total_data=[x.Unknown_status+x.success_status+x.client_err_status for x in data]
+            total_data=[x.Unknown_status+x.success_status+x.client_err_status+x.server_err_status for x in data]
             return sum(total_data).__int__()
         def get_unknown(daytime,domain=None):
             if domain:
@@ -880,11 +880,11 @@ def Http_request_countView(req):
             p_day_format = p_day.strftime('%Y%m%d')
             time_line.append(p_day_format)
 
-        unknown_count=[get_unknown(x,name).__int__() for x in time_line]
-        client_err_count=[get_client_err(x,name).__int__() for x in time_line]
-        server_err_count=[get_server_err(x,name).__int__() for x in time_line]
-        success_count=[get_success(x,name).__int__() for x in time_line]
-        total_count=[get_total(x,name).__int__() for x in time_line]
+        unknown_count=[get_unknown(x,name) for x in time_line]
+        client_err_count=[get_client_err(x,name) for x in time_line]
+        server_err_count=[get_server_err(x,name) for x in time_line]
+        success_count=[get_success(x,name) for x in time_line]
+        total_count=[get_total(x,name) for x in time_line]
         response = render(req, 'api/chart.html', {
                                                     "timeline": time_line,
                                                     "unknown_count":unknown_count,
