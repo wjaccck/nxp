@@ -879,7 +879,7 @@ def Http_request_countView(req):
             p_day = datetime.today() + timedelta(-m)
             p_day_format = p_day.strftime('%Y%m%d')
             time_line.append(p_day_format)
-
+        time_line.reverse()
         unknown_count=[get_unknown(x,name) for x in time_line]
         client_err_count=[get_client_err(x,name) for x in time_line]
         server_err_count=[get_server_err(x,name) for x in time_line]
