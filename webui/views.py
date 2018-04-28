@@ -844,35 +844,35 @@ def Http_request_countView(req):
             else:
                 data = Http_statistics.objects.filter(daytime=daytime)
             total_data=[x.Unknown_status+x.success_status+x.client_err_status for x in data]
-            return int(sum(total_data))
+            return sum(total_data).__int__()
         def get_unknown(daytime,domain=None):
             if domain:
                 data=Http_statistics.objects.filter(daytime=daytime,domain=domain)
             else:
                 data = Http_statistics.objects.filter(daytime=daytime)
             unknown_data=[x.Unknown_status for x in data]
-            return int(sum(unknown_data))
+            return sum(unknown_data).__int__()
         def get_success(daytime,domain=None):
             if domain:
                 data=Http_statistics.objects.filter(daytime=daytime,domain=domain)
             else:
                 data = Http_statistics.objects.filter(daytime=daytime)
             success_data=[x.success_status for x in data]
-            return int(sum(success_data))
+            return sum(success_data).__int__()
         def get_client_err(daytime,domain=None):
             if domain:
                 data=Http_statistics.objects.filter(daytime=daytime,domain=domain)
             else:
                 data = Http_statistics.objects.filter(daytime=daytime)
             client_err_data=[x.client_err_status for x in data]
-            return int(sum(client_err_data))
+            return sum(client_err_data).__int__()
         def get_server_err(daytime,domain=None):
             if domain:
                 data=Http_statistics.objects.filter(daytime=daytime,domain=domain)
             else:
                 data = Http_statistics.objects.filter(daytime=daytime)
             server_err_data=[x.server_err_status for x in data]
-            return int(sum(server_err_data))
+            return sum(server_err_data).__int__()
 
         time_line=[]
         for m in range(1,8):
@@ -880,11 +880,11 @@ def Http_request_countView(req):
             p_day_format = p_day.strftime('%Y%m%d')
             time_line.append(p_day_format)
 
-        unknown_count=[get_unknown(x,name) for x in time_line]
-        client_err_count=[get_client_err(x,name) for x in time_line]
-        server_err_count=[get_server_err(x,name) for x in time_line]
-        success_count=[get_success(x,name) for x in time_line]
-        total_count=[get_total(x,name) for x in time_line]
+        unknown_count=[get_unknown(x,name).__int__() for x in time_line]
+        client_err_count=[get_client_err(x,name).__int__() for x in time_line]
+        server_err_count=[get_server_err(x,name).__int__() for x in time_line]
+        success_count=[get_success(x,name).__int__() for x in time_line]
+        total_count=[get_total(x,name).__int__() for x in time_line]
         response = render(req, 'api/chart.html', {
                                                     "timeline": time_line,
                                                     "unknown_count":unknown_count,

@@ -109,7 +109,7 @@ urlpatterns = [
     url(r'^run/(?P<mission_id>\d+)/$', login_required(views.Run_mission), name='run-mission'),
     # #
     # url(r'^reset/(?P<job_id>\d+)/$', login_required(views.reset_job), name='reset-job'),
-    url(r'^request-count/$', login_required(views.Http_request_countView), name='request-count'),
+    url(r'^request-count/$', views.Http_request_countView, name='request-count'),
 
     url(r'^login/$',
         login,
