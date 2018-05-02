@@ -90,6 +90,9 @@
                                 <th>
                                     生成
                                 </th>
+                                <th>
+                                    访问统计
+                                </th>
 							</tr>
 							</thead>
 							<tbody>
@@ -108,6 +111,7 @@
                                         </td>
                                         {% endif %}
                                         <td><a  href="{% url 'get-detail' m.id %}">详情</a></td>
+                                        <td><a  href="{% url 'request-count' %}?domain={{ m.name }}">统计</a></td>
                                     </tr>
                                 {% endfor %}
 							</tbody>
