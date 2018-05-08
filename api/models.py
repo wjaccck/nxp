@@ -96,7 +96,7 @@ class Site_context(CommonModel,NGINX_BASE):
     proxy_path=models.CharField(max_length=200,blank=True)
     default_proxy_set=models.BooleanField(default=True)
     extra_parametres=models.TextField(blank=True)
-    lua_status=models.BooleanField(default=True)
+    lua_status=models.BooleanField(default=False)
     status=models.ForeignKey(Status)
     @staticmethod
     def verbose():
