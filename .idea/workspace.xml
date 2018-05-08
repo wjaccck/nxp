@@ -2,10 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a8356791-8dff-4783-a146-d6e83154db82" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/nxp.iml" afterPath="$PROJECT_DIR$/.idea/nxp.iml" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/api/models.py" afterPath="$PROJECT_DIR$/api/models.py" />
       <change beforePath="$PROJECT_DIR$/webui/views.py" afterPath="$PROJECT_DIR$/webui/views.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,11 +16,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/webui/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="52">
-              <caret line="934" column="20" lean-forward="false" selection-start-line="934" selection-start-column="20" selection-end-line="934" selection-end-column="20" />
+            <state relative-caret-position="2095">
+              <caret line="945" column="72" lean-forward="true" selection-start-line="901" selection-start-column="1" selection-end-line="945" selection-end-column="72" />
               <folding>
                 <element signature="e#14#44#0" expanded="true" />
                 <element signature="e#3965#4094#0" expanded="false" />
@@ -68,10 +64,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/api/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="268">
+            <state relative-caret-position="-2486">
               <caret line="98" column="48" lean-forward="false" selection-start-line="98" selection-start-column="48" selection-end-line="98" selection-end-column="48" />
               <folding />
             </state>
@@ -200,8 +196,8 @@
         <option value="$PROJECT_DIR$/webui/urls.py" />
         <option value="$PROJECT_DIR$/templates/api/chart.html" />
         <option value="$PROJECT_DIR$/templates/api/site.html" />
-        <option value="$PROJECT_DIR$/webui/views.py" />
         <option value="$PROJECT_DIR$/api/models.py" />
+        <option value="$PROJECT_DIR$/webui/views.py" />
       </list>
     </option>
   </component>
@@ -869,22 +865,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/webui/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="52">
-          <caret line="934" column="20" lean-forward="false" selection-start-line="934" selection-start-column="20" selection-end-line="934" selection-end-column="20" />
-          <folding>
-            <element signature="e#14#44#0" expanded="true" />
-            <element signature="e#3965#4094#0" expanded="false" />
-            <element signature="e#4146#4275#0" expanded="false" />
-            <element signature="e#4327#4383#0" expanded="false" />
-            <element signature="e#7066#7217#0" expanded="false" />
-            <element signature="e#7277#7428#0" expanded="false" />
-            <element signature="e#7488#7555#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/nginx/context.conf">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
@@ -935,9 +915,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/api/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
+        <state relative-caret-position="-2486">
           <caret line="98" column="48" lean-forward="false" selection-start-line="98" selection-start-column="48" selection-end-line="98" selection-end-column="48" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webui/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2095">
+          <caret line="945" column="72" lean-forward="true" selection-start-line="901" selection-start-column="1" selection-end-line="945" selection-end-column="72" />
+          <folding>
+            <element signature="e#14#44#0" expanded="true" />
+            <element signature="e#3965#4094#0" expanded="false" />
+            <element signature="e#4146#4275#0" expanded="false" />
+            <element signature="e#4327#4383#0" expanded="false" />
+            <element signature="e#7066#7217#0" expanded="false" />
+            <element signature="e#7277#7428#0" expanded="false" />
+            <element signature="e#7488#7555#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
