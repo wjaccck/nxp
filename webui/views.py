@@ -528,7 +528,7 @@ def Create_tran_mission(req, site_id):
 
 def Get_upstream_detail(req,upstream_id):
     if req.user.is_authenticated():
-        upstream=Site.objects.get(id=upstream_id)
+        upstream=Upstream.objects.get(id=upstream_id)
         response = render(req,'api/upstream_detail.html',{"username":req.user.last_name,
                                                   "active":"nginx",
                                                    "upstream":upstream,

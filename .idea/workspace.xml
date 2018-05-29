@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a8356791-8dff-4783-a146-d6e83154db82" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/templates/api/upstream_check.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/api/upstream_conf.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/api/upstream_detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webui/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/webui/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webui/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/webui/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/api/upstream.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/api/upstream.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -22,10 +16,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/webui/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="188">
+            <state relative-caret-position="818">
               <caret line="619" column="26" lean-forward="true" selection-start-line="619" selection-start-column="26" selection-end-line="619" selection-end-column="26" />
               <folding>
                 <element signature="e#14#44#0" expanded="true" />
@@ -76,15 +70,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="redirect.conf" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/nginx/redirect.conf">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="4" column="1" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/api/models.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -103,11 +88,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="upstream.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="upstream.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/api/upstream.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-515">
-              <caret line="92" column="36" lean-forward="true" selection-start-line="92" selection-start-column="36" selection-end-line="92" selection-end-column="36" />
+            <state relative-caret-position="325">
+              <caret line="135" column="95" selection-start-line="135" selection-start-column="95" selection-end-line="135" selection-end-column="95" />
             </state>
           </provider>
         </entry>
@@ -124,8 +109,19 @@
       <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/webui/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="95" column="134" selection-start-line="95" selection-start-column="134" selection-end-line="95" selection-end-column="134" />
+            <state relative-caret-position="363">
+              <caret line="102" column="120" selection-start-line="102" selection-start-column="101" selection-end-line="102" selection-end-column="120" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/webui/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <folding>
+                <element signature="e#0#39#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -197,13 +193,13 @@
         <option value="$PROJECT_DIR$/templates/api/site.html" />
         <option value="$PROJECT_DIR$/webui/wiget.py" />
         <option value="$PROJECT_DIR$/webui/forms.py" />
-        <option value="$PROJECT_DIR$/templates/api/upstream.html" />
         <option value="$PROJECT_DIR$/templates/api/upstream_detail.html" />
         <option value="$PROJECT_DIR$/templates/api/upstream_conf.html" />
         <option value="$PROJECT_DIR$/templates/api/upstream_check.html" />
         <option value="$PROJECT_DIR$/webui/urls.py" />
         <option value="$PROJECT_DIR$/api/models.py" />
         <option value="$PROJECT_DIR$/webui/views.py" />
+        <option value="$PROJECT_DIR$/templates/api/upstream.html" />
       </list>
     </option>
   </component>
@@ -513,7 +509,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -549,13 +545,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/templates/nginx/shihui_https.conf">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="7" selection-start-line="7" selection-end-line="9" selection-end-column="104" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/nginx/upstream.conf">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -860,13 +849,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/api/upstream.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-515">
-          <caret line="92" column="36" lean-forward="true" selection-start-line="92" selection-start-column="36" selection-end-line="92" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/api/upstream_detail.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="990">
@@ -888,13 +870,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/webui/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="95" column="134" selection-start-line="95" selection-start-column="134" selection-end-line="95" selection-end-column="134" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/api/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2250">
@@ -902,9 +877,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/webui/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/webui/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
+        <state relative-caret-position="818">
           <caret line="619" column="26" lean-forward="true" selection-start-line="619" selection-start-column="26" selection-end-line="619" selection-end-column="26" />
           <folding>
             <element signature="e#14#44#0" expanded="true" />
@@ -924,6 +908,20 @@
             <element signature="e#19995#20444#0" />
             <element signature="e#20484#21630#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webui/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="363">
+          <caret line="102" column="120" selection-start-line="102" selection-start-column="101" selection-end-line="102" selection-end-column="120" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/api/upstream.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="325">
+          <caret line="135" column="95" selection-start-line="135" selection-start-column="95" selection-end-line="135" selection-end-column="95" />
         </state>
       </provider>
     </entry>
