@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a8356791-8dff-4783-a146-d6e83154db82" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/templates/api/upstream_check.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/api/upstream_check.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webui/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/webui/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,11 +16,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/webui/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="387">
-              <caret line="598" column="75" selection-start-line="598" selection-start-column="75" selection-end-line="598" selection-end-column="75" />
+            <state relative-caret-position="122">
+              <caret line="618" column="42" selection-start-line="618" selection-start-column="42" selection-end-line="618" selection-end-column="42" />
               <folding>
                 <element signature="e#14#44#0" expanded="true" />
                 <element signature="e#3965#4094#0" />
@@ -34,7 +33,9 @@
                 <element signature="e#10882#15506#0" />
                 <element signature="e#15542#18731#0" />
                 <element signature="e#18776#19944#0" />
+                <element signature="e#19979#20621#0" />
                 <element signature="e#20500#22332#0" />
+                <element signature="e#22175#24769#0" />
                 <element signature="e#19995#20444#0" />
                 <element signature="e#20484#21630#0" />
               </folding>
@@ -42,7 +43,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="upstream_check.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="upstream_check.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/api/upstream_check.html">
           <provider selected="true" editor-type-id="text-editor">
             <state>
@@ -197,8 +198,8 @@
         <option value="$PROJECT_DIR$/webui/urls.py" />
         <option value="$PROJECT_DIR$/api/models.py" />
         <option value="$PROJECT_DIR$/templates/api/upstream.html" />
-        <option value="$PROJECT_DIR$/webui/views.py" />
         <option value="$PROJECT_DIR$/templates/api/upstream_check.html" />
+        <option value="$PROJECT_DIR$/webui/views.py" />
       </list>
     </option>
   </component>
@@ -892,10 +893,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/api/upstream_check.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="24" column="69" selection-start-line="24" selection-start-column="69" selection-end-line="24" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/webui/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="387">
-          <caret line="598" column="75" selection-start-line="598" selection-start-column="75" selection-end-line="598" selection-end-column="75" />
+        <state relative-caret-position="122">
+          <caret line="618" column="42" selection-start-line="618" selection-start-column="42" selection-end-line="618" selection-end-column="42" />
           <folding>
             <element signature="e#14#44#0" expanded="true" />
             <element signature="e#3965#4094#0" />
@@ -908,17 +916,12 @@
             <element signature="e#10882#15506#0" />
             <element signature="e#15542#18731#0" />
             <element signature="e#18776#19944#0" />
+            <element signature="e#19979#20621#0" />
             <element signature="e#20500#22332#0" />
+            <element signature="e#22175#24769#0" />
             <element signature="e#19995#20444#0" />
             <element signature="e#20484#21630#0" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/api/upstream_check.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="24" column="69" selection-start-line="24" selection-start-column="69" selection-end-line="24" selection-end-column="69" />
         </state>
       </provider>
     </entry>
