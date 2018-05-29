@@ -59,6 +59,7 @@ class Upstream(CommonModel,NGINX_BASE):
     docker_list=models.ManyToManyField(Docker_app,blank=True,related_name='docker_app')
     status=models.ForeignKey(Status)
     ip_hash=models.BooleanField(default=False)
+    group=models.ForeignKey(Group,blank=True,null=True)
 
     def __unicode__(self):
         return self.name

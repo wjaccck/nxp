@@ -109,10 +109,12 @@ class UpstreamForm(forms.ModelForm):
             'docker_list',
             'direct_status',
             'ip_hash',
+            'group'
         )
         widgets = {
             'hosts': UpstreamModelSelect2MultipleWidget,
             'docker_list': Docker_appMultipleWidget,
+            'group':Upstream_groupModelSelect2Widget,
         }
         model = Upstream
         exclude = ['created_date', 'modified_date','status']

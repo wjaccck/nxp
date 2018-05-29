@@ -899,48 +899,48 @@ def Http_request_countView(req):
     else:
         response = redirect('login')
     return response
-
-class Http_request_ListViewSet(Base_ListViewSet):
-    Redis_group.objects.all().count()
-    model = Redis_group
-    template_name = 'api/request_count.html'
-    paginate_by = 10
-
-    def get_queryset(self):
-        try:
-            limit = int(self.request.GET['keyword'])
-        except:
-            limit = 100
-        time_line=[]
-        for m in range(1,8):
-            p_day = datetime.today() + timedelta(-m)
-            p_day_format = p_day.strftime('%Y%m%d')
-            time_line.append(p_day_format)
-        time_line.reverse()
-
-        all_domain=[x.get('domain') for x in Http_statistics.objects.distinct().values('domain')]
-
-        def get_statistics(s_data):
-            ret_status=True
-            for i in s_data:
-                i_total=i.Unknown_status+i.success_status+i.client_err_status+i.server_err_status
-                if i_total>limit:
-                    ret_status=False
-
-            return ret_status
-
-        for n in all_domain:
-            for p in time_line:
-                if get_statistics(Http_statistics.objects.filter(domain=n,daytime=p)):
-                    
-
-
-        try:
-            name = self.request.GET['keyword']
-        except:
-            pass
-
-        if name:
-            return self.model.objects.filter(name__icontains=name).order_by("-modified_date")
-        else:
-            return self.model.objects.all().order_by("-modified_date")
+#
+# class Http_request_ListViewSet(Base_ListViewSet):
+#     Redis_group.objects.all().count()
+#     model = Redis_group
+#     template_name = 'api/request_count.html'
+#     paginate_by = 10
+#
+#     def get_queryset(self):
+#         try:
+#             limit = int(self.request.GET['keyword'])
+#         except:
+#             limit = 100
+#         time_line=[]
+#         for m in range(1,8):
+#             p_day = datetime.today() + timedelta(-m)
+#             p_day_format = p_day.strftime('%Y%m%d')
+#             time_line.append(p_day_format)
+#         time_line.reverse()
+#
+#         all_domain=[x.get('domain') for x in Http_statistics.objects.distinct().values('domain')]
+#
+#         def get_statistics(s_data):
+#             ret_status=True
+#             for i in s_data:
+#                 i_total=i.Unknown_status+i.success_status+i.client_err_status+i.server_err_status
+#                 if i_total>limit:
+#                     ret_status=False
+#
+#             return ret_status
+#
+#         for n in all_domain:
+#             for p in time_line:
+#                 if get_statistics(Http_statistics.objects.filter(domain=n,daytime=p)):
+#
+#
+#
+#         try:
+#             name = self.request.GET['keyword']
+#         except:
+#             pass
+#
+#         if name:
+#             return self.model.objects.filter(name__icontains=name).order_by("-modified_date")
+#         else:
+#             return self.model.objects.all().order_by("-modified_date")

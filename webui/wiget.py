@@ -38,6 +38,12 @@ class UpstreamModelSelect2MultipleWidget(BaseModelSelect2MultipleWidget):
         'pk__startswith',
     ]
 
+class Upstream_groupModelSelect2Widget(BaseModelSelect2Widget):
+    search_fields = [
+        'name__istartswith',
+        'pk__startswith',
+    ]
+
 class SiteModelSelect2Widget(BaseModelSelect2Widget):
     search_fields = [
         'name__istartswith',

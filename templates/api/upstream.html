@@ -88,6 +88,9 @@
 									 状态
 								</th>
                                 <th>
+									 所属组
+								</th>
+                                <th>
 									 创建日期
 								</th>
                                 {% if user.is_superuser %}
@@ -119,6 +122,7 @@
                                             {% endfor %}
                                         </td>
                                         <td>{{ m.status }}</td>
+                                        <td>{{ m.group }}</td>
                                         <td>{{ m.created_date |date:'Y-m-d H:i:s' }}</td>
                                         {% if user.is_superuser %}
                                         <td>
