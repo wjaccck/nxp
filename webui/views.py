@@ -615,7 +615,9 @@ def Create_upstream_tran_mission(req, upstream_id):
 
         mark=uuid.uuid4()
         all_host=[]
-        for m in Group.objects.all():
+        for m in Group.objects.filter(name='intra'):
+            all_host.extend(m.hosts.all())
+        for m in Group.objects.filter(name='public'):
             all_host.extend(m.hosts.all())
         for i in all_host:
             Nxp_mission.objects.create(
