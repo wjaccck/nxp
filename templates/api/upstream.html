@@ -97,6 +97,9 @@
                                 <th>
                                     修改
                                 </th>
+                                <th>
+                                    配置生成
+                                </th>
                                 {% endif %}
 {#                                <th>#}
 {#                                    详细列表#}
@@ -129,6 +132,10 @@
                                             <a  href="{% url 'upstream-update' m.id %} ">修改</a>
                                             <a  href="{% url 'upstream-delete' m.id %} ">删除</a>
                                         </td>
+                                        <td>
+                                            <a  href="{% url 'get-upstream-detail' m.id %} ">生成</a>
+                                        </td>
+
                                         {% endif %}
 {#                                        <td><a  href="{% url 'name-list' %}?status={{ m.content }}">详情</a></td>#}
                                     </tr>
