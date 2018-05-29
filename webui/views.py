@@ -526,6 +526,114 @@ def Create_tran_mission(req, site_id):
         response = redirect('login')
     return response
 
+def Get_upstream_detail(req,upstream_id):
+    if req.user.is_authenticated():
+        upstream=Site.objects.get(id=upstream_id)
+        response = render(req,'api/upstream_detail.html',{"username":req.user.last_name,
+                                                  "active":"nginx",
+                                                   "upstream":upstream,
+                                                  }
+                          )
+    else:
+        response =redirect('login')
+    return response
+
+def Generate_upstream_conf(req, upstream_id):
+    if req.user.is_authenticated():
+        upstream = Upstream.objects.get(id=upstream_id)
+        file_list = []
+        upstream_content = get_file_content(upstream_file)
+
+        if upstream.direct_status:
+            pass
+        else:
+            upstream_tmp_conf=open(upstream_tmp_file.format(upstream.name),'w')
+            upstream_content=upstream_content.replace('upstream_name',upstream.name)
+            back_end_list=[ "server {0}:{1};".format(x.name,upstream.port) for x in upstream.hosts.all()]+["server {0}:{1};".format(x.host.name,x.port) for x in upstream.docker_list.all()]
+            if upstream.ip_hash:
+                back_end_list.insert(0,'ip_hash;')
+            upstream_content=upstream_content.replace('back_end','\n    '.join(back_end_list))
+            upstream_tmp_conf.write(upstream_content)
+            upstream_tmp_conf.close()
+            logger.info("create upstream conf {0}".format(upstream_tmp_file.format(upstream.name)))
+            file_list.append(upstream_tmp_file.format(upstream.name))
+
+        new_content=''
+        for m in file_list:
+            new_content=new_content+"\r\n####%s####\r\n%s\r\n" %(m,get_file_content(m))
+
+        response = render(req, 'api/upstream_conf.html', {"username": req.user.last_name,
+                                                   "active": "nginx",
+                                                   "conf": new_content,
+                                                    "upstream": upstream,
+                                                   }
+                          )
+    else:
+        response = redirect('login')
+    return response
+
+def Conf_upstream_check(req, upstream_id):
+    if req.user.is_authenticated():
+        all_status=True
+        upstream=Upstream.objects.get(id=upstream_id)
+        if not upstream.direct_status:
+            result=getComStr("rsync -av {0} {1}".format(upstream_tmp_file.format(upstream.name), upstream_release_file.format(upstream.name)))
+            if result.get('retcode') != 0:
+                all_status=False
+                logger.error(result)
+        result =getComStr("/opt/nginx/sbin/nginx -t -c /opt/nginx/conf/nginx.conf")
+        if result.get('retcode') != 0:
+            all_status = False
+            logger.error(result)
+        if all_status:
+            response = render(req, 'api/upstream_check.html', {"username": req.user.last_name,
+                                                       "active": "nginx",
+                                                       "upstream": upstream.name,
+                                                       "content":"Check pass",
+                                                       "all_status":all_status
+                                                       }
+                              )
+        else:
+            response = render(req, 'api/upstream_check.html', {"username": req.user.last_name,
+                                                       "active": "nginx",
+                                                       "upstream": upstream.name,
+                                                       "content":"Check failed ! please check cmd.log",
+                                                        "all_status":all_status
+                                                       }
+                              )
+    else:
+        response = redirect('login')
+    return response
+
+def Create_upstream_tran_mission(req, upstream_id):
+    if req.user.is_authenticated():
+        upstream=Upstream.objects.get(id=upstream_id)
+        file_list=[]
+
+        if not upstream.direct_status:
+            file_list.append(upstream_online_file.format(upstream.name))
+
+        mark=uuid.uuid4()
+        all_host=[]
+        for m in Group.objects.all():
+            all_host.extend(m.hosts.all())
+        for i in all_host:
+            Nxp_mission.objects.create(
+                                       mark=mark,
+                                       host=i,
+                                       files=','.join(file_list),
+                                       status=Status.objects.get(name='undo')
+                                       )
+
+
+
+        response = redirect('/mission/?keyword={0}'.format(mark))
+    else:
+        response = redirect('login')
+    return response
+
+
+
 class Tran_missionViewSet(Base_ListViewSet):
     Nxp_mission.objects.all().count()
     model = Nxp_mission
