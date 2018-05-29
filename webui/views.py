@@ -588,7 +588,7 @@ def Conf_upstream_check(req, upstream_id):
         if all_status:
             response = render(req, 'api/upstream_check.html', {"username": req.user.last_name,
                                                        "active": "nginx",
-                                                       "upstream": upstream.name,
+                                                       "upstream": upstream,
                                                        "content":"Check pass",
                                                        "all_status":all_status
                                                        }
@@ -596,7 +596,7 @@ def Conf_upstream_check(req, upstream_id):
         else:
             response = render(req, 'api/upstream_check.html', {"username": req.user.last_name,
                                                        "active": "nginx",
-                                                       "upstream": upstream.name,
+                                                       "upstream": upstream,
                                                        "content":"Check failed ! please check cmd.log",
                                                         "all_status":all_status
                                                        }
