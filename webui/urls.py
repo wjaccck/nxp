@@ -114,7 +114,7 @@ urlpatterns = [
     # #
     # url(r'^reset/(?P<job_id>\d+)/$', login_required(views.reset_job), name='reset-job'),
     url(r'^request-count/$', views.Http_request_countView, name='request-count'),
-    url(r'^request-statistics/$', views.Http_request_countView, name='request-statistics'),
+    url(r'^request-statistics/$', views.Http_request_statisticsView, name='request-statistics'),
 
     url(r'^login/$',
         login,
