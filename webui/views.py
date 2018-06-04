@@ -1042,9 +1042,9 @@ def Http_request_statisticsView(req):
             if avg<limit:
                 all_info.append({"domain":m,"avg":avg})
 
-        sorted(all_info.items(), lambda x, y: cmp(x[1], y[1]), reverse=True)
+        avg_list = sorted(all_info, key=lambda all_info: (all_info['avg']), reverse=True)
         response = render(req, 'api/avg.html', {
-                                                    "all_info":all_info,
+                                                    "all_info":avg_list,
                                                    }
                           )
     else:

@@ -19,8 +19,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/webui/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="377">
-              <caret line="1044" column="23" selection-start-line="1044" selection-start-column="23" selection-end-line="1044" selection-end-column="23" />
+            <state relative-caret-position="167">
+              <caret line="1046" column="71" selection-start-line="1046" selection-start-column="71" selection-end-line="1046" selection-end-column="71" />
               <folding>
                 <element signature="e#14#44#0" expanded="true" />
                 <element signature="e#3965#4094#0" />
@@ -900,8 +900,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/webui/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
-          <caret line="1044" column="23" selection-start-line="1044" selection-start-column="23" selection-end-line="1044" selection-end-column="23" />
+        <state relative-caret-position="167">
+          <caret line="1046" column="71" selection-start-line="1046" selection-start-column="71" selection-end-line="1046" selection-end-column="71" />
           <folding>
             <element signature="e#14#44#0" expanded="true" />
             <element signature="e#3965#4094#0" />
