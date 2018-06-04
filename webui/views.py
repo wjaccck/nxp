@@ -1041,6 +1041,8 @@ def Http_request_statisticsView(req):
             avg=sum([get_total(x,m) for x in time_line])/7
             if avg<limit:
                 all_info.append({"domain":m,"avg":avg})
+
+        sorted(all_info.items(), lambda x, y: cmp(x[1], y[1]), reverse=True)
         response = render(req, 'api/avg.html', {
                                                     "all_info":all_info,
                                                    }

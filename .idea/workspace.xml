@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a8356791-8dff-4783-a146-d6e83154db82" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/templates/api/avg.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/webui/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/webui/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webui/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/webui/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webui/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/webui/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -19,11 +16,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/webui/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="227">
-              <caret line="1018" column="27" selection-start-line="1018" selection-start-column="17" selection-end-line="1018" selection-end-column="27" />
+            <state relative-caret-position="377">
+              <caret line="1044" column="23" selection-start-line="1044" selection-start-column="23" selection-end-line="1044" selection-end-column="23" />
               <folding>
                 <element signature="e#14#44#0" expanded="true" />
                 <element signature="e#3965#4094#0" />
@@ -64,8 +61,8 @@
       <file leaf-file-name="avg.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/api/avg.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="64" column="98" selection-start-line="64" selection-start-column="98" selection-end-line="64" selection-end-column="98" />
+            <state relative-caret-position="210">
+              <caret line="7" column="19" lean-forward="true" selection-start-line="7" selection-start-column="19" selection-end-line="7" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -120,12 +117,12 @@
         <entry file="file://$PROJECT_DIR$/webui/urls.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="243">
-              <caret line="116" column="88" selection-start-line="116" selection-start-column="78" selection-end-line="116" selection-end-column="88" />
+              <caret line="116" column="67" selection-start-line="116" selection-start-column="67" selection-end-line="116" selection-end-column="67" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/webui/index.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="255">
@@ -204,10 +201,10 @@
         <option value="$PROJECT_DIR$/templates/api/upstream_check.html" />
         <option value="$PROJECT_DIR$/act.log" />
         <option value="$PROJECT_DIR$/cmd.log" />
+        <option value="$PROJECT_DIR$/templates/webui/index.html" />
+        <option value="$PROJECT_DIR$/webui/urls.py" />
         <option value="$PROJECT_DIR$/templates/api/avg.html" />
         <option value="$PROJECT_DIR$/webui/views.py" />
-        <option value="$PROJECT_DIR$/webui/urls.py" />
-        <option value="$PROJECT_DIR$/templates/webui/index.html" />
       </list>
     </option>
   </component>
@@ -254,6 +251,17 @@
               <item name="nxp" type="b2602c69:ProjectViewProjectNode" />
               <item name="nxp" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="nxp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="nxp" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="webui" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="nxp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="nxp" type="462c0819:PsiDirectoryNode" />
               <item name="webui" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -869,17 +877,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/webui/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="143" column="56" selection-start-line="143" selection-start-column="56" selection-end-line="143" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webui/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="116" column="67" selection-start-line="116" selection-start-column="67" selection-end-line="116" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/templates/api/avg.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="64" column="98" selection-start-line="64" selection-start-column="98" selection-end-line="64" selection-end-column="98" />
+        <state relative-caret-position="210">
+          <caret line="7" column="19" lean-forward="true" selection-start-line="7" selection-start-column="19" selection-end-line="7" selection-end-column="19" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/webui/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="227">
-          <caret line="1018" column="27" selection-start-line="1018" selection-start-column="17" selection-end-line="1018" selection-end-column="27" />
+        <state relative-caret-position="377">
+          <caret line="1044" column="23" selection-start-line="1044" selection-start-column="23" selection-end-line="1044" selection-end-column="23" />
           <folding>
             <element signature="e#14#44#0" expanded="true" />
             <element signature="e#3965#4094#0" />
@@ -913,20 +935,6 @@
             <element signature="e#23391#23467#0" />
             <element signature="e#23525#24002#0" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webui/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="116" column="88" selection-start-line="116" selection-start-column="78" selection-end-line="116" selection-end-column="88" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/webui/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="143" column="56" selection-start-line="143" selection-start-column="56" selection-end-line="143" selection-end-column="56" />
         </state>
       </provider>
     </entry>
