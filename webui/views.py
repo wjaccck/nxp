@@ -1045,6 +1045,8 @@ def Http_request_statisticsView(req):
         avg_list = sorted(all_info, key=lambda all_info: (all_info['avg']), reverse=False)
         response = render(req, 'api/avg.html', {
                                                     "all_info":avg_list,
+                                                    "avg_count":avg_list.__len__(),
+                                                    "limit":limit
                                                    }
                           )
     else:
