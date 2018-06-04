@@ -1,7 +1,5 @@
 {% extends "webui/index.html" %}
 {% load staticfiles %}
-{% load bootstrap_pagination %}
-{% load webui_extras %}
 {% block username %}
 {{ username }}
 {% endblock %}
@@ -68,8 +66,6 @@
                                 {% endfor %}
 							</tbody>
 							</table>
-                            {% bootstrap_paginate page_obj range=10 show_prev_next="false" show_first_last="true" %}
-                            <div>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}. Size {{ page_obj.paginator.per_page }}.Total {{ page_obj.paginator.count }}</div>
 						</div>
 						</div>
 					</div>
