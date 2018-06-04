@@ -1013,6 +1013,42 @@ def Http_request_countView(req):
     else:
         response = redirect('login')
     return response
+
+
+
+def Http_request_statisticsView(req):
+    if req.user.is_authenticated():
+        try:
+            limit=req.GET['limit']
+        except:
+            limit=100
+
+        def get_total(daytime, domain=None):
+            data = Http_statistics.objects.filter(daytime=daytime, domain=domain)
+            total_data = [x.Unknown_status + x.success_status + x.client_err_status + x.server_err_status for x in
+                          data]
+            return sum(total_data).__int__()
+        time_line = []
+        for m in range(1, 8):
+            p_day = datetime.today() + timedelta(-m)
+            p_day_format = p_day.strftime('%Y%m%d')
+            time_line.append(p_day_format)
+        domain_list=[x.get('domain') for x in Http_statistics.objects.distinct().values('domain') if 'weimi.me' not in x.get('domain')]
+
+        all_info=[]
+        for m in domain_list:
+            avg=None
+            avg=sum([get_total(x,m) for x in time_line])/7
+            if avg<limit:
+                all_info.append({"domain":m,"avg":avg})
+        response = render(req, 'api/avg.html', {
+                                                    "all_info":all_info,
+                                                   }
+                          )
+    else:
+        response = redirect('login')
+    return response
+
 #
 # class Http_request_ListViewSet(Base_ListViewSet):
 #     Redis_group.objects.all().count()
