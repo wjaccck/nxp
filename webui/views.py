@@ -397,11 +397,14 @@ def Generate_conf(req, site_id):
                 vhost_tmp_conf.write(';\r\n        '.join(n.extra_conf.split(';')))
             for m in detail:
                 m_content=context_content.replace('context_path',m.context)
-                if m.proxy_path:
-                    m_upstream_name=m.upstream.name.strip()+m.proxy_path.strip()
+                if m.upstream:
+                    if m.proxy_path:
+                        m_upstream_name=m.upstream.name.strip()+m.proxy_path.strip()
+                    else:
+                        m_upstream_name=m.upstream.name
+                    m_content=m_content.replace('upstream_name',m_upstream_name)
                 else:
-                    m_upstream_name=m.upstream.name
-                m_content=m_content.replace('upstream_name',m_upstream_name)
+                    m_content=m_content.replace('proxy_pass  http://upstream_name;','')
                 m_parametres=[x.strip() for x in m.extra_parametres.split(';')]
                 if m.default_proxy_set:
                     m_parametres.insert(0,'include proxy_conf')
@@ -669,12 +672,18 @@ def Run_mission(req, mission_id):
         result=ssh.run(' /opt/nginx/sbin/nginx -t -c /opt/nginx/conf/nginx.conf  && /etc/init.d/nginx reload')
         logger.info("{0} {1} reload nginx : {2}".format(mission.id,mission.host.name,result))
         if result.get('retcode')==0:
-            for m in Site_context.objects.filter(site=mission.site):
-                m.upstream.status=Status.objects.get(name='online')
-                m.upstream.save()
+            if mission.site:
+                for m in Site_context.objects.filter(site=mission.site):
+                    m.upstream.status=Status.objects.get(name='online')
+                    m.upstream.save()
 
-            mission.status=Status.objects.get(name='done')
-            mission.remark=result.get('stdout')
+                mission.status=Status.objects.get(name='done')
+                mission.remark=result.get('stdout')
+            else:
+                upstream_name=mission.files.split('/')[-1].split('.')[0]
+                upstream=Upstream.objects.get(name=upstream_name)
+                upstream.status=Status.objects.get(name='online')
+                upstream.save()
         else:
             mission.status=Status.objects.get(name='failed')
             mission.remark = result.get('stderr')
