@@ -684,6 +684,8 @@ def Run_mission(req, mission_id):
                 upstream=Upstream.objects.get(name=upstream_name)
                 upstream.status=Status.objects.get(name='online')
                 upstream.save()
+                mission.status=Status.objects.get(name='done')
+                mission.remark=result.get('stdout')
         else:
             mission.status=Status.objects.get(name='failed')
             mission.remark = result.get('stderr')
