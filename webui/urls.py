@@ -14,6 +14,11 @@ urlpatterns = [
     url(r'^status/create/$',login_required(views.Status_CreateViewSet.as_view()),name='status-create'),
 
     ### status
+    url(r'^apps-group/$', login_required(views.Apps_group_ListViewSet.as_view()), name='apps-group-list'),
+    url(r'^apps-group/update/(?P<pk>\d+)/$', login_required(views.Apps_group_UpdateViewSet.as_view()), name='apps-group-update'),
+    url(r'^apps-group/create/$', login_required(views.Apps_group_CreateViewSet.as_view()), name='apps-group-create'),
+
+    ### status
     url(r'^group/$', login_required(views.Group_ListViewSet.as_view()), name='group-list'),
     url(r'^group/update/(?P<pk>\d+)/$', login_required(views.Group_UpdateViewSet.as_view()), name='group-update'),
     url(r'^group/create/$', login_required(views.Group_CreateViewSet.as_view()), name='group-create'),
@@ -29,6 +34,15 @@ urlpatterns = [
     url(r'^site-headers/update/(?P<pk>\d+)/$', login_required(views.Site_headers_UpdateViewSet.as_view()), name='site-headers-update'),
     url(r'^site-headers/create/$', login_required(views.Site_headers_CreateViewSet.as_view()), name='site-headers-create'),
     url(r'^site-headers/delete/(?P<pk>\d+)/$', login_required(views.Site_headers_DeleteViewSet.as_view()), name='site-headers-delete'),
+
+    ### proxy headers
+    url(r'^proxy-headers/$', login_required(views.Proxy_headers_ListViewSet.as_view()), name='proxy-headers-list'),
+    url(r'^proxy-headers/update/(?P<pk>\d+)/$', login_required(views.Proxy_headers_UpdateViewSet.as_view()),
+        name='proxy-headers-update'),
+    url(r'^proxy-headers/create/$', login_required(views.Proxy_headers_CreateViewSet.as_view()),
+        name='proxy-headers-create'),
+    url(r'^proxy-headers/delete/(?P<pk>\d+)/$', login_required(views.Proxy_headers_DeleteViewSet.as_view()),
+        name='proxy-headers-delete'),
 
     ### upstream
     url(r'^upstream/$', login_required(views.Upstream_ListViewSet.as_view()), name='upstream-list'),

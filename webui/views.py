@@ -27,8 +27,8 @@ def index(req):
             all_machine.extend(m.hosts.all())
             all_machine.extend([x.host for x in m.docker_list.all()])
         machine_count=list(set(all_machine)).__len__()
-        public_count=Site.objects.filter(group=Group.objects.get(name='public')).count()
-        intra_count=Site.objects.filter(group=Group.objects.get(name='intra')).count()
+        public_count=Site.objects.filter(group=Nginx_group.objects.get(name='public')).count()
+        intra_count=Site.objects.filter(group=Nginx_group.objects.get(name='intra')).count()
         response = render(req,'webui/index.html',{"username":req.user.last_name,
                                                   "active":"index",
                                                   "http_count":http_count,
@@ -73,21 +73,73 @@ class Status_ListViewSet(Base_ListViewSet):
         else:
             return self.model.objects.all()
 #
+
+
+class Apps_ListViewSet(Base_ListViewSet):
+    Apps.objects.all().count()
+    model = Apps
+    template_name = 'api/apps.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        name = None
+        try:
+            name = self.request.GET['keyword']
+        except:
+            pass
+
+        if name:
+            return self.model.objects.filter(host__icontains=name)
+        else:
+            return self.model.objects.all()
+
+
+class Apps_group_ListViewSet(Base_ListViewSet):
+    Apps_group.objects.all().count()
+    model = Apps_group
+    template_name = 'api/apps_group.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        name = None
+        try:
+            name = self.request.GET['keyword']
+        except:
+            pass
+
+        if name:
+            return self.model.objects.filter(name__icontains=name)
+        else:
+            return self.model.objects.all()
+
+class Apps_group_CreateViewSet(Base_CreateViewSet):
+    model = Apps_group
+    form_class = forms.Nginx_groupForm
+    template_name = 'api/apps_group_form.html'
+    success_url = reverse_lazy('apps-group-list')
+
+class Apps_group_UpdateViewSet(Base_UpdateViewSet):
+    model = Apps_group
+    form_class = forms.Nginx_groupForm
+    template_name = 'api/apps_group_form.html'
+    success_url = reverse_lazy('apps-group-list')
+
+#
 class Group_CreateViewSet(Base_CreateViewSet):
-    model = Group
-    form_class = forms.GroupForm
+    model = Nginx_group
+    form_class = forms.Nginx_groupForm
     template_name = 'api/group_form.html'
     success_url = reverse_lazy('group-list')
 
 class Group_UpdateViewSet(Base_UpdateViewSet):
-    model = Group
-    form_class = forms.GroupForm
+    model = Nginx_group
+    form_class = forms.Nginx_groupForm
     template_name = 'api/group_form.html'
     success_url = reverse_lazy('group-list')
 
 class Group_ListViewSet(Base_ListViewSet):
-    Group.objects.all().count()
-    model = Group
+    Nginx_group.objects.all().count()
+    model = Nginx_group
     template_name = 'api/group.html'
     paginate_by = 10
 
@@ -160,7 +212,6 @@ class Site_headers_DeleteViewSet(Base_DeleteViewSet):
     model = Site_headers
     success_url = reverse_lazy('site-headers-list')
 
-
 class Site_headers_ListViewSet(Base_ListViewSet):
     Site_headers.objects.all().count()
     model = Site_headers
@@ -175,7 +226,43 @@ class Site_headers_ListViewSet(Base_ListViewSet):
             pass
 
         if name:
-            return self.model.objects.filter(site__name__icontains=name).order_by("-modified_date")
+            return self.model.objects.filter(name__icontains=name).order_by("-modified_date")
+        else:
+            return self.model.objects.all().order_by("-modified_date")
+
+#
+
+class Proxy_headers_CreateViewSet(Base_CreateViewSet):
+    model = Proxy_headers
+    form_class = forms.Proxy_headersForm
+    template_name = 'api/proxy_headers_form.html'
+    success_url = reverse_lazy('proxy-headers-list')
+
+class Proxy_headers_UpdateViewSet(Base_UpdateViewSet):
+    model = Proxy_headers
+    form_class = forms.Site_headersForm
+    template_name = 'api/proxy_headers_form.html'
+    success_url = reverse_lazy('proxy-headers-list')
+
+class Proxy_headers_DeleteViewSet(Base_DeleteViewSet):
+    model = Proxy_headers
+    success_url = reverse_lazy('proxy-headers-list')
+
+class Proxy_headers_ListViewSet(Base_ListViewSet):
+    Proxy_headers.objects.all().count()
+    model = Proxy_headers
+    template_name = 'api/proxy_headers.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        name = None
+        try:
+            name = self.request.GET['keyword']
+        except:
+            pass
+
+        if name:
+            return self.model.objects.filter(name__icontains=name).order_by("-modified_date")
         else:
             return self.model.objects.all().order_by("-modified_date")
 
@@ -254,39 +341,39 @@ class Site_context_ListViewSet(Base_ListViewSet):
                         #
 
 
-class Docker_app_CreateViewSet(Base_CreateViewSet):
-    model = Docker_app
-    form_class = forms.Docker_appForm
-    template_name = 'api/docker_form.html'
-    success_url = reverse_lazy('docker-list')
-
-class Docker_app_UpdateViewSet(Base_UpdateViewSet):
-    model = Docker_app
-    form_class = forms.Docker_appForm
-    template_name = 'api/context_form.html'
-    success_url = reverse_lazy('docker-list')
-
-class Docker_app_DeleteViewSet(Base_DeleteViewSet):
-    model = Docker_app
-    success_url = reverse_lazy('docker-list')
-
-class Docker_app_ListViewSet(Base_ListViewSet):
-    Docker_app.objects.all().count()
-    model = Docker_app
-    template_name = 'api/docker.html'
-    paginate_by = 10
-
-    def get_queryset(self):
-        name = None
-        try:
-            name = self.request.GET['keyword']
-        except:
-            pass
-
-        if name:
-            return self.model.objects.filter(host__name__istartswith=name)
-        else:
-            return self.model.objects.all()
+# class Docker_app_CreateViewSet(Base_CreateViewSet):
+#     model = Docker_app
+#     form_class = forms.Docker_appForm
+#     template_name = 'api/docker_form.html'
+#     success_url = reverse_lazy('docker-list')
+#
+# class Docker_app_UpdateViewSet(Base_UpdateViewSet):
+#     model = Docker_app
+#     form_class = forms.Docker_appForm
+#     template_name = 'api/context_form.html'
+#     success_url = reverse_lazy('docker-list')
+#
+# class Docker_app_DeleteViewSet(Base_DeleteViewSet):
+#     model = Docker_app
+#     success_url = reverse_lazy('docker-list')
+#
+# class Docker_app_ListViewSet(Base_ListViewSet):
+#     Docker_app.objects.all().count()
+#     model = Docker_app
+#     template_name = 'api/docker.html'
+#     paginate_by = 10
+#
+#     def get_queryset(self):
+#         name = None
+#         try:
+#             name = self.request.GET['keyword']
+#         except:
+#             pass
+#
+#         if name:
+#             return self.model.objects.filter(host__name__istartswith=name)
+#         else:
+#             return self.model.objects.all()
 
 
 
@@ -622,9 +709,9 @@ def Create_upstream_tran_mission(req, upstream_id):
             all_host.extend(upstream.group.hosts.all())
 
         else:
-            for m in Group.objects.filter(name='intra'):
+            for m in Nginx_group.objects.filter(name='intra'):
                 all_host.extend(m.hosts.all())
-            for m in Group.objects.filter(name='public'):
+            for m in Nginx_group.objects.filter(name='public'):
                 all_host.extend(m.hosts.all())
         for i in all_host:
             Nxp_mission.objects.create(

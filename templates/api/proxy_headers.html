@@ -1,11 +1,10 @@
 {% extends "webui/index.html" %}
 {% load staticfiles %}
 {% load bootstrap_pagination %}
-{% block username %}
 {% load webui_extras %}
+{% block username %}
 {{ username }}
 {% endblock %}
-
 
 <!-- END HEADER INNER -->
 {% block content %}
@@ -56,8 +55,10 @@
 							</div>
 						</div>
 
-						<div class="portlet-body">
-                        <a href="{% url 'context-create' %}" class="btn btn-success">{{ create }}</a>
+                        <div class="portlet-body">
+                        {% if user.is_superuser %}
+                            <a href="{% url 'proxy-headers-create' %}" class="btn btn-success">{{ create }}</a>
+                        {% endif %}
                         <div class="table-responsive">
                             <table class="table table-bordered">
 {#							<table class="table table-striped table-hover table-bordered" id="sample_editable_1">#}
@@ -67,25 +68,13 @@
 									 ID
 								</th>
 								<th>
-									 站点
+									 名称
+								</th>
+								<th>
+									 HEADER
 								</th>
                                 <th>
-									 CONTEXT
-								</th>
-                                <th>
-									 UPSTREAM
-								</th>
-                                <th>
-									 PROXY_PATH
-								</th>
-                                <th>
-									 DEFAULT_PROXY_SET
-								</th>
-                                <th>
-                                     EXTRA_PARAMETRES
-								</th>
-                                <th>
-                                     创建日期
+									 创建日期
 								</th>
                                 {% if user.is_superuser %}
                                 <th>
@@ -98,30 +87,20 @@
                                 {% for m in object_list  %}
                                     <tr>
                                         <td>{{ m.id }}</td>
-                                        <td>{{ m.site }}</td>
-                                        <td>{{ m.context }}</td>
-                                        <td>{{ m.upstream }}</td>
-                                        <td>{{ m.proxy_path }}</td>
-                                        <td>{{ m.default_proxy_set }}</td>
-                                        <td>
-                                            {% for n in m.extra_parametres %}
-                                                {{ n }}<br>
-                                            {% endfor %}
-                                        </td>
-{#                                        <td>{{ m.status }}</td>#}
+                                        <td>{{ m.name }}</td>
+                                        <td>{{ m.extra_parameter }}</td>
                                         <td>{{ m.created_date |date:'Y-m-d H:i:s' }}</td>
                                         {% if user.is_superuser %}
                                         <td>
-                                            <a  href="{% url 'context-update' m.id %} ">修改</a>
-                                            <a  href="{% url 'context-delete' m.id %} ">删除</a>
+                                            <a  href="{% url 'proxy-headers-update' m.id %} ">修改</a>
+                                            <a  href="{% url 'proxy-headers-delete' m.id %} ">删除</a>
                                         </td>
                                         {% endif %}
-{#                                        <td><a  href="{% url 'name-list' %}?status={{ m.content }}">详情</a></td>#}
                                     </tr>
                                 {% endfor %}
 							</tbody>
 							</table>
-                            {% bootstrap_paginate page_obj %}
+                            {% bootstrap_paginate page_obj range=10 show_prev_next="false" show_first_last="true" %}
                             <div>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}. Size {{ page_obj.paginator.per_page }}.Total {{ page_obj.paginator.count }}</div>
 						</div>
 						</div>

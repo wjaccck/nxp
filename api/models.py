@@ -30,17 +30,29 @@ class Status(CommonModel,NGINX_BASE):
         return u'状态'
 
 
-class Docker_app(CommonModel, NGINX_BASE):
-    host = models.ForeignKey(Ipv4Address)
-    port = models.CharField(max_length=10)
+class Apps(CommonModel, NGINX_BASE):
+    host = models.ForeignKey(Ipv4Address,related_name='app_host')
+    port = models.CharField(max_length=5)
+    status = models.ForeignKey(Status)
 
     def __unicode__(self):
         return "{0}:{1}".format(self.host.name, self.port)
     @staticmethod
     def verbose():
-        return u'Docker'
+        return u'Apps'
 
-class Group(CommonModel,NGINX_BASE):
+class Apps_group(CommonModel,NGINX_BASE):
+    name=models.CharField(max_length=50,unique=True)
+    apps=models.ManyToManyField(Apps,related_name='group_app')
+
+    def __unicode__(self):
+        return self.name
+
+    @staticmethod
+    def verbose():
+        return u'Apps组'
+
+class Nginx_group(CommonModel,NGINX_BASE):
     name=models.CharField(max_length=50,unique=True)
     hosts=models.ManyToManyField(Ipv4Address,related_name='group_host')
 
@@ -53,13 +65,11 @@ class Group(CommonModel,NGINX_BASE):
 
 class Upstream(CommonModel,NGINX_BASE):
     name=models.CharField(max_length=50,unique=True)
-    direct_status=models.BooleanField(default=False)
-    hosts=models.ManyToManyField(Ipv4Address,blank=True,related_name='upstream_host')
-    port=models.CharField(max_length=20,blank=True)
-    docker_list=models.ManyToManyField(Docker_app,blank=True,related_name='docker_app')
+    domain_proxy=models.CharField(max_length=50,blank=True)
+    app=models.ForeignKey(Apps_group,blank=True,null=True)
     status=models.ForeignKey(Status)
     ip_hash=models.BooleanField(default=False)
-    group=models.ForeignKey(Group,blank=True,null=True)
+    group=models.ForeignKey(Nginx_group,blank=True,null=True)
 
     def __unicode__(self):
         return self.name
@@ -68,12 +78,34 @@ class Upstream(CommonModel,NGINX_BASE):
     def verbose():
         return u'upstream组'
 
+class Site_headers(CommonModel,NGINX_BASE):
+    name=models.CharField(max_length=20)
+    extra_parameter=models.CharField(max_length=255)
+    @staticmethod
+    def verbose():
+        return u'site_headers'
+    def __unicode__(self):
+        return self.name
+
+class Proxy_headers(CommonModel,NGINX_BASE):
+    name=models.CharField(max_length=20)
+    extra_parameter=models.CharField(max_length=255)
+    @staticmethod
+    def verbose():
+        return u'proxy_headers'
+    def __unicode__(self):
+        return self.name
+
+
 class Site(CommonModel,NGINX_BASE):
     name=models.CharField(max_length=50)
-    group=models.ForeignKey(Group,related_name='site_group')
+    group=models.ForeignKey(Nginx_group,related_name='site_group')
+    http=models.BooleanField()
     https=models.BooleanField()
+    http2=models.BooleanField()
+    trace_status=models.BooleanField(default=False)
     redirect_status=models.BooleanField(default=False)
-
+    extra_parameters=models.ManyToManyField(Site_headers)
     def __unicode__(self):
         if self.https:
             return "https://{0}".format(self.name)
@@ -83,17 +115,10 @@ class Site(CommonModel,NGINX_BASE):
     def verbose():
         return u'server_name'
 
-class Site_headers(CommonModel,NGINX_BASE):
-    site=models.ForeignKey(Site)
-    extra_conf=models.TextField(blank=True)
-    @staticmethod
-    def verbose():
-        return u'site_headers'
-
 class Site_context(CommonModel,NGINX_BASE):
     site=models.ForeignKey(Site)
     context=models.CharField(max_length=200)
-    upstream=models.ForeignKey(Upstream,related_name='context_upstream')
+    upstream=models.ForeignKey(Upstream,related_name='context_upstream',blank=True)
     proxy_path=models.CharField(max_length=200,blank=True)
     default_proxy_set=models.BooleanField(default=True)
     extra_parametres=models.TextField(blank=True)

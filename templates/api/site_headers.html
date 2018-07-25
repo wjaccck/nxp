@@ -68,10 +68,10 @@
 									 ID
 								</th>
 								<th>
-									 站点
+									 名称
 								</th>
 								<th>
-									 HEADERS
+									 HEADER
 								</th>
                                 <th>
 									 创建日期
@@ -87,10 +87,8 @@
                                 {% for m in object_list  %}
                                     <tr>
                                         <td>{{ m.id }}</td>
-                                        <td>{{ m.site }}</td>
-                                        {% autoescape off %}
-                                        <td>{{ m.extra_conf | change_word }}</td>
-                                        {% endautoescape %}
+                                        <td>{{ m.name }}</td>
+                                        <td>{{ m.extra_parameter }}</td>
                                         <td>{{ m.created_date |date:'Y-m-d H:i:s' }}</td>
                                         {% if user.is_superuser %}
                                         <td>

@@ -26,7 +26,31 @@ class ModelSelect2MultipleWidget(BaseModelSelect2MultipleWidget):
         'pk__startswith',
     ]
 
+class AppsModelSelect2MultipleWidget(BaseModelSelect2MultipleWidget):
+    search_fields = [
+        'name__istartswith',
+        'pk__startswith',
+    ]
+
+class SiteheadersSelect2MultipleWidget(BaseModelSelect2MultipleWidget):
+    search_fields = [
+        'extra_parameter__istartswith',
+        'pk__startswith',
+    ]
+
+class ProxyheadersSelect2MultipleWidget(BaseModelSelect2MultipleWidget):
+    search_fields = [
+        'extra_parameter__istartswith',
+        'pk__startswith',
+    ]
+
 class GroupModelSelect2Widget(BaseModelSelect2Widget):
+    search_fields = [
+        'name__istartswith',
+        'pk__startswith',
+    ]
+
+class AppModelSelect2Widget(BaseModelSelect2Widget):
     search_fields = [
         'name__istartswith',
         'pk__startswith',

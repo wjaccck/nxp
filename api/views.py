@@ -8,14 +8,14 @@ from .models import *
 from .serializers import *
 # from rest_framework_filters.backends import DjangoFilterBackend
 
-class Site_ApiViewSet(viewsets.ModelViewSet):
-    http_method_names = [ 'get']
-    queryset = Site.objects.all()
-    serializer_class = SiteSerializer
-    permission_classes = (permissions.DjangoModelPermissions,)
-    filter_backends = (filters.DjangoFilterBackend, filters.SearchFilter, )
-    filter_fields = ('name',)
-    search_fields = ('^name', )
+# class Site_ApiViewSet(viewsets.ModelViewSet):
+#     http_method_names = [ 'get']
+#     queryset = Site.objects.all()
+#     serializer_class = SiteSerializer
+#     permission_classes = (permissions.DjangoModelPermissions,)
+#     filter_backends = (filters.DjangoFilterBackend, filters.SearchFilter, )
+#     filter_fields = ('name',)
+#     search_fields = ('^name', )
 
 class Codis_ApiViewSet(viewsets.ModelViewSet):
     http_method_names = [ 'get','post']
@@ -53,14 +53,14 @@ class Ipv4Address_ApiViewSet(viewsets.ModelViewSet):
     queryset=Ipv4Address.objects.select_related('creator', 'last_modified_by')\
                                 .all()
     serializer_class = IPv4AddressSerializer
-
     # Applies permissions
     permission_classes = (permissions.DjangoModelPermissions,)
-
     # Applies Filters
     filter_backends = (filters.DjangoFilterBackend, filters.SearchFilter, )
     filter_fields = ('name',)
     search_fields = ('^name', )
+    def get_queryset(self):
+        pass
 
     def perform_create(self, serializer):
         serializer.save(

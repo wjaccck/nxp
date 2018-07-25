@@ -71,10 +71,22 @@
 									 名称
 								</th>
 								<th>
+									 HTTP
+								</th>
+                                <th>
 									 HTTPS
 								</th>
                                 <th>
+									 HTTP2
+								</th>
+                                <th>
+									 设置跟踪ID
+								</th>
+                                <th>
 									 重定向至HTTPS
+								</th>
+                                <th>
+									 Site-headers
 								</th>
                                 <th>
 									 所属NGINX组
@@ -100,9 +112,17 @@
                                     <tr>
                                         <td>{{ m.id }}</td>
                                         <td>{{ m.name }}</td>
+                                        <td>{{ m.http | https_status }}</td>
                                         <td>{{ m.https | https_status }}</td>
+                                        <td>{{ m.http2 | https_status }}</td>
+                                        <td>{{ m.trace_status | https_status }}</td>
                                         <td>{{ m.redirect_status | https_status }}</td>
                                         <td>{{ m.group }}</td>
+                                        <td>
+                                            {% for n in m.extra_parameters.all %}
+                                                {{ n }}<br>
+                                            {% endfor %}
+                                        </td>
                                         <td>{{ m.created_date |date:'Y-m-d H:i:s' }}</td>
                                         {% if user.is_superuser %}
                                         <td>

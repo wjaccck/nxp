@@ -74,32 +74,28 @@ class SentinelSerializer(serializers.HyperlinkedModelSerializer):
         return result
 
 
-# class Site(CommonModel,NGINX_BASE):
-#     name=models.CharField(max_length=50)
-#     group=models.ForeignKey(Group,related_name='site_group')
-#     https=models.BooleanField()
 
-class SiteSerializer(serializers.HyperlinkedModelSerializer):
-    group=serializers.SlugRelatedField(queryset=Group.objects.all(), many=False,slug_field='name')
-    detail=serializers.SerializerMethodField()
-    class Meta:
-        model = Site
-        fields='__all__'
-
-    def get_detail(self,obj):
-        all_context=Site_context.objects.filter(site=obj)
-        result=[]
-        for m in all_context:
-            t_result={}
-            t_result['upstream']=m.upstream.name
-            t_result['context']=m.context
-            if m.upstream.direct_status:
-                t_result['app_info']=[]
-            else:
-                t_result['app_info']=[x.__str__() for x in m.upstream.docker_list.all()]+["{0}:{1}".format(x,m.upstream.port) for x in m.upstream.hosts.all()]
-            result.append(t_result)
-        # return [{"x":{"master":x.master,"slave":x.slave.all(),"offline":x.offline.all()}} for x in groups]
-        return result
+# class SiteSerializer(serializers.HyperlinkedModelSerializer):
+#     group=serializers.SlugRelatedField(queryset=Nginx_group.objects.all(), many=False,slug_field='name')
+#     detail=serializers.SerializerMethodField()
+#     class Meta:
+#         model = Site
+#         fields='__all__'
+#
+#     def get_detail(self,obj):
+#         all_context=Site_context.objects.filter(site=obj)
+#         result=[]
+#         for m in all_context:
+#             t_result={}
+#             t_result['upstream']=m.upstream.name
+#             t_result['context']=m.context
+#             if m.upstream.direct_status:
+#                 t_result['app_info']=[]
+#             else:
+#                 t_result['app_info']=[x.__str__() for x in m.upstream.docker_list.all()]+["{0}:{1}".format(x,m.upstream.port) for x in m.upstream.hosts.all()]
+#             result.append(t_result)
+#         # return [{"x":{"master":x.master,"slave":x.slave.all(),"offline":x.offline.all()}} for x in groups]
+#         return result
 
 class Request_countSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:

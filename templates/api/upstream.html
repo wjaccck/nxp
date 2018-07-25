@@ -70,19 +70,14 @@
 									 名称
 								</th>
                                 <th>
-									 是否为代理域名
+									 代理域名
 								</th>
-                                <th>
-									 是否为IP_HASH
-								</th>
+
                                 <th>
 									 后端服务器
 								</th>
                                 <th>
-									 端口
-								</th>
-                                <th>
-									 Docker
+									 是否为IP_HASH
 								</th>
                                 <th>
 									 状态
@@ -111,19 +106,20 @@
                                     <tr>
                                         <td>{{ m.id }}</td>
                                         <td>{{ m.name }}</td>
-                                        <td>{{ m.direct_status | https_status }}</td>
-                                        <td>{{ m.ip_hash | https_status }}</td>
+                                        {% if m.domain_proxy %}
+                                        <td>{{ m.domain_proxy }}</td>
+                                        <td></td>
+                                        {% else %}
+                                        <td></td>
                                         <td>
-                                            {% for n in m.hosts.all %}
-                                                {{ n.name }}<br>
-                                            {% endfor %}
-                                        </td>
-                                        <td>{{ m.port }}</td>
-                                        <td>
-                                            {% for n in m.docker_list.all %}
+                                            {{ m.app }}:<br>
+                                            {% for n in m.app.apps.all %}
                                                 {{ n }}<br>
                                             {% endfor %}
+
                                         </td>
+                                        {% endif %}
+                                        <td>{{ m.ip_hash | https_status }}</td>
                                         <td>{{ m.status }}</td>
                                         <td>{{ m.group }}</td>
                                         <td>{{ m.created_date |date:'Y-m-d H:i:s' }}</td>
