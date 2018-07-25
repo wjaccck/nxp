@@ -79,6 +79,14 @@ class AppsSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Apps
         fields='__all__'
+    def validate(self, attrs):
+        host=attrs['host']
+        port=attrs['port']
+        if Apps.objects.filter(port=port,host=Ipv4Address.objects.get(name=host)) >  0 :
+            raise serializers.ValidationError('已录入')
+
+        return super(AppsSerializer, self).validate(attrs)
+
 
 
 # class SiteSerializer(serializers.HyperlinkedModelSerializer):
