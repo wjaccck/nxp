@@ -17,6 +17,16 @@ from .serializers import *
 #     filter_fields = ('name',)
 #     search_fields = ('^name', )
 
+class Apps_ApiViewSet(viewsets.ModelViewSet):
+    http_method_names = [ 'get','post']
+    queryset = Apps.objects.all()
+    serializer_class = AppsSerializer
+    permission_classes = (permissions.DjangoModelPermissions,)
+    filter_backends = (filters.DjangoFilterBackend, filters.SearchFilter, )
+    filter_fields = ('host',)
+    search_fields = ('^host', )
+
+
 class Codis_ApiViewSet(viewsets.ModelViewSet):
     http_method_names = [ 'get','post']
     queryset = Codis.objects.all()

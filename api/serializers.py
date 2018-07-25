@@ -73,6 +73,12 @@ class SentinelSerializer(serializers.HyperlinkedModelSerializer):
         # return [{"x":{"master":x.master,"slave":x.slave.all(),"offline":x.offline.all()}} for x in groups]
         return result
 
+class AppsSerializer(serializers.HyperlinkedModelSerializer):
+    host=serializers.SlugRelatedField(queryset=Ipv4Address.objects.all(), many=False,slug_field='name')
+    status=serializers.SlugRelatedField(queryset=Status.objects.all(), many=False,slug_field='name')
+    class Meta:
+        model = Apps
+        fields='__all__'
 
 
 # class SiteSerializer(serializers.HyperlinkedModelSerializer):
