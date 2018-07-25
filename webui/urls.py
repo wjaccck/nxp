@@ -74,13 +74,13 @@ urlpatterns = [
     url(r'^codis/delete/(?P<pk>\d+)/$', login_required(views.Codis_DeleteViewSet.as_view()),
         name='codis-delete'),
 
-    ### docker
-    url(r'^docker/$', login_required(views.Docker_app_ListViewSet.as_view()), name='docker-list'),
-    url(r'^docker/update/(?P<pk>\d+)/$', login_required(views.Docker_app_UpdateViewSet.as_view()),
-        name='codis-update'),
-    url(r'^docker/create/$', login_required(views.Docker_app_CreateViewSet.as_view()), name='docker-create'),
-    url(r'^docker/delete/(?P<pk>\d+)/$', login_required(views.Docker_app_DeleteViewSet.as_view()),
-        name='docker-delete'),
+    # ### docker
+    # url(r'^docker/$', login_required(views.Docker_app_ListViewSet.as_view()), name='docker-list'),
+    # url(r'^docker/update/(?P<pk>\d+)/$', login_required(views.Docker_app_UpdateViewSet.as_view()),
+    #     name='codis-update'),
+    # url(r'^docker/create/$', login_required(views.Docker_app_CreateViewSet.as_view()), name='docker-create'),
+    # url(r'^docker/delete/(?P<pk>\d+)/$', login_required(views.Docker_app_DeleteViewSet.as_view()),
+    #     name='docker-delete'),
 
     ### redis-task
     url(r'^redis-task/$', login_required(views.Redis_tas_ListViewSet.as_view()), name='redis-task-list'),
