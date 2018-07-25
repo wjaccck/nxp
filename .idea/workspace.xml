@@ -1,29 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a8356791-8dff-4783-a146-d6e83154db82" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/templates/api/apps.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/api/apps_group.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/api/apps_group_form.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/api/proxy_confirm_delete.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/api/proxy_headers.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/api/proxy_headers_form.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/nginx/nginx.j2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/nginx/upstream.j2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/api/context.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/api/context.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/api/site.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/api/site.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/api/site_headers.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/api/site_headers.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/api/upstream.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/api/upstream.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webui/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/webui/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webui/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/webui/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webui/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/webui/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webui/wiget.py" beforeDir="false" afterPath="$PROJECT_DIR$/webui/wiget.py" afterDir="false" />
-    </list>
+    <list default="true" id="a8356791-8dff-4783-a146-d6e83154db82" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -216,7 +194,7 @@
       <path value="$PROJECT_DIR$/static/assets/global/plugins/bootstrap-sessiontimeout/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1378" />
@@ -509,7 +487,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
