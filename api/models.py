@@ -105,7 +105,7 @@ class Site(CommonModel,NGINX_BASE):
     http2=models.BooleanField()
     trace_status=models.BooleanField(default=False)
     redirect_status=models.BooleanField(default=False)
-    extra_parameters=models.ManyToManyField(Site_headers)
+    extra_parameters=models.ManyToManyField(Site_headers,blank=True)
     def __unicode__(self):
         if self.https:
             return "https://{0}".format(self.name)
@@ -121,8 +121,7 @@ class Site_context(CommonModel,NGINX_BASE):
     upstream=models.ForeignKey(Upstream,related_name='context_upstream',blank=True)
     proxy_path=models.CharField(max_length=200,blank=True)
     default_proxy_set=models.BooleanField(default=True)
-    extra_parametres=models.TextField(blank=True)
-    lua_status=models.BooleanField(default=False)
+    extra_parametres=models.ManyToManyField(Proxy_headers,blank=True)
     status=models.ForeignKey(Status)
     @staticmethod
     def verbose():
