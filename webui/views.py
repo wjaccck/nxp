@@ -114,13 +114,13 @@ class Apps_group_ListViewSet(Base_ListViewSet):
 
 class Apps_group_CreateViewSet(Base_CreateViewSet):
     model = Apps_group
-    form_class = forms.Nginx_groupForm
+    form_class = forms.Apps_groupForm
     template_name = 'api/apps_group_form.html'
     success_url = reverse_lazy('apps-group-list')
 
 class Apps_group_UpdateViewSet(Base_UpdateViewSet):
     model = Apps_group
-    form_class = forms.Nginx_groupForm
+    form_class = forms.Apps_groupForm
     template_name = 'api/apps_group_form.html'
     success_url = reverse_lazy('apps-group-list')
 
