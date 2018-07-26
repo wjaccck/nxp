@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a8356791-8dff-4783-a146-d6e83154db82" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/webui/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/webui/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webui/wiget.py" beforeDir="false" afterPath="$PROJECT_DIR$/webui/wiget.py" afterDir="false" />
-    </list>
+    <list default="true" id="a8356791-8dff-4783-a146-d6e83154db82" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,11 +14,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/webui/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="301">
+              <caret line="118" column="49" lean-forward="true" selection-start-line="118" selection-start-column="49" selection-end-line="118" selection-end-column="49" />
+              <folding>
+                <element signature="e#14#44#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/webui/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1500">
-              <caret line="76" selection-start-line="76" selection-end-line="83" />
+            <state relative-caret-position="30">
+              <caret line="16" column="57" lean-forward="true" selection-start-line="16" selection-start-column="57" selection-end-line="16" selection-end-column="57" />
             </state>
           </provider>
         </entry>
@@ -47,7 +56,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="forms.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/webui/forms.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="398">
@@ -61,15 +70,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="15">
               <caret line="28" column="36" selection-start-line="28" selection-start-column="6" selection-end-line="28" selection-end-column="36" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="site.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/api/site.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="122" column="55" selection-start-line="122" selection-start-column="55" selection-end-line="122" selection-end-column="55" />
             </state>
           </provider>
         </entry>
@@ -168,7 +168,6 @@
         <option value="$PROJECT_DIR$/templates/api/apps.html" />
         <option value="$PROJECT_DIR$/templates/api/apps_group_form.html" />
         <option value="$PROJECT_DIR$/templates/api/apps_group.html" />
-        <option value="$PROJECT_DIR$/webui/views.py" />
         <option value="$PROJECT_DIR$/templates/api/site_headers.html" />
         <option value="$PROJECT_DIR$/templates/api/proxy_headers.html" />
         <option value="$PROJECT_DIR$/templates/api/proxy_headers_form.html" />
@@ -184,6 +183,7 @@
         <option value="$PROJECT_DIR$/api/serializers.py" />
         <option value="$PROJECT_DIR$/webui/wiget.py" />
         <option value="$PROJECT_DIR$/webui/forms.py" />
+        <option value="$PROJECT_DIR$/webui/views.py" />
       </list>
     </option>
   </component>
@@ -493,8 +493,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
@@ -761,29 +760,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/webui/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="262" lean-forward="true" selection-start-line="262" selection-end-line="262" />
-          <folding>
-            <element signature="e#14#44#0" expanded="true" />
-            <element signature="e#3965#4094#0" />
-            <element signature="e#4146#4275#0" />
-            <element signature="e#4327#4383#0" />
-            <element signature="e#4934#5095#0" />
-            <element signature="e#5155#5316#0" />
-            <element signature="e#5376#5448#0" />
-            <element signature="e#7066#7217#0" />
-            <element signature="e#7277#7428#0" />
-            <element signature="e#7488#7555#0" />
-            <element signature="e#7611#8103#0" />
-            <element signature="e#8154#8207#0" />
-            <element signature="e#9154#9307#0" />
-            <element signature="e#9823#10165#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/api/site_headers.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -847,13 +823,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/webui/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1500">
-          <caret line="76" selection-start-line="76" selection-end-line="83" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/webui/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-381">
@@ -903,6 +872,23 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="398">
           <caret line="54" column="51" lean-forward="true" selection-start-line="54" selection-start-column="51" selection-end-line="54" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webui/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="16" column="57" lean-forward="true" selection-start-line="16" selection-start-column="57" selection-end-line="16" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webui/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="301">
+          <caret line="118" column="49" lean-forward="true" selection-start-line="118" selection-start-column="49" selection-end-line="118" selection-end-column="49" />
+          <folding>
+            <element signature="e#14#44#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
