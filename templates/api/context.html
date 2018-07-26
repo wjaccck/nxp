@@ -104,7 +104,7 @@
                                         <td>{{ m.proxy_path }}</td>
                                         <td>{{ m.default_proxy_set }}</td>
                                         <td>
-                                            {% for n in m.extra_parametres %}
+                                            {% for n in m.extra_parametres.all %}
                                                 {{ n }}<br>
                                             {% endfor %}
                                         </td>
