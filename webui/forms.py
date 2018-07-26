@@ -50,7 +50,7 @@ class Apps_groupForm(forms.ModelForm):
                 )
         model = Apps_group
         widgets = {
-            'apps':ModelSelect2MultipleWidget,
+            'apps':AppsModelSelect2MultipleWidget,
         }
         exclude = ['created_date', 'modified_date']
 
