@@ -98,7 +98,7 @@ class Proxy_headers(CommonModel,NGINX_BASE):
 
 
 class Site(CommonModel,NGINX_BASE):
-    name=models.CharField(max_length=50)
+    name=models.CharField(max_length=50,unique=True)
     group=models.ForeignKey(Nginx_group,related_name='site_group')
     http=models.BooleanField()
     https=models.BooleanField()

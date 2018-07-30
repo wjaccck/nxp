@@ -64,7 +64,6 @@ class SiteForm(forms.ModelForm):
     http2 = forms.BooleanField(label='是否为http2',required=False)
     trace_status = forms.BooleanField(label='是否添加trace-id',required=False)
     redirect_status = forms.BooleanField(label='是否为重定向至https',required=False)
-
     def clean(self):
         cleaned_data = super(SiteForm,self).clean()
         name = cleaned_data.get('name')
@@ -78,7 +77,7 @@ class SiteForm(forms.ModelForm):
         if https and redirect_status:
             self._errors['redirect_status'] = self.error_class([u"不可做http至https的重定向"])
         else:
-            if Site.objects.filter(name=name,https=https,group=group).__len__()==0:
+            if Site.objects.filter(name=name,https=https,group=group).__len__()<2:
                 return cleaned_data
             else:
                 self._errors['name'] = self.error_class([u"该站点在本组已有配置"])
