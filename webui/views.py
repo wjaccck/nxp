@@ -22,11 +22,11 @@ def index(req):
         http_count=Site.objects.filter(https=False).count()
         https_count=Site.objects.filter(https=True).count()
         upstream_count=Upstream.objects.all().count()
-        all_machine=[]
-        for m in Upstream.objects.all():
-            all_machine.extend(m.hosts.all())
-            all_machine.extend([x.host for x in m.docker_list.all()])
-        machine_count=list(set(all_machine)).__len__()
+        # all_machine=[]
+        # for m in Upstream.objects.all():
+        #     all_machine.extend(m.app.apps.host.all())
+        #     all_machine.extend([x.host for x in m.docker_list.all()])
+        # machine_count=list(set(all_machine)).__len__()
         public_count=Site.objects.filter(group=Nginx_group.objects.get(name='public')).count()
         intra_count=Site.objects.filter(group=Nginx_group.objects.get(name='intra')).count()
         response = render(req,'webui/index.html',{"username":req.user.last_name,
@@ -34,7 +34,7 @@ def index(req):
                                                   "http_count":http_count,
                                                   "https_count":https_count,
                                                   "upstream_count":upstream_count,
-                                                  "machine_count":machine_count,
+                                                  # "machine_count":machine_count,
                                                   "public_count":public_count,
                                                   "intra_count":intra_count
                                                   }
