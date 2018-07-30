@@ -3,12 +3,27 @@
 from core.common import logger,get_result
 from django.http import HttpResponse,HttpResponseBadRequest,HttpResponseRedirect
 import json
+from django.contrib.auth.decorators import login_required, permission_required
+from vanilla import TemplateView
 from vanilla import ListView, CreateView, UpdateView,DeleteView
 from rest_framework.views import APIView
 from rest_framework import permissions
 from datetime import datetime
 
-class Base_ListViewSet(ListView):
+class LoginRequiredMixin(object):
+    """
+    登陆限定，并指定登陆url
+    """
+    @classmethod
+    def as_view(cls, **initkwargs):
+        view = super(LoginRequiredMixin, cls).as_view(**initkwargs)
+        return login_required(view, login_url='/login/')
+
+class Base_Template(LoginRequiredMixin,TemplateView):
+    pass
+
+
+class Base_ListViewSet(LoginRequiredMixin,ListView):
 
     def get_context_data(self, **kwargs):
         context = super(Base_ListViewSet, self).get_context_data(**kwargs)
@@ -22,7 +37,7 @@ class Base_ListViewSet(ListView):
         context['active']=self.model.father()
         return context
 
-class Base_CreateViewSet(CreateView):
+class Base_CreateViewSet(LoginRequiredMixin,CreateView):
 
     def get_context_data(self, **kwargs):
         context = super(Base_CreateViewSet, self).get_context_data(**kwargs)
@@ -35,7 +50,7 @@ class Base_CreateViewSet(CreateView):
         context['active']=self.model.father()
         return context
 
-class Base_UpdateViewSet(UpdateView):
+class Base_UpdateViewSet(LoginRequiredMixin,UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super(Base_UpdateViewSet, self).get_context_data(**kwargs)
@@ -48,7 +63,7 @@ class Base_UpdateViewSet(UpdateView):
         context['active']=self.model.father()
         return context
 
-class Base_DeleteViewSet(DeleteView):
+class Base_DeleteViewSet(LoginRequiredMixin,DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super(Base_DeleteViewSet, self).get_context_data(**kwargs)

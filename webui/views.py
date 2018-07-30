@@ -10,38 +10,55 @@ from core.common import getComStr,head_file,tail_file,context_file,upstream_file
     upstream_tmp_file,upstream_release_file,vhost_release_file,vhost_tmp_file,vhost_online_file,\
     upstream_online_file,shihui_https_file,hiwemeet_https_file,ssl_vhost_online_file,ssl_vhost_release_file,ssl_vhost_tmp_file
 from django.http import HttpResponse,HttpResponseBadRequest,StreamingHttpResponse
-import operator
 from tasks import Run_ansible_redis_task
-from vanilla import TemplateView
-from abstract.views import Base_CreateViewSet, Base_ListViewSet, Base_UpdateViewSet,Base_DeleteViewSet
+from abstract.views import Base_CreateViewSet, Base_ListViewSet, Base_UpdateViewSet,Base_DeleteViewSet,Base_Template
 from datetime import timedelta, datetime
 
 
-def index(req):
-    if req.user.is_authenticated():
-        http_count=Site.objects.filter(https=False).count()
-        https_count=Site.objects.filter(https=True).count()
-        upstream_count=Upstream.objects.all().count()
-        # all_machine=[]
-        # for m in Upstream.objects.all():
-        #     all_machine.extend(m.app.apps.host.all())
-        #     all_machine.extend([x.host for x in m.docker_list.all()])
-        # machine_count=list(set(all_machine)).__len__()
-        public_count=Site.objects.filter(group=Nginx_group.objects.get(name='public')).count()
-        intra_count=Site.objects.filter(group=Nginx_group.objects.get(name='intra')).count()
-        response = render(req,'webui/index.html',{"username":req.user.last_name,
-                                                  "active":"index",
-                                                  "http_count":http_count,
-                                                  "https_count":https_count,
-                                                  "upstream_count":upstream_count,
-                                                  # "machine_count":machine_count,
-                                                  "public_count":public_count,
-                                                  "intra_count":intra_count
-                                                  }
-                          )
-    else:
-        response =redirect('login')
-    return response
+class IndexTemplateView(Base_Template):
+    template_name = 'webui/index.html'
+
+    def get_context_data(self, **kwargs):
+        context=super(IndexTemplateView,self).get_context_data(**kwargs)
+        http_count = Site.objects.filter(https=False).count()
+        https_count = Site.objects.filter(https=True).count()
+        upstream_count = Upstream.objects.all().count()
+        public_count = Site.objects.filter(group=Nginx_group.objects.get(name='public')).count()
+        intra_count = Site.objects.filter(group=Nginx_group.objects.get(name='intra')).count()
+        context['username']=self.request.user.last_name
+        context['active']='index'
+        context['http_count']=http_count
+        context['https_count']=https_count
+        context['upstream_count']=upstream_count
+        context['public_count']=public_count
+        context['intra_count']=intra_count
+        return context
+
+# def index(req):
+#     if req.user.is_authenticated():
+#         http_count=Site.objects.filter(https=False).count()
+#         https_count=Site.objects.filter(https=True).count()
+#         upstream_count=Upstream.objects.all().count()
+#         # all_machine=[]
+#         # for m in Upstream.objects.all():
+#         #     all_machine.extend(m.app.apps.host.all())
+#         #     all_machine.extend([x.host for x in m.docker_list.all()])
+#         # machine_count=list(set(all_machine)).__len__()
+#         public_count=Site.objects.filter(group=Nginx_group.objects.get(name='public')).count()
+#         intra_count=Site.objects.filter(group=Nginx_group.objects.get(name='intra')).count()
+#         response = render(req,'webui/index.html',{"username":req.user.last_name,
+#                                                   "active":"index",
+#                                                   "http_count":http_count,
+#                                                   "https_count":https_count,
+#                                                   "upstream_count":upstream_count,
+#                                                   # "machine_count":machine_count,
+#                                                   "public_count":public_count,
+#                                                   "intra_count":intra_count
+#                                                   }
+#                           )
+#     else:
+#         response =redirect('login')
+#     return response
 
 class Status_CreateViewSet(Base_CreateViewSet):
     model = Status

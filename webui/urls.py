@@ -7,71 +7,71 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.views import login,logout
 
 urlpatterns = [
-    url(r'^$',views.index,name='index'),
+    url(r'^$',views.IndexTemplateView.as_view(),name='index'),
     ### status
-    url(r'^status/$',login_required(views.Status_ListViewSet.as_view()),name='status-list'),
-    url(r'^status/update/(?P<pk>\d+)/$',login_required(views.Status_UpdateViewSet.as_view()),name='status-update'),
-    url(r'^status/create/$',login_required(views.Status_CreateViewSet.as_view()),name='status-create'),
+    url(r'^status/$',views.Status_ListViewSet.as_view(),name='status-list'),
+    url(r'^status/update/(?P<pk>\d+)/$',views.Status_UpdateViewSet.as_view(),name='status-update'),
+    url(r'^status/create/$',views.Status_CreateViewSet.as_view(),name='status-create'),
 
     ### status
-    url(r'^apps-group/$', login_required(views.Apps_group_ListViewSet.as_view()), name='apps-group-list'),
-    url(r'^apps-group/update/(?P<pk>\d+)/$', login_required(views.Apps_group_UpdateViewSet.as_view()), name='apps-group-update'),
-    url(r'^apps-group/create/$', login_required(views.Apps_group_CreateViewSet.as_view()), name='apps-group-create'),
+    url(r'^apps-group/$', views.Apps_group_ListViewSet.as_view(), name='apps-group-list'),
+    url(r'^apps-group/update/(?P<pk>\d+)/$', views.Apps_group_UpdateViewSet.as_view(), name='apps-group-update'),
+    url(r'^apps-group/create/$', views.Apps_group_CreateViewSet.as_view(), name='apps-group-create'),
 
     ### status
-    url(r'^group/$', login_required(views.Group_ListViewSet.as_view()), name='group-list'),
-    url(r'^group/update/(?P<pk>\d+)/$', login_required(views.Group_UpdateViewSet.as_view()), name='group-update'),
-    url(r'^group/create/$', login_required(views.Group_CreateViewSet.as_view()), name='group-create'),
+    url(r'^group/$', views.Group_ListViewSet.as_view(), name='group-list'),
+    url(r'^group/update/(?P<pk>\d+)/$', views.Group_UpdateViewSet.as_view(), name='group-update'),
+    url(r'^group/create/$', views.Group_CreateViewSet.as_view(), name='group-create'),
 
     ### site
-    url(r'^site/$', login_required(views.Site_ListViewSet.as_view()), name='site-list'),
-    url(r'^site/update/(?P<pk>\d+)/$', login_required(views.Site_UpdateViewSet.as_view()), name='site-update'),
-    url(r'^site/create/$', login_required(views.Site_CreateViewSet.as_view()), name='site-create'),
-    url(r'^site/delete/(?P<pk>\d+)/$', login_required(views.Site_DeleteViewSet.as_view()), name='site-delete'),
+    url(r'^site/$', views.Site_ListViewSet.as_view(), name='site-list'),
+    url(r'^site/update/(?P<pk>\d+)/$', views.Site_UpdateViewSet.as_view(), name='site-update'),
+    url(r'^site/create/$', views.Site_CreateViewSet.as_view(), name='site-create'),
+    url(r'^site/delete/(?P<pk>\d+)/$', views.Site_DeleteViewSet.as_view(), name='site-delete'),
 
     ### site headers
-    url(r'^site-headers/$', login_required(views.Site_headers_ListViewSet.as_view()), name='site-headers-list'),
-    url(r'^site-headers/update/(?P<pk>\d+)/$', login_required(views.Site_headers_UpdateViewSet.as_view()), name='site-headers-update'),
-    url(r'^site-headers/create/$', login_required(views.Site_headers_CreateViewSet.as_view()), name='site-headers-create'),
-    url(r'^site-headers/delete/(?P<pk>\d+)/$', login_required(views.Site_headers_DeleteViewSet.as_view()), name='site-headers-delete'),
+    url(r'^site-headers/$', views.Site_headers_ListViewSet.as_view(), name='site-headers-list'),
+    url(r'^site-headers/update/(?P<pk>\d+)/$', views.Site_headers_UpdateViewSet.as_view(), name='site-headers-update'),
+    url(r'^site-headers/create/$', views.Site_headers_CreateViewSet.as_view(), name='site-headers-create'),
+    url(r'^site-headers/delete/(?P<pk>\d+)/$', views.Site_headers_DeleteViewSet.as_view(), name='site-headers-delete'),
 
     ### proxy headers
-    url(r'^proxy-headers/$', login_required(views.Proxy_headers_ListViewSet.as_view()), name='proxy-headers-list'),
-    url(r'^proxy-headers/update/(?P<pk>\d+)/$', login_required(views.Proxy_headers_UpdateViewSet.as_view()),
+    url(r'^proxy-headers/$', views.Proxy_headers_ListViewSet.as_view(), name='proxy-headers-list'),
+    url(r'^proxy-headers/update/(?P<pk>\d+)/$', views.Proxy_headers_UpdateViewSet.as_view(),
         name='proxy-headers-update'),
-    url(r'^proxy-headers/create/$', login_required(views.Proxy_headers_CreateViewSet.as_view()),
+    url(r'^proxy-headers/create/$', views.Proxy_headers_CreateViewSet.as_view(),
         name='proxy-headers-create'),
-    url(r'^proxy-headers/delete/(?P<pk>\d+)/$', login_required(views.Proxy_headers_DeleteViewSet.as_view()),
+    url(r'^proxy-headers/delete/(?P<pk>\d+)/$', views.Proxy_headers_DeleteViewSet.as_view(),
         name='proxy-headers-delete'),
 
     ### upstream
-    url(r'^upstream/$', login_required(views.Upstream_ListViewSet.as_view()), name='upstream-list'),
-    url(r'^upstream/update/(?P<pk>\d+)/$', login_required(views.Upstream_UpdateViewSet.as_view()), name='upstream-update'),
-    url(r'^upstream/create/$', login_required(views.Upstream_CreateViewSet.as_view()), name='upstream-create'),
-    url(r'^upstream/delete/(?P<pk>\d+)/$', login_required(views.Upstream_DeleteViewSet.as_view()), name='upstream-delete'),
+    url(r'^upstream/$', views.Upstream_ListViewSet.as_view(), name='upstream-list'),
+    url(r'^upstream/update/(?P<pk>\d+)/$', views.Upstream_UpdateViewSet.as_view(), name='upstream-update'),
+    url(r'^upstream/create/$', views.Upstream_CreateViewSet.as_view(), name='upstream-create'),
+    url(r'^upstream/delete/(?P<pk>\d+)/$', views.Upstream_DeleteViewSet.as_view(), name='upstream-delete'),
 
     ### redis-instance
-    url(r'^redis-instance/$', login_required(views.Redis_instance_ListViewSet.as_view()), name='redis-instance-list'),
-    url(r'^redis-instance/update/(?P<pk>\d+)/$', login_required(views.Redis_instance_UpdateViewSet.as_view()),
+    url(r'^redis-instance/$', views.Redis_instance_ListViewSet.as_view(), name='redis-instance-list'),
+    url(r'^redis-instance/update/(?P<pk>\d+)/$', views.Redis_instance_UpdateViewSet.as_view(),
         name='redis-instance-update'),
-    url(r'^redis-instance/create/$', login_required(views.Redis_instance_CreateViewSet.as_view()), name='redis-instance-create'),
-    url(r'^redis-instance/delete/(?P<pk>\d+)/$', login_required(views.Redis_instance_DeleteViewSet.as_view()),
+    url(r'^redis-instance/create/$', views.Redis_instance_CreateViewSet.as_view(), name='redis-instance-create'),
+    url(r'^redis-instance/delete/(?P<pk>\d+)/$', views.Redis_instance_DeleteViewSet.as_view(),
         name='redis-instance-delete'),
 
     ### redis-group
-    url(r'^redis-group/$', login_required(views.Redis_group_ListViewSet.as_view()), name='redis-group-list'),
-    url(r'^redis-group/update/(?P<pk>\d+)/$', login_required(views.Redis_group_UpdateViewSet.as_view()),
+    url(r'^redis-group/$', views.Redis_group_ListViewSet.as_view(), name='redis-group-list'),
+    url(r'^redis-group/update/(?P<pk>\d+)/$', views.Redis_group_UpdateViewSet.as_view(),
         name='redis-group-update'),
-    url(r'^redis-group/create/$', login_required(views.Redis_group_CreateViewSet.as_view()), name='redis-group-create'),
-    url(r'^redis-group/delete/(?P<pk>\d+)/$', login_required(views.Redis_group_DeleteViewSet.as_view()),
+    url(r'^redis-group/create/$', views.Redis_group_CreateViewSet.as_view(), name='redis-group-create'),
+    url(r'^redis-group/delete/(?P<pk>\d+)/$', views.Redis_group_DeleteViewSet.as_view(),
         name='redis-group-delete'),
 
     ### codis
-    url(r'^codis/$', login_required(views.Codis_ListViewSet.as_view()), name='codis-list'),
-    url(r'^codis/update/(?P<pk>\d+)/$', login_required(views.Codis_UpdateViewSet.as_view()),
+    url(r'^codis/$', views.Codis_ListViewSet.as_view(), name='codis-list'),
+    url(r'^codis/update/(?P<pk>\d+)/$', views.Codis_UpdateViewSet.as_view(),
         name='codis-update'),
-    url(r'^codis/create/$', login_required(views.Codis_CreateViewSet.as_view()), name='codis-create'),
-    url(r'^codis/delete/(?P<pk>\d+)/$', login_required(views.Codis_DeleteViewSet.as_view()),
+    url(r'^codis/create/$', views.Codis_CreateViewSet.as_view(), name='codis-create'),
+    url(r'^codis/delete/(?P<pk>\d+)/$', views.Codis_DeleteViewSet.as_view(),
         name='codis-delete'),
 
     # ### docker
@@ -83,12 +83,12 @@ urlpatterns = [
     #     name='docker-delete'),
 
     ### redis-task
-    url(r'^redis-task/$', login_required(views.Redis_tas_ListViewSet.as_view()), name='redis-task-list'),
-    url(r'^redis-task/create/$', login_required(views.Redis_task_CreateViewSet.as_view()), name='redis-task-create'),
+    url(r'^redis-task/$', views.Redis_tas_ListViewSet.as_view(), name='redis-task-list'),
+    url(r'^redis-task/create/$', views.Redis_task_CreateViewSet.as_view(), name='redis-task-create'),
     url(r'^redis-task-run/(?P<redis_task_id>\d+)/$', login_required(views.Run_redis_task), name='run-redis-task'),
 
     ### sentinel
-    url(r'^sentinel/$', login_required(views.Sentinel_ListViewSet.as_view()), name='sentinel-list'),
+    url(r'^sentinel/$', views.Sentinel_ListViewSet.as_view(), name='sentinel-list'),
     # url(r'^codis/update/(?P<pk>\d+)/$', login_required(views.Codis_UpdateViewSet.as_view()),
     #     name='codis-update'),
     # url(r'^codis/create/$', login_required(views.Codis_CreateViewSet.as_view()), name='codis-create'),
@@ -96,16 +96,16 @@ urlpatterns = [
     #     name='codis-delete'),
 
     ### context
-    url(r'^context/$', login_required(views.Site_context_ListViewSet.as_view()), name='context-list'),
-    url(r'^context/update/(?P<pk>\d+)/$', login_required(views.Site_context_UpdateViewSet.as_view()),
+    url(r'^context/$', views.Site_context_ListViewSet.as_view(), name='context-list'),
+    url(r'^context/update/(?P<pk>\d+)/$', views.Site_context_UpdateViewSet.as_view(),
         name='context-update'),
-    url(r'^context/create/$', login_required(views.Site_context_CreateViewSet.as_view()), name='context-create'),
-    url(r'^context/delete/(?P<pk>\d+)/$', login_required(views.Site_context_DeleteViewSet.as_view()),
+    url(r'^context/create/$', views.Site_context_CreateViewSet.as_view(), name='context-create'),
+    url(r'^context/delete/(?P<pk>\d+)/$', views.Site_context_DeleteViewSet.as_view(),
         name='context-delete'),
 
     # ### publish
     url(r'^fun/$', login_required(views.Fun_queryView), name='fun-query'),
-    url(r'^mission/$', login_required(views.Tran_missionViewSet.as_view()), name='mission-list'),
+    url(r'^mission/$', views.Tran_missionViewSet.as_view(), name='mission-list'),
     url(r'^create-mission/(?P<site_id>\d+)/$', login_required(views.Create_tran_mission), name='create-mission'),
     url(r'^create-upstream-mission/(?P<upstream_id>\d+)/$', login_required(views.Create_upstream_tran_mission), name='create-upstream-mission'),
     #
