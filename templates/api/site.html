@@ -117,12 +117,12 @@
                                         <td>{{ m.http2 | https_status }}</td>
                                         <td>{{ m.trace_status | https_status }}</td>
                                         <td>{{ m.redirect_status | https_status }}</td>
-                                        <td>{{ m.group }}</td>
                                         <td>
                                             {% for n in m.extra_parameters.all %}
                                                 {{ n }}<br>
                                             {% endfor %}
                                         </td>
+                                        <td>{{ m.group }}</td>
                                         <td>{{ m.created_date |date:'Y-m-d H:i:s' }}</td>
                                         {% if user.is_superuser %}
                                         <td>
