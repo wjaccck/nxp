@@ -448,7 +448,7 @@ class Generate_vhostTemplate(Base_Template):
             upstream_info={
                 "upstream":m.name,
                 "ip_hash":m.ip_hash,
-                "upstream_server":[x.__name__ for x in m.app.apps.all()]
+                "upstream_server":[x.__str__() for x in m.app.apps.all()]
             }
             upstream_result=generate_conf(upstream_j2,upstream_tmp_file,upstream_info)
             logger.info(upstream_result)
