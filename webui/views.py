@@ -398,9 +398,6 @@ class Get_detailTemplate(Base_Template):
 
 class Generate_vhostTemplate(Base_Template):
     template_name = 'api/conf.html'
-    def get(self, request, *args, **kwargs):
-        context=self.get_context_data()
-        return self.render_to_response()
     def get_context_data(self, **kwargs):
         context=super(Generate_vhostTemplate,self).get_context_data(**kwargs)
         file_list=[]
