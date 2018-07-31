@@ -424,6 +424,7 @@ class Generate_vhostTemplate(Base_Template):
         context_all=Site_context.objects.filter(site=site)
         info={
             "listen_port":listen_port,
+            "https":site.https,
             "domain":site.name,
             "cer":cer,
             "key": key,
