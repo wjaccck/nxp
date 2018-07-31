@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a8356791-8dff-4783-a146-d6e83154db82" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/templates/nginx/upstream.j2" beforeDir="false" afterPath="$PROJECT_DIR$/templates/nginx/upstream.j2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webui/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/webui/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,8 +19,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/webui/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="454" column="62" lean-forward="true" selection-start-line="454" selection-start-column="62" selection-end-line="454" selection-end-column="62" />
+            <state relative-caret-position="165">
+              <caret line="450" column="46" selection-start-line="450" selection-start-column="46" selection-end-line="450" selection-end-column="46" />
               <folding>
                 <element signature="e#14#44#0" expanded="true" />
                 <element signature="e#916#1771#0" />
@@ -924,8 +923,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/webui/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="454" column="62" lean-forward="true" selection-start-line="454" selection-start-column="62" selection-end-line="454" selection-end-column="62" />
+        <state relative-caret-position="165">
+          <caret line="450" column="46" selection-start-line="450" selection-start-column="46" selection-end-line="450" selection-end-column="46" />
           <folding>
             <element signature="e#14#44#0" expanded="true" />
             <element signature="e#916#1771#0" />
