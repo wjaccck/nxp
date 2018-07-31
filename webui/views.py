@@ -398,6 +398,9 @@ class Get_detailTemplate(Base_Template):
 
 class Generate_vhostTemplate(Base_Template):
     template_name = 'api/conf.html'
+    def get(self, request, *args, **kwargs):
+        context=self.get_context_data()
+        return self.render_to_response()
     def get_context_data(self, **kwargs):
         context=super(Generate_vhostTemplate,self).get_context_data(**kwargs)
         file_list=[]
@@ -424,10 +427,21 @@ class Generate_vhostTemplate(Base_Template):
         context_all=Site_context.objects.filter(site=site)
         info={
             "listen_port":listen_port,
-            "site":site,
+            "domain":site.name,
             "cer":cer,
             "key": key,
-            "context_all": context_all
+            "site_headers":[x.extra_parameter for x in site.extra_parameters.all()],
+            "trace_status":site.trace_status,
+            "context_all": [{
+                "domain_proxy":y.upstream.domain_proxy,
+                "app_name":y.upstream.app.name,
+                "context":y.context,
+                "default_proxy_set":y.default_proxy_set,
+                "proxy_headers":[i.extra_parameter for i in y.extra_parametres.all()],
+                "proxy_path":y.proxy_path
+            }
+
+                 for y in context_all]
         }
         vhost_result=generate_conf(vhost_j2,vhost_tmp_file.format(site.name),info)
         logger.info(vhost_result)

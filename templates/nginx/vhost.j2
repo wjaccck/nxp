@@ -1,9 +1,9 @@
 server {
 
     listen {{ listen_port }};
-    server_name  {{ site.name }};
+    server_name  {{ domain }};
 
-    {% if site.https %}
+    {% if https %}
         ssl on;
         ssl_certificate {{ cer }};
         ssl_certificate_key {{ key }};
@@ -12,17 +12,17 @@ server {
         ssl_ciphers EECDH+CHACHA20:EECDH+AES128:RSA+AES128:EECDH+AES256:RSA+AES256:EECCDH+3DES:RSA+3DES:!MD5;
         ssl_prefer_server_ciphers on;
 
-        access_log  /data/logs/nginx/{{ site.name }}.access.log main;
-        error_log  /data/logs/nginx/{{ site.name }}.error.log;
+        access_log  /data/logs/nginx/{{ domain }}.access.log main;
+        error_log  /data/logs/nginx/{{ domain }}.error.log;
     {% else %}
-        access_log  /data/logs/nginx/ssl.{{ site.name }}.access.log main;
-        error_log  /data/logs/nginx/ssl.{{ site.name }}.error.log;
+        access_log  /data/logs/nginx/ssl.{{ domain }}.access.log main;
+        error_log  /data/logs/nginx/ssl.{{ domain }}.error.log;
     {% endif %}
 
-    {% for header in site.extra_parameters.all %}
-        {{ header.extra_parameter }};
+    {% for header in site_headers %}
+        {{ header }};
     {% endfor %}
-    {% if site.trace_status %}
+    {% if trace_status %}
         if ($http_x_request_id !~ ^trace-id){
             set $http_x_request_id trace-id-$pid-$connection-$bytes_sent-$msec;
         }
@@ -34,15 +34,15 @@ server {
 
     ## send request back to upstream ##
     {% for context_p in context_all %}
-        {% if context_p.upstream.domain_proxy %}
+        {% if context_p.domain_proxy %}
             location {{ context_p.context }} {
                 {% if context_p.default_proxy_set %}
                     include proxy_conf;
                 {% endif %}
-                {% for proxy_header in context_p.extra_parametres.all %}
-                    {{ proxy_header.extra_parameter }};
+                {% for proxy_header in context_p.proxy_headers %}
+                    {{ proxy_header }};
                 {% endfor %}
-                proxy_pass  http://{{ context_p.upstream.domain_proxy }}{{ context_p.proxy_path  or '' }};
+                proxy_pass  http://{{ context_p.domain_proxy }}{{ context_p.proxy_path  or '' }};
 
             }
         {% else %}
@@ -50,10 +50,10 @@ server {
                 {% if context_p.default_proxy_set %}
                     include proxy_conf;
                 {% endif %}
-                {% for proxy_header in context_p.extra_parametres.all %}
-                    {{ proxy_header.extra_parameter }};
+                {% for proxy_header in context_p.proxy_headers %}
+                    {{ proxy_header }};
                 {% endfor %}
-                proxy_pass  http://{{ context_p.upstream.app.name }}{{ context_p.proxy_path  or '' }};
+                proxy_pass  http://{{ context_p.app_name }}{{ context_p.proxy_path  or '' }};
 
             }
         {% endif %}

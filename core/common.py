@@ -1,7 +1,7 @@
 __author__ = 'jinhongjun'
 import logging
 logger = logging.getLogger("nxp")
-from jinja2 import Template
+from jinja2 import Template,Environment
 import commands
 import paramiko
 import requests
