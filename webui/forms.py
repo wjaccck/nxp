@@ -179,7 +179,8 @@ class Site_contextForm(forms.ModelForm):
     def save(self, commit=True):
         instance = super(Site_contextForm, self).save(commit=False)
         instance.status = Status.objects.get(name='undo')
-        return instance.save()
+        instance.save()
+        return self.save_m2m()
 
     class Meta:
         fields = (
