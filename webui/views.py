@@ -443,9 +443,14 @@ class Generate_vhostTemplate(Base_Template):
         }
         vhost_result=generate_conf(vhost_j2,vhost_tmp_file.format(site.name),info)
         logger.info(vhost_result)
-        upstreams=[x.upstream for x in context_all if cmp(x.upstream.status.name,'undo')]
+        upstreams=[x.upstream for x in context_all if x.upstream.status.name=='undo']
         for m in upstreams:
-            upstream_result=generate_conf(upstream_j2,upstream_tmp_file,m)
+            upstream_info={
+                "upstream":m.name,
+                "ip_hash":m.ip_hash,
+                "upstream_server":[x.__name__ for x in m.app.apps.all()]
+            }
+            upstream_result=generate_conf(upstream_j2,upstream_tmp_file,upstream_info)
             logger.info(upstream_result)
             file_list.append(upstream_tmp_file.format(m.name))
 
