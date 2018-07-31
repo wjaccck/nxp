@@ -4,28 +4,28 @@ server {
     server_name  {{ site.name }};
 
     {% if site.https %}
-    ssl on;
-    ssl_certificate {{ cer }};
-    ssl_certificate_key {{ key }};
-    ssl_session_timeout 5m;
-    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
-    ssl_ciphers EECDH+CHACHA20:EECDH+AES128:RSA+AES128:EECDH+AES256:RSA+AES256:EECCDH+3DES:RSA+3DES:!MD5;
-    ssl_prefer_server_ciphers on;
+        ssl on;
+        ssl_certificate {{ cer }};
+        ssl_certificate_key {{ key }};
+        ssl_session_timeout 5m;
+        ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+        ssl_ciphers EECDH+CHACHA20:EECDH+AES128:RSA+AES128:EECDH+AES256:RSA+AES256:EECCDH+3DES:RSA+3DES:!MD5;
+        ssl_prefer_server_ciphers on;
 
-    access_log  /data/logs/nginx/{{ site.name }}.access.log main;
-    error_log  /data/logs/nginx/{{ site.name }}.error.log;
+        access_log  /data/logs/nginx/{{ site.name }}.access.log main;
+        error_log  /data/logs/nginx/{{ site.name }}.error.log;
     {% else %}
-    access_log  /data/logs/nginx/ssl.{{ site.name }}.access.log main;
-    error_log  /data/logs/nginx/ssl.{{ site.name }}.error.log;
+        access_log  /data/logs/nginx/ssl.{{ site.name }}.access.log main;
+        error_log  /data/logs/nginx/ssl.{{ site.name }}.error.log;
     {% endif %}
 
     {% for header in site.extra_parameters.all %}
-    {{ header.extra_parameter }};
-    {{ endfor }}
+        {{ header.extra_parameter }};
+    {% endfor %}
     {% if site.trace_status %}
-    if ($http_x_request_id !~ ^trace-id){
-        set $http_x_request_id trace-id-$pid-$connection-$bytes_sent-$msec;
-    }
+        if ($http_x_request_id !~ ^trace-id){
+            set $http_x_request_id trace-id-$pid-$connection-$bytes_sent-$msec;
+        }
     {% endif %}
 
 
@@ -34,29 +34,29 @@ server {
 
     ## send request back to upstream ##
     {% for context_p in context_all %}
-    {% if context_p.upstream.domain_proxy %}
-    location {{ context_p.context }} {
-        {% if context_p.default_proxy_set %}
-        include proxy_conf;
-        {% endif %}
-        {% for proxy_header in context_p.extra_parametres.all %}
-        {{ proxy_header.extra_parameter }};
-        {% endfor %}
-        proxy_pass  http://{{ context_p.upstream.domain_proxy }}{{ context_p.proxy_path  or '' }};
+        {% if context_p.upstream.domain_proxy %}
+            location {{ context_p.context }} {
+                {% if context_p.default_proxy_set %}
+                    include proxy_conf;
+                {% endif %}
+                {% for proxy_header in context_p.extra_parametres.all %}
+                    {{ proxy_header.extra_parameter }};
+                {% endfor %}
+                proxy_pass  http://{{ context_p.upstream.domain_proxy }}{{ context_p.proxy_path  or '' }};
 
-    }
-    {% else %}
-    location {{ context_p.context }} {
-        {% if context_p.default_proxy_set %}
-        include proxy_conf;
-        {% endif %}
-        {% for proxy_header in context_p.extra_parametres.all %}
-        {{ proxy_header.extra_parameter }};
-        {% endfor %}
-        proxy_pass  http://{{ context_p.upstream.app.name }}{{ context_p.proxy_path  or '' }};
+            }
+        {% else %}
+            location {{ context_p.context }} {
+                {% if context_p.default_proxy_set %}
+                    include proxy_conf;
+                {% endif %}
+                {% for proxy_header in context_p.extra_parametres.all %}
+                    {{ proxy_header.extra_parameter }};
+                {% endfor %}
+                proxy_pass  http://{{ context_p.upstream.app.name }}{{ context_p.proxy_path  or '' }};
 
-    }
-    {% endif %}
+            }
+        {% endif %}
     {% endfor %}
 
 }
