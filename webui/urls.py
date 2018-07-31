@@ -119,7 +119,7 @@ urlpatterns = [
     url(r'^sentinel-detail/(?P<sentinel_id>\d+)/$', login_required(views.Sentinel_detailView), name='get-sentinel-detail'),
     url(r'^query-redis/$', login_required(views.Codis_queryView), name='query-redis'),
 
-    url(r'^conf/(?P<site_id>\d+)/$', login_required(views.Generate_conf), name='get-conf'),
+    url(r'^conf/(?P<site_id>\d+)/$', views.Get_detailTemplate.as_view(), name='get-conf'),
     url(r'^upstream-conf/(?P<upstream_id>\d+)/$', login_required(views.Generate_upstream_conf), name='get-upstream-conf'),
 
     url(r'^check-conf/(?P<site_id>\d+)/$', login_required(views.Conf_check), name='check-conf'),

@@ -446,100 +446,100 @@ class Generate_vhostTemplate(Base_Template):
         context['site_id']=site_id
         context['conf']=new_content
         return context
-    
-def Generate_conf(req, site_id):
-    if req.user.is_authenticated():
-        site = Site.objects.get(id=site_id)
-        file_list = []
-        if site.redirect_status:
-            content = get_file_content(redirect_file)
-            vhost_tmp_conf = open(vhost_tmp_file.format(site.name), 'w')
-            vhost_tmp_conf.write(content.replace('http_host', site.name))
-            vhost_tmp_conf.write('\r\n    ')
-            for m in Site_headers.objects.filter(site=site):
-                vhost_tmp_conf.write(';\r\n        '.join(m.extra_conf.__str__().split(';')))
-            vhost_tmp_conf.close()
-        else:
-            detail = [x for x in Site_context.objects.filter(site=site)]
-            ## get template for nginx vhost and upstream
-            if site.https:
-                if site.name.endswith('17shihui.com'):
-                    head_content = get_file_content(shihui_https_file)
-                else:
-                    head_content = get_file_content(hiwemeet_https_file)
-            else:
-                head_content=get_file_content(head_file)
-            context_content=get_file_content(context_file)
-            tail_content = get_file_content(tail_file)
-            upstream_content = get_file_content(upstream_file)
-
-            upstreams=[ x.upstream for x in detail if x.upstream.status.name=='undo']
-
-            for m in upstreams:
-                m_content=None
-                if m.direct_status:
-                    pass
-                else:
-                    upstream_tmp_conf=open(upstream_tmp_file.format(m.name),'w')
-                    m_content=upstream_content.replace('upstream_name',m.name)
-                    back_end_list=[ "server {0}:{1};".format(x.name,m.port) for x in m.hosts.all()]+["server {0}:{1};".format(x.host.name,x.port) for x in m.docker_list.all()]
-                    if m.ip_hash:
-                        back_end_list.insert(0,'ip_hash;')
-                    m_content=m_content.replace('back_end','\n    '.join(back_end_list))
-                    upstream_tmp_conf.write(m_content)
-                    upstream_tmp_conf.close()
-                    logger.info("create upstream conf {0}".format(upstream_tmp_file.format(m.name)))
-                    file_list.append(upstream_tmp_file.format(m.name))
-            if site.https:
-                vhost_tmp_conf=open(ssl_vhost_tmp_file.format(site.name),'w')
-            else:
-                vhost_tmp_conf=open(vhost_tmp_file.format(site.name),'w')
-
-            vhost_tmp_conf.write(head_content.replace('http_host',site.name))
-            vhost_tmp_conf.write('\r\n    ')
-            for n in Site_headers.objects.filter(site=site):
-                vhost_tmp_conf.write(';\r\n        '.join(n.extra_conf.split(';')))
-            for m in detail:
-                m_content=context_content.replace('context_path',m.context)
-                if m.upstream:
-                    if m.proxy_path:
-                        m_upstream_name=m.upstream.name.strip()+m.proxy_path.strip()
-                    else:
-                        m_upstream_name=m.upstream.name
-                    m_content=m_content.replace('upstream_name',m_upstream_name)
-                else:
-                    m_content=m_content.replace('proxy_pass  http://upstream_name;','')
-                m_parametres=[x.strip() for x in m.extra_parametres.split(';')]
-                if m.default_proxy_set:
-                    m_parametres.insert(0,'include proxy_conf')
-                if m.lua_status:
-                    m_parametres.insert(1,'log_by_lua_file /opt/nginx/conf/status/kafka.lua')
-                m_content=m_content.replace('extra_parametres',';\r\n        '.join(m_parametres))
-                vhost_tmp_conf.write(m_content)
-
-            vhost_tmp_conf.write(tail_content)
-            vhost_tmp_conf.close()
-        if site.https:
-            logger.info("create upstream conf {0}".format(ssl_vhost_tmp_file.format(site.name)))
-            file_list.append(ssl_vhost_tmp_file.format(site.name))
-        else:
-            logger.info("create upstream conf {0}".format(vhost_tmp_file.format(site.name)))
-            file_list.append(vhost_tmp_file.format(site.name))
-
-        new_content=''
-        for m in file_list:
-            new_content=new_content+"\r\n####%s####\r\n%s\r\n" %(m,get_file_content(m))
-
-        response = render(req, 'api/conf.html', {"username": req.user.last_name,
-                                                   "active": "nginx",
-                                                   "conf": new_content,
-                                                    "site": site.name,
-                                                    "site_id": site_id
-                                                   }
-                          )
-    else:
-        response = redirect('login')
-    return response
+#
+# def Generate_conf(req, site_id):
+#     if req.user.is_authenticated():
+#         site = Site.objects.get(id=site_id)
+#         file_list = []
+#         if site.redirect_status:
+#             content = get_file_content(redirect_file)
+#             vhost_tmp_conf = open(vhost_tmp_file.format(site.name), 'w')
+#             vhost_tmp_conf.write(content.replace('http_host', site.name))
+#             vhost_tmp_conf.write('\r\n    ')
+#             for m in Site_headers.objects.filter(site=site):
+#                 vhost_tmp_conf.write(';\r\n        '.join(m.extra_conf.__str__().split(';')))
+#             vhost_tmp_conf.close()
+#         else:
+#             detail = [x for x in Site_context.objects.filter(site=site)]
+#             ## get template for nginx vhost and upstream
+#             if site.https:
+#                 if site.name.endswith('17shihui.com'):
+#                     head_content = get_file_content(shihui_https_file)
+#                 else:
+#                     head_content = get_file_content(hiwemeet_https_file)
+#             else:
+#                 head_content=get_file_content(head_file)
+#             context_content=get_file_content(context_file)
+#             tail_content = get_file_content(tail_file)
+#             upstream_content = get_file_content(upstream_file)
+#
+#             upstreams=[ x.upstream for x in detail if x.upstream.status.name=='undo']
+#
+#             for m in upstreams:
+#                 m_content=None
+#                 if m.direct_status:
+#                     pass
+#                 else:
+#                     upstream_tmp_conf=open(upstream_tmp_file.format(m.name),'w')
+#                     m_content=upstream_content.replace('upstream_name',m.name)
+#                     back_end_list=[ "server {0}:{1};".format(x.name,m.port) for x in m.hosts.all()]+["server {0}:{1};".format(x.host.name,x.port) for x in m.docker_list.all()]
+#                     if m.ip_hash:
+#                         back_end_list.insert(0,'ip_hash;')
+#                     m_content=m_content.replace('back_end','\n    '.join(back_end_list))
+#                     upstream_tmp_conf.write(m_content)
+#                     upstream_tmp_conf.close()
+#                     logger.info("create upstream conf {0}".format(upstream_tmp_file.format(m.name)))
+#                     file_list.append(upstream_tmp_file.format(m.name))
+#             if site.https:
+#                 vhost_tmp_conf=open(ssl_vhost_tmp_file.format(site.name),'w')
+#             else:
+#                 vhost_tmp_conf=open(vhost_tmp_file.format(site.name),'w')
+#
+#             vhost_tmp_conf.write(head_content.replace('http_host',site.name))
+#             vhost_tmp_conf.write('\r\n    ')
+#             for n in Site_headers.objects.filter(site=site):
+#                 vhost_tmp_conf.write(';\r\n        '.join(n.extra_conf.split(';')))
+#             for m in detail:
+#                 m_content=context_content.replace('context_path',m.context)
+#                 if m.upstream:
+#                     if m.proxy_path:
+#                         m_upstream_name=m.upstream.name.strip()+m.proxy_path.strip()
+#                     else:
+#                         m_upstream_name=m.upstream.name
+#                     m_content=m_content.replace('upstream_name',m_upstream_name)
+#                 else:
+#                     m_content=m_content.replace('proxy_pass  http://upstream_name;','')
+#                 m_parametres=[x.strip() for x in m.extra_parametres.split(';')]
+#                 if m.default_proxy_set:
+#                     m_parametres.insert(0,'include proxy_conf')
+#                 if m.lua_status:
+#                     m_parametres.insert(1,'log_by_lua_file /opt/nginx/conf/status/kafka.lua')
+#                 m_content=m_content.replace('extra_parametres',';\r\n        '.join(m_parametres))
+#                 vhost_tmp_conf.write(m_content)
+#
+#             vhost_tmp_conf.write(tail_content)
+#             vhost_tmp_conf.close()
+#         if site.https:
+#             logger.info("create upstream conf {0}".format(ssl_vhost_tmp_file.format(site.name)))
+#             file_list.append(ssl_vhost_tmp_file.format(site.name))
+#         else:
+#             logger.info("create upstream conf {0}".format(vhost_tmp_file.format(site.name)))
+#             file_list.append(vhost_tmp_file.format(site.name))
+#
+#         new_content=''
+#         for m in file_list:
+#             new_content=new_content+"\r\n####%s####\r\n%s\r\n" %(m,get_file_content(m))
+#
+#         response = render(req, 'api/conf.html', {"username": req.user.last_name,
+#                                                    "active": "nginx",
+#                                                    "conf": new_content,
+#                                                     "site": site.name,
+#                                                     "site_id": site_id
+#                                                    }
+#                           )
+#     else:
+#         response = redirect('login')
+#     return response
 
 def Conf_check(req, site_id):
     if req.user.is_authenticated():
