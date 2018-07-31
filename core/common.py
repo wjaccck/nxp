@@ -1,6 +1,7 @@
 __author__ = 'jinhongjun'
 import logging
 logger = logging.getLogger("nxp")
+from jinja2 import Template
 import commands
 import paramiko
 import requests
@@ -16,6 +17,8 @@ from ansible.executor.playbook_executor import PlaybookExecutor
 pkey='/root/.ssh/id_rsa'
 head_file="/opt/app/nxp/templates/nginx/head.conf"
 shihui_https_file="/opt/app/nxp/templates/nginx/17shihui_https.conf"
+vhost_j2="/opt/app/nxp/templates/nginx/vhost.j2"
+upstream_j2="/opt/app/nxp/templates/nginx/upstream.j2"
 hiwemeet_https_file="/opt/app/nxp/templates/nginx/hiwemeet_https.conf"
 context_file="/opt/app/nxp/templates/nginx/context.conf"
 redirect_file="/opt/app/nxp/templates/nginx/redirect.conf"
@@ -33,6 +36,17 @@ ssl_vhost_online_file="/opt/nginx/conf/vhost.d/ssl.{0}.conf"
 
 ###
 sentinel_host=[{"host":"10.0.8.119","port":"26379","db":0}]
+
+def generate_conf(source_file,target_file,info):
+    try:
+        with open(source_file, 'r') as in_file, open(target_file, 'w') as out_file:
+            tmle = Template(in_file.read())
+            out_file.write(tmle.render(info))
+        return get_result(0,'done')
+    except Exception as e:
+        return get_result(1,str(e))
+
+
 
 def get_file_content(file_path):
     with open(file_path, 'r') as f:

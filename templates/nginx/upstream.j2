@@ -1,3 +1,8 @@
-upstream {{upstream.name}}  {
-    back_end
+upstream {{ upstream.name }}  {
+    {% if upstream.ip_hash %}
+    ip_hash;
+    {% endif %}
+    {% for m in upstream.apps.all %}
+    {{ m }};
+    {% endfor %}
 }

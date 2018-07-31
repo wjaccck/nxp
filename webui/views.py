@@ -6,7 +6,7 @@ from django.core.urlresolvers import reverse_lazy
 import forms
 import uuid
 from core.common import getComStr,head_file,tail_file,context_file,upstream_file,Cmd_ssh,\
-    get_file_content,logger,pkey,redirect_file,\
+    get_file_content,logger,pkey,redirect_file,generate_conf,vhost_j2,upstream_j2,\
     upstream_tmp_file,upstream_release_file,vhost_release_file,vhost_tmp_file,vhost_online_file,\
     upstream_online_file,shihui_https_file,hiwemeet_https_file,ssl_vhost_online_file,ssl_vhost_release_file,ssl_vhost_tmp_file
 from django.http import HttpResponse,HttpResponseBadRequest,StreamingHttpResponse
@@ -34,31 +34,6 @@ class IndexTemplateView(Base_Template):
         context['intra_count']=intra_count
         return context
 
-# def index(req):
-#     if req.user.is_authenticated():
-#         http_count=Site.objects.filter(https=False).count()
-#         https_count=Site.objects.filter(https=True).count()
-#         upstream_count=Upstream.objects.all().count()
-#         # all_machine=[]
-#         # for m in Upstream.objects.all():
-#         #     all_machine.extend(m.app.apps.host.all())
-#         #     all_machine.extend([x.host for x in m.docker_list.all()])
-#         # machine_count=list(set(all_machine)).__len__()
-#         public_count=Site.objects.filter(group=Nginx_group.objects.get(name='public')).count()
-#         intra_count=Site.objects.filter(group=Nginx_group.objects.get(name='intra')).count()
-#         response = render(req,'webui/index.html',{"username":req.user.last_name,
-#                                                   "active":"index",
-#                                                   "http_count":http_count,
-#                                                   "https_count":https_count,
-#                                                   "upstream_count":upstream_count,
-#                                                   # "machine_count":machine_count,
-#                                                   "public_count":public_count,
-#                                                   "intra_count":intra_count
-#                                                   }
-#                           )
-#     else:
-#         response =redirect('login')
-#     return response
 
 class Status_CreateViewSet(Base_CreateViewSet):
     model = Status
@@ -109,7 +84,6 @@ class Apps_ListViewSet(Base_ListViewSet):
             return self.model.objects.filter(host__icontains=name)
         else:
             return self.model.objects.all()
-
 
 class Apps_group_ListViewSet(Base_ListViewSet):
     Apps_group.objects.all().count()
@@ -172,9 +146,6 @@ class Group_ListViewSet(Base_ListViewSet):
         else:
             return self.model.objects.all()
 #
-
-
-
 
 class Site_CreateViewSet(Base_CreateViewSet):
     model = Site
@@ -282,8 +253,6 @@ class Proxy_headers_ListViewSet(Base_ListViewSet):
             return self.model.objects.filter(name__icontains=name).order_by("-modified_date")
         else:
             return self.model.objects.all().order_by("-modified_date")
-
-
 #
 
 class Upstream_CreateViewSet(Base_CreateViewSet):
@@ -358,42 +327,6 @@ class Site_context_ListViewSet(Base_ListViewSet):
                         #
 
 
-# class Docker_app_CreateViewSet(Base_CreateViewSet):
-#     model = Docker_app
-#     form_class = forms.Docker_appForm
-#     template_name = 'api/docker_form.html'
-#     success_url = reverse_lazy('docker-list')
-#
-# class Docker_app_UpdateViewSet(Base_UpdateViewSet):
-#     model = Docker_app
-#     form_class = forms.Docker_appForm
-#     template_name = 'api/context_form.html'
-#     success_url = reverse_lazy('docker-list')
-#
-# class Docker_app_DeleteViewSet(Base_DeleteViewSet):
-#     model = Docker_app
-#     success_url = reverse_lazy('docker-list')
-#
-# class Docker_app_ListViewSet(Base_ListViewSet):
-#     Docker_app.objects.all().count()
-#     model = Docker_app
-#     template_name = 'api/docker.html'
-#     paginate_by = 10
-#
-#     def get_queryset(self):
-#         name = None
-#         try:
-#             name = self.request.GET['keyword']
-#         except:
-#             pass
-#
-#         if name:
-#             return self.model.objects.filter(host__name__istartswith=name)
-#         else:
-#             return self.model.objects.all()
-
-
-
 class Redis_task_CreateViewSet(Base_CreateViewSet):
     model = Redis_task
     form_class = forms.Redis_taskForm
@@ -418,7 +351,6 @@ class Redis_tas_ListViewSet(Base_ListViewSet):
         else:
             return self.model.objects.all()
 
-
 def Run_redis_task(req,redis_task_id):
     if req.user.is_authenticated():
         task=Redis_task.objects.get(id=redis_task_id)
@@ -430,23 +362,91 @@ def Run_redis_task(req,redis_task_id):
         response =redirect('login')
     return response
 
-
-def Get_detail(req,site_id):
-    if req.user.is_authenticated():
+class Get_detailTemplate(Base_Template):
+    template_name = 'api/detail.html'
+    # def get(self, request, *args, **kwargs):
+    #     site_id=self.kwargs.get('site_id',None)
+    #     context=self.get_context_data(**kwargs)
+    #     return self.render_to_response(context)
+    def get_context_data(self, **kwargs):
+        context=super(Get_detailTemplate,self).get_context_data(**kwargs)
+        site_id=self.kwargs.get('site_id',None)
         site=Site.objects.get(id=site_id)
         detail=[x for x in Site_context.objects.filter(site=site)]
+        context['username']=self.request.user.last_name
+        context['active']='nginx'
+        context['site']=site.name
+        context['detail']=detail
+        context['site_id']=site_id
+        return context
 
-        response = render(req,'api/detail.html',{"username":req.user.last_name,
-                                                  "active":"nginx",
-                                                   "site":site.name,
-                                                   "detail":detail,
-                                                    "site_id":site_id
-                                                  }
-                          )
-    else:
-        response =redirect('login')
-    return response
+# def Get_detail(req,site_id):
+#     if req.user.is_authenticated():
+#         site=Site.objects.get(id=site_id)
+#         detail=[x for x in Site_context.objects.filter(site=site)]
+#
+#         response = render(req,'api/detail.html',{"username":req.user.last_name,
+#                                                   "active":"nginx",
+#                                                    "site":site.name,
+#                                                    "detail":detail,
+#                                                     "site_id":site_id
+#                                                   }
+#                           )
+#     else:
+#         response =redirect('login')
+#     return response
 
+class Generate_vhostTemplate(Base_Template):
+    template_name = 'api/conf.html'
+    def get_context_data(self, **kwargs):
+        context=super(Generate_vhostTemplate,self).get_context_data(**kwargs)
+        file_list=[]
+        site_id = self.kwargs.get('site_id', None)
+        site=Site.objects.get(id=site_id)
+        file_list.append(vhost_tmp_file.format(site.name))
+        listen_port=''
+        if site.http:
+            listen_port=listen_port+'80 '
+        if site.https:
+            listen_port=listen_port+'ssl '
+        if site.http2:
+            listen_port=listen_port+'http2'
+
+        if site.name.endswith('17shihui.com'):
+            cer='_.17shihui.com.cer'
+            key='_.17shihui.com.key'
+        elif site.name.endswith('hiwemeet.com'):
+            cer='_.hiwemeet.com.cer'
+            key='_.hiwemeet.com.key'
+        else:
+            cer='_.hiwemeet.com.cer'
+            key='_.hiwemeet.com.key'
+        context_all=Site_context.objects.filter(site=site)
+        info={
+            "listen_port":listen_port,
+            "site":site,
+            "cer":cer,
+            "key": key,
+            "context_all": context_all
+        }
+        vhost_result=generate_conf(vhost_j2,vhost_tmp_file.format(site.name),info)
+        logger.info(vhost_result)
+        upstreams=[x.upstream for x in context_all if cmp(x.upstream.status.name,'undo')]
+        for m in upstreams:
+            upstream_result=generate_conf(upstream_j2,upstream_tmp_file,m)
+            logger.info(upstream_result)
+            file_list.append(upstream_tmp_file.format(m.name))
+
+        new_content=''
+        for n in file_list:
+            new_content=new_content+"\r\n####%s####\r\n%s\r\n" %(n,get_file_content(n))
+
+        context['active']="nginx"
+        context['site']=site.name
+        context['site_id']=site_id
+        context['conf']=new_content
+        return context
+    
 def Generate_conf(req, site_id):
     if req.user.is_authenticated():
         site = Site.objects.get(id=site_id)

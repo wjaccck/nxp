@@ -113,7 +113,7 @@ urlpatterns = [
     # url(r'^version/$', login_required(views.Version_historyViewSet.as_view()), name='version-list'),
     # url(r'^progress/$', login_required(views.Progress_ViewSet.as_view()), name='progress-list'),
     # #
-    url(r'^detail/(?P<site_id>\d+)/$', login_required(views.Get_detail), name='get-detail'),
+    url(r'^detail/(?P<site_id>\d+)/$', views.Get_detailTemplate.as_view(), name='get-detail'),
     url(r'^upstream-detail/(?P<upstream_id>\d+)/$', login_required(views.Get_upstream_detail), name='get-upstream-detail'),
     url(r'^codis-detail/(?P<codis_id>\d+)/$', login_required(views.Codis_detailView), name='get-codis-detail'),
     url(r'^sentinel-detail/(?P<sentinel_id>\d+)/$', login_required(views.Sentinel_detailView), name='get-sentinel-detail'),
