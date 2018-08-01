@@ -106,24 +106,24 @@ urlpatterns = [
     # ### publish
     url(r'^fun/$', login_required(views.Fun_queryView), name='fun-query'),
     url(r'^mission/$', views.Tran_missionViewSet.as_view(), name='mission-list'),
-    url(r'^create-mission/(?P<site_id>\d+)/$', login_required(views.Create_tran_mission), name='create-mission'),
-    url(r'^create-upstream-mission/(?P<upstream_id>\d+)/$', login_required(views.Create_upstream_tran_mission), name='create-upstream-mission'),
+    url(r'^create-mission/(?P<site_id>\d+)/$', views.Create_tran_mission.as_view(), name='create-mission'),
+    url(r'^create-upstream-mission/(?P<upstream_id>\d+)/$', views.Create_upstream_tran_mission.as_view(), name='create-upstream-mission'),
     #
     # ### version
     # url(r'^version/$', login_required(views.Version_historyViewSet.as_view()), name='version-list'),
     # url(r'^progress/$', login_required(views.Progress_ViewSet.as_view()), name='progress-list'),
     # #
     url(r'^detail/(?P<site_id>\d+)/$', views.Get_detailTemplate.as_view(), name='get-detail'),
-    url(r'^upstream-detail/(?P<upstream_id>\d+)/$', login_required(views.Get_upstream_detail), name='get-upstream-detail'),
+    url(r'^upstream-detail/(?P<upstream_id>\d+)/$', views.Get_upstream_detailTemplate.as_view(), name='get-upstream-detail'),
     url(r'^codis-detail/(?P<codis_id>\d+)/$', login_required(views.Codis_detailView), name='get-codis-detail'),
     url(r'^sentinel-detail/(?P<sentinel_id>\d+)/$', login_required(views.Sentinel_detailView), name='get-sentinel-detail'),
     url(r'^query-redis/$', login_required(views.Codis_queryView), name='query-redis'),
 
     url(r'^conf/(?P<site_id>\d+)/$', views.Generate_vhostTemplate.as_view(), name='get-conf'),
-    url(r'^upstream-conf/(?P<upstream_id>\d+)/$', login_required(views.Generate_upstream_conf), name='get-upstream-conf'),
+    url(r'^upstream-conf/(?P<upstream_id>\d+)/$', views.Generate_upstream_confTemplate.as_view(), name='get-upstream-conf'),
 
     url(r'^check-conf/(?P<site_id>\d+)/$', views.Check_confTemplate.as_view(), name='check-conf'),
-    url(r'^upstream-check-conf/(?P<upstream_id>\d+)/$', login_required(views.Conf_upstream_check), name='check-upstream-conf'),
+    url(r'^upstream-check-conf/(?P<upstream_id>\d+)/$', views.Check_upstreamTemplate.as_view(), name='check-upstream-conf'),
     url(r'^run/(?P<mission_id>\d+)/$', login_required(views.Run_mission), name='run-mission'),
     # #
     # url(r'^reset/(?P<job_id>\d+)/$', login_required(views.reset_job), name='reset-job'),

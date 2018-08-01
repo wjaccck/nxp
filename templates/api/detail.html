@@ -59,14 +59,11 @@
                                     <tr>
                                             <td>{{ m.context }}</td>
                                             <td>{{ m.upstream }}</td>
-                                            <td>{% if m.upstream.direct_status %}
-                                                    {{ m.upstream }}
+                                            <td>{% if m.upstream.domain_proxy %}
+                                                    {{ m.domain_proxy }}
                                                 {% else %}
-                                                    {% for n in m.upstream.hosts.all %}
-                                                        {{ n }}:{{ m.upstream.port }}<br>
-                                                    {% endfor %}
-                                                    {% for p in m.upstream.docker_list.all %}
-                                                        {{ p }}<br>
+                                                    {% for n in m.upstream.app.apps.all %}
+                                                        {{ n }}<br>
                                                     {% endfor %}
                                                 {% endif %}
                                             </td>

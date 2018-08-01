@@ -34,7 +34,6 @@ class IndexTemplateView(Base_Template):
         context['intra_count']=intra_count
         return context
 
-
 class Status_CreateViewSet(Base_CreateViewSet):
     model = Status
     form_class = forms.StatusForm
@@ -65,8 +64,6 @@ class Status_ListViewSet(Base_ListViewSet):
         else:
             return self.model.objects.all()
 #
-
-
 class Apps_ListViewSet(Base_ListViewSet):
     Apps.objects.all().count()
     model = Apps
@@ -114,7 +111,6 @@ class Apps_group_UpdateViewSet(Base_UpdateViewSet):
     form_class = forms.Apps_groupForm
     template_name = 'api/apps_group_form.html'
     success_url = reverse_lazy('apps-group-list')
-
 #
 class Group_CreateViewSet(Base_CreateViewSet):
     model = Nginx_group
@@ -146,7 +142,6 @@ class Group_ListViewSet(Base_ListViewSet):
         else:
             return self.model.objects.all()
 #
-
 class Site_CreateViewSet(Base_CreateViewSet):
     model = Site
     form_class = forms.SiteForm
@@ -162,7 +157,6 @@ class Site_UpdateViewSet(Base_UpdateViewSet):
 class Site_DeleteViewSet(Base_DeleteViewSet):
     model = Site
     success_url = reverse_lazy('site-list')
-
 
 class Site_ListViewSet(Base_ListViewSet):
     Site.objects.all().count()
@@ -181,9 +175,7 @@ class Site_ListViewSet(Base_ListViewSet):
             return self.model.objects.filter(name__icontains=name).order_by("-modified_date")
         else:
             return self.model.objects.all().order_by("-modified_date")
-
 #
-
 class Site_headers_CreateViewSet(Base_CreateViewSet):
     model = Site_headers
     form_class = forms.Site_headersForm
@@ -217,9 +209,7 @@ class Site_headers_ListViewSet(Base_ListViewSet):
             return self.model.objects.filter(name__icontains=name).order_by("-modified_date")
         else:
             return self.model.objects.all().order_by("-modified_date")
-
 #
-
 class Proxy_headers_CreateViewSet(Base_CreateViewSet):
     model = Proxy_headers
     form_class = forms.Proxy_headersForm
@@ -254,7 +244,6 @@ class Proxy_headers_ListViewSet(Base_ListViewSet):
         else:
             return self.model.objects.all().order_by("-modified_date")
 #
-
 class Upstream_CreateViewSet(Base_CreateViewSet):
     model = Upstream
     form_class = forms.UpstreamForm
@@ -289,8 +278,6 @@ class Upstream_ListViewSet(Base_ListViewSet):
         else:
             return self.model.objects.all().order_by("-modified_date")
 #
-
-
 class Site_context_CreateViewSet(Base_CreateViewSet):
     model = Site_context
     form_class = forms.Site_contextForm
@@ -325,7 +312,6 @@ class Site_context_ListViewSet(Base_ListViewSet):
         else:
             return self.model.objects.all().order_by("-modified_date")
                         #
-
 
 class Redis_task_CreateViewSet(Base_CreateViewSet):
     model = Redis_task
@@ -651,7 +637,7 @@ class Check_confTemplate(Base_Template):
 #         response = redirect('login')
 #     return response
 
-class Create_tran_missionTemplate(Base_Redirect):
+class Create_tran_mission(Base_Redirect):
     def get(self, request, *args, **kwargs):
         site_id = self.kwargs.get('site_id', None)
         site=Site.objects.get(id=site_id)
@@ -671,153 +657,246 @@ class Create_tran_missionTemplate(Base_Redirect):
                                        )
         return HttpResponseRedirect('/mission/?keyword={0}'.format(mark))
 
-def Create_tran_mission(req, site_id):
-    if req.user.is_authenticated():
-        site = Site.objects.get(id=site_id)
-        detail = [x for x in Site_context.objects.filter(site=site)]
-        file_list = []
-        ## get template for nginx vhost and upstream
-        upstreams=[ x.upstream for x in detail if x.upstream.status.name=='undo']
+# def Create_tran_mission(req, site_id):
+#     if req.user.is_authenticated():
+#         site = Site.objects.get(id=site_id)
+#         detail = [x for x in Site_context.objects.filter(site=site)]
+#         file_list = []
+#         ## get template for nginx vhost and upstream
+#         upstreams=[ x.upstream for x in detail if x.upstream.status.name=='undo']
+#
+#         file_list=[]
+#
+#         for m in upstreams:
+#             if not m.direct_status:
+#                 file_list.append(upstream_online_file.format(m.name))
+#         if site.https:
+#             file_list.append(ssl_vhost_online_file.format(site.name))
+#         else:
+#             file_list.append(vhost_online_file.format(site.name))
+#
+#         mark=uuid.uuid4()
+#         for i in site.group.hosts.all():
+#             Nxp_mission.objects.create(site=site,
+#                                        mark=mark,
+#                                        host=i,
+#                                        files=','.join(file_list),
+#                                        status=Status.objects.get(name='undo')
+#                                        )
+#
+#
+#
+#         response = redirect('/mission/?keyword={0}'.format(mark))
+#     else:
+#         response = redirect('login')
+#     return response
 
-        file_list=[]
-
-        for m in upstreams:
-            if not m.direct_status:
-                file_list.append(upstream_online_file.format(m.name))
-        if site.https:
-            file_list.append(ssl_vhost_online_file.format(site.name))
-        else:
-            file_list.append(vhost_online_file.format(site.name))
-
-        mark=uuid.uuid4()
-        for i in site.group.hosts.all():
-            Nxp_mission.objects.create(site=site,
-                                       mark=mark,
-                                       host=i,
-                                       files=','.join(file_list),
-                                       status=Status.objects.get(name='undo')
-                                       )
-
-
-
-        response = redirect('/mission/?keyword={0}'.format(mark))
-    else:
-        response = redirect('login')
-    return response
-
-def Get_upstream_detail(req,upstream_id):
-    if req.user.is_authenticated():
+class Get_upstream_detailTemplate(Base_Template):
+    template_name = 'api/upstream_detail.html'
+    def get_context_data(self, **kwargs):
+        context=super(Get_upstream_detailTemplate,self).get_context_data(**kwargs)
+        upstream_id = self.kwargs.get('upstream_id', None)
         upstream=Upstream.objects.get(id=upstream_id)
-        response = render(req,'api/upstream_detail.html',{"username":req.user.last_name,
-                                                  "active":"nginx",
-                                                   "upstream":upstream,
-                                                  }
-                          )
-    else:
-        response =redirect('login')
-    return response
+        context['username']=self.request.user.last_name
+        context['active']='nginx'
+        context['upstream']=upstream
+        return context
 
-def Generate_upstream_conf(req, upstream_id):
-    if req.user.is_authenticated():
-        upstream = Upstream.objects.get(id=upstream_id)
-        file_list = []
-        upstream_content = get_file_content(upstream_file)
+# def Get_upstream_detail(req,upstream_id):
+#     if req.user.is_authenticated():
+#         upstream=Upstream.objects.get(id=upstream_id)
+#         response = render(req,'api/upstream_detail.html',{"username":req.user.last_name,
+#                                                   "active":"nginx",
+#                                                    "upstream":upstream,
+#                                                   }
+#                           )
+#     else:
+#         response =redirect('login')
+#     return response
 
-        if upstream.direct_status:
-            pass
+class Generate_upstream_confTemplate(Base_Template):
+    template_name = 'api/upstream_conf.html'
+    def get_context_data(self, **kwargs):
+        context=super(Generate_upstream_confTemplate,self).get_context_data(**kwargs)
+        upstream_id = self.kwargs.get('upstream_id', None)
+        upstream=Upstream.objects.get(id=upstream_id)
+        if upstream.domain_proxy:
+            new_content='None'
         else:
-            upstream_tmp_conf=open(upstream_tmp_file.format(upstream.name),'w')
-            upstream_content=upstream_content.replace('upstream_name',upstream.name)
-            back_end_list=[ "server {0}:{1};".format(x.name,upstream.port) for x in upstream.hosts.all()]+["server {0}:{1};".format(x.host.name,x.port) for x in upstream.docker_list.all()]
-            if upstream.ip_hash:
-                back_end_list.insert(0,'ip_hash;')
-            upstream_content=upstream_content.replace('back_end','\n    '.join(back_end_list))
-            upstream_tmp_conf.write(upstream_content)
-            upstream_tmp_conf.close()
-            logger.info("create upstream conf {0}".format(upstream_tmp_file.format(upstream.name)))
+            file_list=[]
+            upstream_info = {
+                "upstream": upstream.name,
+                "ip_hash": upstream.ip_hash,
+                "upstream_server": [x.__str__() for x in upstream.app.apps.all()]
+            }
+            upstream_result = generate_conf(upstream_j2, upstream_tmp_file.format(upstream.name), upstream_info)
+            logger.info(upstream_result)
             file_list.append(upstream_tmp_file.format(upstream.name))
+            new_content=''
+            for m in file_list:
+                new_content=new_content+"\r\n####%s####\r\n%s\r\n" %(m,get_file_content(m))
+        context['username']=self.request.user.last_name
+        context['active']='nginx'
+        context['conf']=new_content
+        context['upstream']=upstream
+        return context
+#
+# def Generate_upstream_conf(req, upstream_id):
+#     if req.user.is_authenticated():
+#         upstream = Upstream.objects.get(id=upstream_id)
+#         file_list = []
+#         upstream_content = get_file_content(upstream_file)
+#
+#         if upstream.direct_status:
+#             pass
+#         else:
+#             upstream_tmp_conf=open(upstream_tmp_file.format(upstream.name),'w')
+#             upstream_content=upstream_content.replace('upstream_name',upstream.name)
+#             back_end_list=[ "server {0}:{1};".format(x.name,upstream.port) for x in upstream.hosts.all()]+["server {0}:{1};".format(x.host.name,x.port) for x in upstream.docker_list.all()]
+#             if upstream.ip_hash:
+#                 back_end_list.insert(0,'ip_hash;')
+#             upstream_content=upstream_content.replace('back_end','\n    '.join(back_end_list))
+#             upstream_tmp_conf.write(upstream_content)
+#             upstream_tmp_conf.close()
+#             logger.info("create upstream conf {0}".format(upstream_tmp_file.format(upstream.name)))
+#             file_list.append(upstream_tmp_file.format(upstream.name))
+#
+#         new_content=''
+#         for m in file_list:
+#             new_content=new_content+"\r\n####%s####\r\n%s\r\n" %(m,get_file_content(m))
+#
+#         response = render(req, 'api/upstream_conf.html', {"username": req.user.last_name,
+#                                                    "active": "nginx",
+#                                                    "conf": new_content,
+#                                                     "upstream": upstream,
+#                                                    }
+#                           )
+#     else:
+#         response = redirect('login')
+#     return response
 
-        new_content=''
-        for m in file_list:
-            new_content=new_content+"\r\n####%s####\r\n%s\r\n" %(m,get_file_content(m))
-
-        response = render(req, 'api/upstream_conf.html', {"username": req.user.last_name,
-                                                   "active": "nginx",
-                                                   "conf": new_content,
-                                                    "upstream": upstream,
-                                                   }
-                          )
-    else:
-        response = redirect('login')
-    return response
-
-def Conf_upstream_check(req, upstream_id):
-    if req.user.is_authenticated():
-        all_status=True
-        upstream=Upstream.objects.get(id=upstream_id)
-        if not upstream.direct_status:
-            result=getComStr("rsync -av {0} {1}".format(upstream_tmp_file.format(upstream.name), upstream_release_file.format(upstream.name)))
-            if result.get('retcode') != 0:
-                all_status=False
-                logger.error(result)
-        result =getComStr("/opt/nginx/sbin/nginx -t -c /opt/nginx/conf/nginx.conf")
-        if result.get('retcode') != 0:
-            all_status = False
-            logger.error(result)
-        if all_status:
-            response = render(req, 'api/upstream_check.html', {"username": req.user.last_name,
-                                                       "active": "nginx",
-                                                       "upstream": upstream,
-                                                       "content":"Check pass",
-                                                       "all_status":all_status
-                                                       }
-                              )
+class Check_upstreamTemplate(Base_Template):
+    template_name = 'api/upstream_check.html'
+    def get_context_data(self, **kwargs):
+        context=super(Check_upstreamTemplate,self).get_context_data(**kwargs)
+        upstream_id = self.kwargs.get('upstream_id', None)
+        upstream = Upstream.objects.get(id=upstream_id)
+        all_status = True
+        if upstream.domain_proxy:
+            content='No need to check'
         else:
-            response = render(req, 'api/upstream_check.html', {"username": req.user.last_name,
-                                                       "active": "nginx",
-                                                       "upstream": upstream,
-                                                       "content":"Check failed ! please check cmd.log",
-                                                        "all_status":all_status
-                                                       }
-                              )
-    else:
-        response = redirect('login')
-    return response
+            result = getComStr("rsync -av {0} {1}".format(upstream_tmp_file.format(upstream.name),
+                                                          upstream_release_file.format(upstream.name)))
+            if result.get('retcode') != 0:
+                all_status = False
+                logger.error(result)
+            result = getComStr("/opt/nginx/sbin/nginx -t -c /opt/nginx/conf/nginx.conf")
+            if result.get('retcode') != 0:
+                all_status = False
+                logger.error(result)
+            if all_status:
+                content="Check pass"
+            else:
+                content="Check failed ! please check cmd.log"
+        context['username']=self.request.user.last_name
+        context['active']='nginx'
+        context['content']=content
+        context['upstream']=upstream
+        return context
 
-def Create_upstream_tran_mission(req, upstream_id):
-    if req.user.is_authenticated():
+# def Conf_upstream_check(req, upstream_id):
+#     if req.user.is_authenticated():
+#         all_status=True
+#         upstream=Upstream.objects.get(id=upstream_id)
+#         if not upstream.direct_status:
+#             result=getComStr("rsync -av {0} {1}".format(upstream_tmp_file.format(upstream.name), upstream_release_file.format(upstream.name)))
+#             if result.get('retcode') != 0:
+#                 all_status=False
+#                 logger.error(result)
+#         result =getComStr("/opt/nginx/sbin/nginx -t -c /opt/nginx/conf/nginx.conf")
+#         if result.get('retcode') != 0:
+#             all_status = False
+#             logger.error(result)
+#         if all_status:
+#             response = render(req, 'api/upstream_check.html', {"username": req.user.last_name,
+#                                                        "active": "nginx",
+#                                                        "upstream": upstream,
+#                                                        "content":"Check pass",
+#                                                        "all_status":all_status
+#                                                        }
+#                               )
+#         else:
+#             response = render(req, 'api/upstream_check.html', {"username": req.user.last_name,
+#                                                        "active": "nginx",
+#                                                        "upstream": upstream,
+#                                                        "content":"Check failed ! please check cmd.log",
+#                                                         "all_status":all_status
+#                                                        }
+#                               )
+#     else:
+#         response = redirect('login')
+#     return response
+
+class Create_upstream_tran_mission(Base_Redirect):
+    def get(self, request, *args, **kwargs):
+        upstream_id = self.kwargs.get('upstream_id', None)
         upstream=Upstream.objects.get(id=upstream_id)
         file_list=[]
-
-        if not upstream.direct_status:
-            file_list.append(upstream_online_file.format(upstream.name))
-
-        mark=uuid.uuid4()
-        all_host=[]
-        if upstream.group:
-            all_host.extend(upstream.group.hosts.all())
-
+        if upstream.domain_proxy:
+            response=HttpResponseBadRequest('No need to deploy')
         else:
-            for m in Nginx_group.objects.filter(name='intra'):
-                all_host.extend(m.hosts.all())
-            for m in Nginx_group.objects.filter(name='public'):
-                all_host.extend(m.hosts.all())
-        for i in all_host:
-            Nxp_mission.objects.create(
-                                       mark=mark,
-                                       host=i,
-                                       files=','.join(file_list),
-                                       status=Status.objects.get(name='undo')
-                                       )
+            file_list.append(upstream_online_file.format(upstream.name))
+            mark=uuid.uuid4()
+            all_host=[]
+            if upstream.group:
+                all_host.extend(upstream.group.hosts.all())
+            else:
+                for m in Nginx_group.objects.filter(name='intra'):
+                    all_host.extend(m.hosts.all())
+                for m in Nginx_group.objects.filter(name='public'):
+                    all_host.extend(m.hosts.all())
+            for i in all_host:
+                Nxp_mission.objects.create(
+                                           mark=mark,
+                                           host=i,
+                                           files=','.join(file_list),
+                                           status=Status.objects.get(name='undo')
+                                           )
+            response=HttpResponseRedirect('/mission/?keyword={0}'.format(mark))
+        return response
 
-
-
-        response = redirect('/mission/?keyword={0}'.format(mark))
-    else:
-        response = redirect('login')
-    return response
-
-
+# def Create_upstream_tran_mission(req, upstream_id):
+#     if req.user.is_authenticated():
+#         upstream=Upstream.objects.get(id=upstream_id)
+#         file_list=[]
+#
+#         if not upstream.direct_status:
+#             file_list.append(upstream_online_file.format(upstream.name))
+#
+#         mark=uuid.uuid4()
+#         all_host=[]
+#         if upstream.group:
+#             all_host.extend(upstream.group.hosts.all())
+#
+#         else:
+#             for m in Nginx_group.objects.filter(name='intra'):
+#                 all_host.extend(m.hosts.all())
+#             for m in Nginx_group.objects.filter(name='public'):
+#                 all_host.extend(m.hosts.all())
+#         for i in all_host:
+#             Nxp_mission.objects.create(
+#                                        mark=mark,
+#                                        host=i,
+#                                        files=','.join(file_list),
+#                                        status=Status.objects.get(name='undo')
+#                                        )
+#
+#
+#
+#         response = redirect('/mission/?keyword={0}'.format(mark))
+#     else:
+#         response = redirect('login')
+#     return response
 
 class Tran_missionViewSet(Base_ListViewSet):
     Nxp_mission.objects.all().count()
