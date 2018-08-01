@@ -968,8 +968,7 @@ def Fun_queryView(req):
                         all_info.append({
                             "app":n,
                             "upstream":m,
-                            "site":m.context_upstream.site,
-                            "context":m.context_upstream.context
+                            "site_context":m.context_upstream.all()
                         })
 
             # site=[{"host":host,"site_all":x.context_upstream.all(),"upstream":x} for x in upstreams]
