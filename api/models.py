@@ -66,7 +66,7 @@ class Nginx_group(CommonModel,NGINX_BASE):
 class Upstream(CommonModel,NGINX_BASE):
     name=models.CharField(max_length=50,unique=True)
     domain_proxy=models.CharField(max_length=50,blank=True)
-    app=models.ForeignKey(Apps_group,blank=True,null=True)
+    app=models.ForeignKey(Apps_group,blank=True,null=True,related_name='upstream_app')
     status=models.ForeignKey(Status)
     ip_hash=models.BooleanField(default=False)
     group=models.ForeignKey(Nginx_group,blank=True,null=True)

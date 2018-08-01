@@ -67,15 +67,13 @@
 							</thead>
 							<tbody>
                             {% if info_status %}
-                                {% for m in all_info  %}
-                                        {% for n in m.site_all %}
-                                            <tr>
-                                                <td>{{ n.site }}</td>
-                                                <td>{{ n.context }}</td>
-                                                <td>{{ m.upstream }}</td>
-                                                <td>{{ m.host }}:{{ m.upstream.port }}</td>
-                                            </tr>
-                                        {% endfor %}
+                                {% for n in all_info  %}
+                                    <tr>
+                                        <td>{{ n.site }}</td>
+                                        <td>{{ n.context }}</td>
+                                        <td>{{ n.upstream }}</td>
+                                        <td>{{ n.app }}</td>
+                                    </tr>
                                 {% endfor %}
                             {% endif %}
                             </tbody>

@@ -959,12 +959,24 @@ def Fun_queryView(req):
 
         if name:
             info_status = True
+            all_info=[]
             host = Ipv4Address.objects.get(name=name)
-            upstreams=host.upstream_host.all()
+            apps=host.app_host.all()
+            for m in Upstream.objects.all():
+                for n in m.app.apps.all():
+                    if n in apps:
+                        all_info.append({
+                            "app":n,
+                            "upstream":m,
+                            "site":m.context_upstream.site,
+                            "context":m.context_upstream.context
+                        })
+
             # site=[{"host":host,"site_all":x.context_upstream.all(),"upstream":x} for x in upstreams]
             # context['all_info'] = map(lambda x: {"host": name, "upstream": x.name, "site": x.context_upstream.all()},
             #                           host.upstream_host.all())
-            all_info = [{"host":host,"site_all":x.context_upstream.all(),"upstream":x} for x in upstreams]
+
+            # all_info = [{"host":host,"site_all":x.context_upstream.all(),"upstream":x} for x in upstreams]
         else:
             all_info = []
             info_status = False
