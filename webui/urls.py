@@ -122,7 +122,7 @@ urlpatterns = [
     url(r'^conf/(?P<site_id>\d+)/$', views.Generate_vhostTemplate.as_view(), name='get-conf'),
     url(r'^upstream-conf/(?P<upstream_id>\d+)/$', login_required(views.Generate_upstream_conf), name='get-upstream-conf'),
 
-    url(r'^check-conf/(?P<site_id>\d+)/$', login_required(views.Conf_check), name='check-conf'),
+    url(r'^check-conf/(?P<site_id>\d+)/$', views.Check_confTemplate.as_view(), name='check-conf'),
     url(r'^upstream-check-conf/(?P<upstream_id>\d+)/$', login_required(views.Conf_upstream_check), name='check-upstream-conf'),
     url(r'^run/(?P<mission_id>\d+)/$', login_required(views.Run_mission), name='run-mission'),
     # #

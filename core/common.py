@@ -42,9 +42,9 @@ def generate_conf(source_file,target_file,info):
         with open(source_file, 'r') as in_file, open(target_file, 'w') as out_file:
             tmle = Template(in_file.read())
             out_file.write(tmle.render(info))
-        return get_result(0,'done')
+        return get_result(0,'{0} format {1} done'.format(source_file,target_file))
     except Exception as e:
-        return get_result(1,str(e))
+        return get_result(1,'{0} format {1} failed the reason is {2}'.format(source_file,target_file,str(e)))
 
 
 

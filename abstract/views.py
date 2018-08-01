@@ -4,7 +4,7 @@ from core.common import logger,get_result
 from django.http import HttpResponse,HttpResponseBadRequest,HttpResponseRedirect
 import json
 from django.contrib.auth.decorators import login_required, permission_required
-from vanilla import TemplateView
+from vanilla import TemplateView,RedirectView
 from vanilla import ListView, CreateView, UpdateView,DeleteView
 from rest_framework.views import APIView
 from rest_framework import permissions
@@ -18,6 +18,9 @@ class LoginRequiredMixin(object):
     def as_view(cls, **initkwargs):
         view = super(LoginRequiredMixin, cls).as_view(**initkwargs)
         return login_required(view, login_url='/login/')
+
+class Base_Redirect(LoginRequiredMixin,RedirectView):
+    pass
 
 class Base_Template(LoginRequiredMixin,TemplateView):
     pass

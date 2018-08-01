@@ -9,9 +9,9 @@ from core.common import getComStr,head_file,tail_file,context_file,upstream_file
     get_file_content,logger,pkey,redirect_file,generate_conf,vhost_j2,upstream_j2,\
     upstream_tmp_file,upstream_release_file,vhost_release_file,vhost_tmp_file,vhost_online_file,\
     upstream_online_file,shihui_https_file,hiwemeet_https_file,ssl_vhost_online_file,ssl_vhost_release_file,ssl_vhost_tmp_file
-from django.http import HttpResponse,HttpResponseBadRequest,StreamingHttpResponse
+from django.http import HttpResponse,HttpResponseBadRequest,StreamingHttpResponse,HttpResponseRedirect
 from tasks import Run_ansible_redis_task
-from abstract.views import Base_CreateViewSet, Base_ListViewSet, Base_UpdateViewSet,Base_DeleteViewSet,Base_Template
+from abstract.views import Base_CreateViewSet, Base_ListViewSet, Base_UpdateViewSet,Base_DeleteViewSet,Base_Template,Base_Redirect
 from datetime import timedelta, datetime
 
 
@@ -450,7 +450,7 @@ class Generate_vhostTemplate(Base_Template):
                 "ip_hash":m.ip_hash,
                 "upstream_server":[x.__str__() for x in m.app.apps.all()]
             }
-            upstream_result=generate_conf(upstream_j2,upstream_tmp_file,upstream_info)
+            upstream_result=generate_conf(upstream_j2,upstream_tmp_file.format(m.name),upstream_info)
             logger.info(upstream_result)
             file_list.append(upstream_tmp_file.format(m.name))
 
@@ -557,64 +557,119 @@ class Generate_vhostTemplate(Base_Template):
 #     else:
 #         response = redirect('login')
 #     return response
+class Check_confTemplate(Base_Template):
+    template_name = 'api/check.html'
 
-def Conf_check(req, site_id):
-    if req.user.is_authenticated():
+    def get_context_data(self, **kwargs):
+        context=super(Check_confTemplate,self).get_context_data(**kwargs)
+        site_id = self.kwargs.get('site_id', None)
         all_status=True
         site = Site.objects.get(id=site_id)
-        if site.https:
-            result =getComStr("rsync -av {0} {1}".format(ssl_vhost_tmp_file.format(site.name),ssl_vhost_release_file.format(site.name)))
-        else:
-            result =getComStr("rsync -av {0} {1}".format(vhost_tmp_file.format(site.name),vhost_release_file.format(site.name)))
+        result =getComStr("rsync -av {0} {1}".format(vhost_tmp_file.format(site.name),vhost_release_file.format(site.name)))
         if result.get('retcode') != 0:
             all_status = False
             logger.error(result)
-        detail = [x for x in Site_context.objects.filter(site=site)]
-        upstreams=[ x.upstream for x in detail if x.upstream.status.name=='undo']
+        detail = [x.upstream for x in Site_context.objects.filter(site=site) if x.upstream.app]
+        upstreams=[ x for x in detail if x.status.name=='undo']
         for m in upstreams:
-            if not m.direct_status:
-                result=getComStr("rsync -av {0} {1}".format(upstream_tmp_file.format(m.name), upstream_release_file.format(m.name)))
-                if result.get('retcode') != 0:
-                    all_status=False
-                    logger.error(result)
-        # if site.https:
-        #     result=getComStr("rsync -av {0} {1}".format(ssl_vhost_release_file.format(site.name),ssl_vhost_online_file.format(site.name)))
-        # else:
-        #     result=getComStr("rsync -av {0} {1}".format(vhost_release_file.format(site.name),vhost_online_file.format(site.name)))
-        # if result.get('retcode') != 0:
-        #     all_status = False
-        #     logger.error(result)
-        # for m in upstreams:
-        #     result=getComStr("rsync -av {0} {1}".format(upstream_release_file.format(m.name), upstream_online_file.format(m.name)))
-        #     if result.get('retcode') != 0:
-        #         all_status=False
-        #         logger.error(result)
+            result=getComStr("rsync -av {0} {1}".format(upstream_tmp_file.format(m.name), upstream_release_file.format(m.name)))
+            if result.get('retcode') != 0:
+                all_status=False
+                logger.error(result)
         result =getComStr("/opt/nginx/sbin/nginx -t -c /opt/nginx/conf/nginx.conf")
         if result.get('retcode') != 0:
             all_status = False
             logger.error(result)
+        context['username']=self.request.user.last_name
+        context['active']='nginx'
+        context['site']=site.name
+        context['site_id']=site_id
+        context['group']=site.group
+        context['all_status']=all_status
         if all_status:
-            response = render(req, 'api/check.html', {"username": req.user.last_name,
-                                                       "active": "nginx",
-                                                       "site": site.name,
-                                                       "site_id": site_id,
-                                                       "group":site.group,
-                                                       "content":"Check pass",
-                                                       "all_status":all_status
-                                                       }
-                              )
+            context['content']='Check pass'
         else:
-            response = render(req, 'api/check.html', {"username": req.user.last_name,
-                                                       "active": "nginx",
-                                                       "site": site.name,
-                                                       "site_id": site_id,
-                                                       "content":"Check failed ! please check cmd.log",
-                                                        "all_status":all_status
-                                                       }
-                              )
-    else:
-        response = redirect('login')
-    return response
+            context['content']='Check failed ! please check cmd.log'
+
+        return context
+
+# def Conf_check(req, site_id):
+#     if req.user.is_authenticated():
+#         all_status=True
+#         site = Site.objects.get(id=site_id)
+#         if site.https:
+#             result =getComStr("rsync -av {0} {1}".format(ssl_vhost_tmp_file.format(site.name),ssl_vhost_release_file.format(site.name)))
+#         else:
+#             result =getComStr("rsync -av {0} {1}".format(vhost_tmp_file.format(site.name),vhost_release_file.format(site.name)))
+#         if result.get('retcode') != 0:
+#             all_status = False
+#             logger.error(result)
+#         detail = [x for x in Site_context.objects.filter(site=site)]
+#         upstreams=[ x.upstream for x in detail if x.upstream.status.name=='undo']
+#         for m in upstreams:
+#             if not m.direct_status:
+#                 result=getComStr("rsync -av {0} {1}".format(upstream_tmp_file.format(m.name), upstream_release_file.format(m.name)))
+#                 if result.get('retcode') != 0:
+#                     all_status=False
+#                     logger.error(result)
+#         # if site.https:
+#         #     result=getComStr("rsync -av {0} {1}".format(ssl_vhost_release_file.format(site.name),ssl_vhost_online_file.format(site.name)))
+#         # else:
+#         #     result=getComStr("rsync -av {0} {1}".format(vhost_release_file.format(site.name),vhost_online_file.format(site.name)))
+#         # if result.get('retcode') != 0:
+#         #     all_status = False
+#         #     logger.error(result)
+#         # for m in upstreams:
+#         #     result=getComStr("rsync -av {0} {1}".format(upstream_release_file.format(m.name), upstream_online_file.format(m.name)))
+#         #     if result.get('retcode') != 0:
+#         #         all_status=False
+#         #         logger.error(result)
+#         result =getComStr("/opt/nginx/sbin/nginx -t -c /opt/nginx/conf/nginx.conf")
+#         if result.get('retcode') != 0:
+#             all_status = False
+#             logger.error(result)
+#         if all_status:
+#             response = render(req, 'api/check.html', {"username": req.user.last_name,
+#                                                        "active": "nginx",
+#                                                        "site": site.name,
+#                                                        "site_id": site_id,
+#                                                        "group":site.group,
+#                                                        "content":"Check pass",
+#                                                        "all_status":all_status
+#                                                        }
+#                               )
+#         else:
+#             response = render(req, 'api/check.html', {"username": req.user.last_name,
+#                                                        "active": "nginx",
+#                                                        "site": site.name,
+#                                                        "site_id": site_id,
+#                                                        "content":"Check failed ! please check cmd.log",
+#                                                         "all_status":all_status
+#                                                        }
+#                               )
+#     else:
+#         response = redirect('login')
+#     return response
+
+class Create_tran_missionTemplate(Base_Redirect):
+    def get(self, request, *args, **kwargs):
+        site_id = self.kwargs.get('site_id', None)
+        site=Site.objects.get(id=site_id)
+        detail = [x.upstream for x in Site_context.objects.filter(site=site) if x.upstream.app]
+        upstreams=[ x for x in detail if x.status.name=='undo']
+        file_list = []
+        for m in upstreams:
+            file_list.append(upstream_online_file.format(m.name))
+        file_list.append(vhost_online_file.format(site.name))
+        mark=uuid.uuid4()
+        for i in site.group.hosts.all():
+            Nxp_mission.objects.create(site=site,
+                                       mark=mark,
+                                       host=i,
+                                       files=','.join(file_list),
+                                       status=Status.objects.get(name='undo')
+                                       )
+        return HttpResponseRedirect('/mission/?keyword={0}'.format(mark))
 
 def Create_tran_mission(req, site_id):
     if req.user.is_authenticated():
