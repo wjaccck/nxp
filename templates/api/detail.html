@@ -63,7 +63,7 @@
                                                     {{ m.domain_proxy }}
                                                 {% else %}
                                                     {% for n in m.upstream.app.apps.all %}
-                                                        {{ n }}
+                                                        {{ n }}<br>
                                                     {% endfor %}
                                                 {% endif %}
                                             </td>
