@@ -82,7 +82,7 @@ class AppsSerializer(serializers.HyperlinkedModelSerializer):
     def validate(self, attrs):
         host=attrs['host']
         port=attrs['port']
-        if Apps.objects.filter(port=port,host=Ipv4Address.objects.get(name=host)) >  0 :
+        if Apps.objects.filter(port=port,host=Ipv4Address.objects.get(name=host)).count() >  0 :
             raise serializers.ValidationError('已录入')
 
         return super(AppsSerializer, self).validate(attrs)
