@@ -104,7 +104,7 @@ urlpatterns = [
         name='context-delete'),
 
     # ### publish
-    url(r'^fun/$', login_required(views.Fun_queryView), name='fun-query'),
+    url(r'^fun/$', views.Fun_queryTemplate.as_view(), name='fun-query'),
     url(r'^mission/$', views.Tran_missionViewSet.as_view(), name='mission-list'),
     url(r'^create-mission/(?P<site_id>\d+)/$', views.Create_tran_mission.as_view(), name='create-mission'),
     url(r'^create-upstream-mission/(?P<upstream_id>\d+)/$', views.Create_upstream_tran_mission.as_view(), name='create-upstream-mission'),
@@ -115,9 +115,9 @@ urlpatterns = [
     # #
     url(r'^detail/(?P<site_id>\d+)/$', views.Get_detailTemplate.as_view(), name='get-detail'),
     url(r'^upstream-detail/(?P<upstream_id>\d+)/$', views.Get_upstream_detailTemplate.as_view(), name='get-upstream-detail'),
-    url(r'^codis-detail/(?P<codis_id>\d+)/$', login_required(views.Codis_detailView), name='get-codis-detail'),
-    url(r'^sentinel-detail/(?P<sentinel_id>\d+)/$', login_required(views.Sentinel_detailView), name='get-sentinel-detail'),
-    url(r'^query-redis/$', login_required(views.Codis_queryView), name='query-redis'),
+    url(r'^codis-detail/(?P<codis_id>\d+)/$', views.Codis_detailTemplate.as_view(), name='get-codis-detail'),
+    url(r'^sentinel-detail/(?P<sentinel_id>\d+)/$', views.Sentinel_detailTemplate.as_view(), name='get-sentinel-detail'),
+    url(r'^query-redis/$', views.Codis_queryTemplate.as_view(), name='query-redis'),
 
     url(r'^conf/(?P<site_id>\d+)/$', views.Generate_vhostTemplate.as_view(), name='get-conf'),
     url(r'^upstream-conf/(?P<upstream_id>\d+)/$', views.Generate_upstream_confTemplate.as_view(), name='get-upstream-conf'),
@@ -127,8 +127,8 @@ urlpatterns = [
     url(r'^run/(?P<mission_id>\d+)/$', login_required(views.Run_mission), name='run-mission'),
     # #
     # url(r'^reset/(?P<job_id>\d+)/$', login_required(views.reset_job), name='reset-job'),
-    url(r'^request-count/$', views.Http_request_countView, name='request-count'),
-    url(r'^request-statistics/$', views.Http_request_statisticsView, name='request-statistics'),
+    url(r'^request-count/$', views.Http_request_countTemplate.as_view(), name='request-count'),
+    url(r'^request-statistics/$', views.Http_request_statisticsTemplate.as_view(), name='request-statistics'),
 
     url(r'^login/$',
         login,

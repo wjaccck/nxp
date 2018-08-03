@@ -5,11 +5,11 @@ from api.models import *
 from django.core.urlresolvers import reverse_lazy
 import forms
 import uuid
-from core.common import getComStr,head_file,tail_file,context_file,upstream_file,Cmd_ssh,\
-    get_file_content,logger,pkey,redirect_file,generate_conf,vhost_j2,upstream_j2,\
+from core.common import getComStr,Cmd_ssh,\
+    get_file_content,logger,pkey,generate_conf,vhost_j2,upstream_j2,\
     upstream_tmp_file,upstream_release_file,vhost_release_file,vhost_tmp_file,vhost_online_file,\
-    upstream_online_file,shihui_https_file,hiwemeet_https_file,ssl_vhost_online_file,ssl_vhost_release_file,ssl_vhost_tmp_file
-from django.http import HttpResponse,HttpResponseBadRequest,StreamingHttpResponse,HttpResponseRedirect
+    upstream_online_file
+from django.http import HttpResponseBadRequest,HttpResponseRedirect
 from tasks import Run_ansible_redis_task
 from abstract.views import Base_CreateViewSet, Base_ListViewSet, Base_UpdateViewSet,Base_DeleteViewSet,Base_Template,Base_Redirect
 from datetime import timedelta, datetime
@@ -337,16 +337,25 @@ class Redis_tas_ListViewSet(Base_ListViewSet):
         else:
             return self.model.objects.all()
 
-def Run_redis_task(req,redis_task_id):
-    if req.user.is_authenticated():
+class Run_redis_taskView(Base_Redirect):
+    def get(self, request, *args, **kwargs):
+        redis_task_id = self.kwargs.get('redis_task_id', None)
         task=Redis_task.objects.get(id=redis_task_id)
         task.status=Status.objects.get(name='in_queue')
         task.save()
         Run_ansible_redis_task().apply_async(args=(redis_task_id,))
-        response = redirect('redis-task-list')
-    else:
-        response =redirect('login')
-    return response
+        return HttpResponseRedirect('redis-task-list')
+
+# def Run_redis_task(req,redis_task_id):
+#     if req.user.is_authenticated():
+#         task=Redis_task.objects.get(id=redis_task_id)
+#         task.status=Status.objects.get(name='in_queue')
+#         task.save()
+#         Run_ansible_redis_task().apply_async(args=(redis_task_id,))
+#         response = redirect('redis-task-list')
+#     else:
+#         response =redirect('login')
+#     return response
 
 class Get_detailTemplate(Base_Template):
     template_name = 'api/detail.html'
@@ -950,17 +959,18 @@ def Run_mission(req, mission_id):
         response = redirect('login')
     return response
 
-def Fun_queryView(req):
-    if req.user.is_authenticated():
+class Fun_queryTemplate(Base_Template):
+    template_name = 'api/fun_query.html'
+    def get_context_data(self, **kwargs):
+        context=super(Fun_queryTemplate,self).get_context_data(**kwargs)
         try:
-            name=req.GET['name']
+            name = self.request.GET['name']
+            host = Ipv4Address.objects.get(name=name)
         except:
-            name=None
-
-        if name:
+            host = None
+        if host:
             info_status = True
             all_info=[]
-            host = Ipv4Address.objects.get(name=name)
             apps=host.app_host.all()
             for m in Upstream.objects.all():
                 for n in m.app.apps.all():
@@ -970,29 +980,58 @@ def Fun_queryView(req):
                             "upstream":m,
                             "site_context":m.context_upstream.all()
                         })
-
-            # site=[{"host":host,"site_all":x.context_upstream.all(),"upstream":x} for x in upstreams]
-            # context['all_info'] = map(lambda x: {"host": name, "upstream": x.name, "site": x.context_upstream.all()},
-            #                           host.upstream_host.all())
-
-            # all_info = [{"host":host,"site_all":x.context_upstream.all(),"upstream":x} for x in upstreams]
+            context['all_info']=all_info
+            context['info_status']=info_status
         else:
             all_info = []
             info_status = False
-        response = render(req, 'api/fun_query.html', {"username": req.user.last_name,
-                                                   "active": "nginx",
-                                                   "info_status":info_status,
-                                                   "all_info":all_info
-                                                   }
-                          )
-    else:
-        response = redirect('login')
-    return response
+            context['all_info']=all_info
+            context['info_status']=info_status
+
+        context['username']=self.request.user.last_name
+        context['active']='nginx'
+        return context
+
+# def Fun_queryView(req):
+#     if req.user.is_authenticated():
+#         try:
+#             name=req.GET['name']
+#         except:
+#             name=None
+#         if name:
+#             info_status = True
+#             all_info=[]
+#             host = Ipv4Address.objects.get(name=name)
+#             apps=host.app_host.all()
+#             for m in Upstream.objects.all():
+#                 for n in m.app.apps.all():
+#                     if n in apps:
+#                         all_info.append({
+#                             "app":n,
+#                             "upstream":m,
+#                             "site_context":m.context_upstream.all()
+#                         })
+#
+#             # site=[{"host":host,"site_all":x.context_upstream.all(),"upstream":x} for x in upstreams]
+#             # context['all_info'] = map(lambda x: {"host": name, "upstream": x.name, "site": x.context_upstream.all()},
+#             #                           host.upstream_host.all())
+#
+#             # all_info = [{"host":host,"site_all":x.context_upstream.all(),"upstream":x} for x in upstreams]
+#         else:
+#             all_info = []
+#             info_status = False
+#         response = render(req, 'api/fun_query.html', {"username": req.user.last_name,
+#                                                    "active": "nginx",
+#                                                    "info_status":info_status,
+#                                                    "all_info":all_info
+#                                                    }
+#                           )
+#     else:
+#         response = redirect('login')
+#     return response
 
 
 #### redis views
-
-
 
 class Redis_instance_CreateViewSet(Base_CreateViewSet):
     model = Redis_instance
@@ -1027,7 +1066,6 @@ class Redis_instance_ListViewSet(Base_ListViewSet):
             return self.model.objects.filter(host__name__istartswith=name).order_by("-modified_date")
         else:
             return self.model.objects.all().order_by("-modified_date")
-
 
 class Redis_group_CreateViewSet(Base_CreateViewSet):
     model = Redis_group
@@ -1117,57 +1155,100 @@ class Sentinel_ListViewSet(Base_ListViewSet):
         else:
             return self.model.objects.all().order_by("-modified_date")
 
-
-
-def Codis_detailView(req,codis_id):
-    if req.user.is_authenticated():
+class Codis_detailTemplate(Base_Template):
+    template_name = 'api/codis-detail.html'
+    def get_context_data(self, **kwargs):
+        context=super(Codis_detailTemplate,self).get_context_data(**kwargs)
         try:
+            codis_id = self.kwargs.get('codis_id', None)
             codis=Codis.objects.get(id=codis_id)
         except:
             codis=None
 
         if codis:
-            all_info=codis.member.all()
-            response = render(req, 'api/codis-detail.html', {"username": req.user.last_name,
-                                                             "active": "redis",
-                                                             "all_info": all_info,
-                                                             "codis": codis.name
-                                                             }
-                              )
+            all_info = codis.member.all()
+            context['codis'] = codis.name
         else:
-            response = HttpResponseBadRequest("not existed this codis")
-    else:
-        response = redirect('login')
-    return response
+            all_info = []
+            context['codis'] = 'not existed this codis'
 
+        context['username']=self.request.user.last_name
+        context['active']='redis'
+        context['all_info']=all_info
+        return context
 
+#
+# def Codis_detailView(req,codis_id):
+#     if req.user.is_authenticated():
+#         try:
+#             codis=Codis.objects.get(id=codis_id)
+#         except:
+#             codis=[]
+#
+#
+#         if codis:
+#             all_info=codis.member.all()
+#             response = render(req, 'api/codis-detail.html', {"username": req.user.last_name,
+#                                                              "active": "redis",
+#                                                              "all_info": all_info,
+#                                                              "codis": codis.name
+#                                                              }
+#                               )
+#         else:
+#             response = HttpResponseBadRequest("not existed this codis")
+#     else:
+#         response = redirect('login')
+#     return response
 
-
-def Sentinel_detailView(req,sentinel_id):
-    if req.user.is_authenticated():
+class Sentinel_detailTemplate(Base_Template):
+    template_name = 'api/sentinel-detail.html'
+    def get_context_data(self, **kwargs):
+        context=super(Sentinel_detailTemplate,self).get_context_data(**kwargs)
         try:
-            sentinel=Sentinel.objects.get(id=sentinel_id)
+            sentinel_id = self.kwargs.get('sentinel_id', None)
+            sentinel=Codis.objects.get(id=sentinel_id)
         except:
             sentinel=None
 
         if sentinel:
-            all_info=sentinel.member.all()
-            response = render(req, 'api/sentinel-detail.html', {"username": req.user.last_name,
-                                                             "active": "redis",
-                                                             "all_info": all_info,
-                                                             "sentinel": sentinel.name
-                                                             }
-                              )
+            all_info = sentinel.member.all()
+            context['sentinel'] = sentinel.name
         else:
-            response = HttpResponseBadRequest("not existed this sentinel")
-    else:
-        response = redirect('login')
-    return response
+            all_info = []
+            context['sentinel'] = 'not existed this sentinel'
 
-def Codis_queryView(req):
-    if req.user.is_authenticated():
+        context['username']=self.request.user.last_name
+        context['active']='redis'
+        context['all_info']=all_info
+        return context
+
+# def Sentinel_detailView(req,sentinel_id):
+#     if req.user.is_authenticated():
+#         try:
+#             sentinel=Sentinel.objects.get(id=sentinel_id)
+#         except:
+#             sentinel=None
+#
+#         if sentinel:
+#             all_info=sentinel.member.all()
+#             response = render(req, 'api/sentinel-detail.html', {"username": req.user.last_name,
+#                                                              "active": "redis",
+#                                                              "all_info": all_info,
+#                                                              "sentinel": sentinel.name
+#                                                              }
+#                               )
+#         else:
+#             response = HttpResponseBadRequest("not existed this sentinel")
+#     else:
+#         response = redirect('login')
+#     return response
+
+class Codis_queryTemplate(Base_Template):
+    template_name = 'api/query-detail.html'
+    def get_context_data(self, **kwargs):
+        context=super(Codis_queryTemplate,self).get_context_data(**kwargs)
         try:
-            name = req.GET['name']
+            name = self.request.GET['name']
             host = Ipv4Address.objects.get(name=name)
         except:
             host=None
@@ -1197,36 +1278,92 @@ def Codis_queryView(req):
             sentinel_master=[{"sentinel":x.get("group").sentinel_group.all(),"group":x.get("group"),"host":x.get("host"),"name":"master","port":x.get("port")} for x in group_master]
             sentinel_offline=[{"sentinel":x.get("group").sentinel_group.all(),"group":x.get("group"),"host":x.get("host"),"name":"offline","port":x.get("port")} for x in group_offline]
             sentinel_slave=[{"sentinel":x.get("group").sentinel_group.all(),"group":x.get("group"),"host":x.get("host"),"name":"slave","port":x.get("port")} for x in group_slave]
-
-            response = render(req, 'api/query-detail.html', {"username": req.user.last_name,
-                                                             "active": "redis",
-                                                             "codis_master": codis_master,
-                                                             "codis_slave": codis_slave,
-                                                             "codis_offline": codis_offline,
-                                                             "sentinel_master": sentinel_master,
-                                                             "sentinel_slave": sentinel_slave,
-                                                             "sentinel_offline": sentinel_offline,
-                                                             }
-                              )
         else:
-            response = render(req, 'api/query-detail.html', {"username": req.user.last_name,
-                                                             "active": "redis",
-                                                             "codis_master": [],
-                                                             "codis_slave": [],
-                                                             "codis_offline": [],
-                                                             "sentinel_master": [],
-                                                             "sentinel_slave": [],
-                                                             "sentinel_offline": [],
-                                                             }
-                              )
-    else:
-        response = redirect('login')
-    return response
+            # codis
+            codis_master=[]
+            codis_offline=[]
+            codis_slave=[]
+            #sentinel
+            sentinel_master=[]
+            sentinel_offline=[]
+            sentinel_slave=[]
+        context['username']=self.request.user.last_name
+        context['active']='redis'
+        context['codis_master']=codis_master
+        context['codis_slave']=codis_slave
+        context['codis_offline']=codis_offline
+        context['sentinel_master']=sentinel_master
+        context['sentinel_slave']=sentinel_slave
+        context['sentinel_offline']=sentinel_offline
+        return context
 
-def Http_request_countView(req):
-    if req.user.is_authenticated():
+# def Codis_queryView(req):
+#     if req.user.is_authenticated():
+#         try:
+#             name = req.GET['name']
+#             host = Ipv4Address.objects.get(name=name)
+#         except:
+#             host=None
+#
+#
+#
+#         if host:
+#             redis_instrance=Redis_instance.objects.filter(host=host)
+#             host_name=host.name
+#             group_master=[]
+#             group_offline=[]
+#             group_slave=[]
+#             for m in redis_instrance:
+#                 for n in Redis_group.objects.filter(master=m):
+#                     group_master.append({"group":n,"host":host_name,"port":m.port})
+#             for m in redis_instrance:
+#                 for n in Redis_group.objects.filter(offline=m):
+#                     group_offline.append({"group":n,"host":host_name,"port":m.port})
+#
+#             for m in redis_instrance:
+#                 for n in Redis_group.objects.filter(slave=m):
+#                     group_slave.append({"group":n,"host":host_name,"port":m.port})
+#             # codis
+#             codis_master=[{"codis":x.get("group").codis_group.all(),"group":x.get("group"),"host":x.get("host"),"name":"master","port":x.get("port")} for x in group_master]
+#             codis_offline=[{"codis":x.get("group").codis_group.all(),"group":x.get("group"),"host":x.get("host"),"name":"offline","port":x.get("port")} for x in group_offline]
+#             codis_slave=[{"codis":x.get("group").codis_group.all(),"group":x.get("group"),"host":x.get("host"),"name":"slave","port":x.get("port")} for x in group_slave]
+#
+#             #sentinel
+#             sentinel_master=[{"sentinel":x.get("group").sentinel_group.all(),"group":x.get("group"),"host":x.get("host"),"name":"master","port":x.get("port")} for x in group_master]
+#             sentinel_offline=[{"sentinel":x.get("group").sentinel_group.all(),"group":x.get("group"),"host":x.get("host"),"name":"offline","port":x.get("port")} for x in group_offline]
+#             sentinel_slave=[{"sentinel":x.get("group").sentinel_group.all(),"group":x.get("group"),"host":x.get("host"),"name":"slave","port":x.get("port")} for x in group_slave]
+#
+#             response = render(req, 'api/query-detail.html', {"username": req.user.last_name,
+#                                                              "active": "redis",
+#                                                              "codis_master": codis_master,
+#                                                              "codis_slave": codis_slave,
+#                                                              "codis_offline": codis_offline,
+#                                                              "sentinel_master": sentinel_master,
+#                                                              "sentinel_slave": sentinel_slave,
+#                                                              "sentinel_offline": sentinel_offline,
+#                                                              }
+#                               )
+#         else:
+#             response = render(req, 'api/query-detail.html', {"username": req.user.last_name,
+#                                                              "active": "redis",
+#                                                              "codis_master": [],
+#                                                              "codis_slave": [],
+#                                                              "codis_offline": [],
+#                                                              "sentinel_master": [],
+#                                                              "sentinel_slave": [],
+#                                                              "sentinel_offline": [],
+#                                                              }
+#                               )
+#     else:
+#         response = redirect('login')
+#     return response
+
+class Http_request_countTemplate(Base_Template):
+    template_name = 'api/chart.html'
+    def get_context_data(self, **kwargs):
+        context=super(Http_request_countTemplate,self).get_context_data(**kwargs)
         try:
-            name=req.GET['domain'].strip()
+            name=self.request.GET['domain'].strip()
         except:
             name=None
         def get_total(daytime,domain=None):
@@ -1276,30 +1413,92 @@ def Http_request_countView(req):
         server_err_count=[get_server_err(x,name) for x in time_line]
         success_count=[get_success(x,name) for x in time_line]
         total_count=[get_total(x,name) for x in time_line]
-        response = render(req, 'api/chart.html', {
-                                                    "timeline": time_line,
-                                                    "domain":name,
-                                                    "active": "nginx",
-                                                    "unknown_count":unknown_count,
-                                                    "client_err_count":client_err_count,
-                                                    "server_err_count":server_err_count,
-                                                    "success_count":success_count,
-                                                    "total_count":total_count
-                                                   }
-                          )
-    else:
-        response = redirect('login')
-    return response
+        context['timeline']=time_line
+        context['domain']=name
+        context['active']='nginx'
+        context['unknown_count']=unknown_count
+        context['client_err_count']=client_err_count
+        context['server_err_count']=server_err_count
+        context['success_count']=success_count
+        context['total_count']=total_count
+        return context
 
+# def Http_request_countView(req):
+#     if req.user.is_authenticated():
+#         try:
+#             name=req.GET['domain'].strip()
+#         except:
+#             name=None
+#         def get_total(daytime,domain=None):
+#             if domain:
+#                 data=Http_statistics.objects.filter(daytime=daytime,domain=domain)
+#             else:
+#                 data = Http_statistics.objects.filter(daytime=daytime)
+#             total_data=[x.Unknown_status+x.success_status+x.client_err_status+x.server_err_status for x in data]
+#             return sum(total_data).__int__()
+#         def get_unknown(daytime,domain=None):
+#             if domain:
+#                 data=Http_statistics.objects.filter(daytime=daytime,domain=domain)
+#             else:
+#                 data = Http_statistics.objects.filter(daytime=daytime)
+#             unknown_data=[x.Unknown_status for x in data]
+#             return sum(unknown_data).__int__()
+#         def get_success(daytime,domain=None):
+#             if domain:
+#                 data=Http_statistics.objects.filter(daytime=daytime,domain=domain)
+#             else:
+#                 data = Http_statistics.objects.filter(daytime=daytime)
+#             success_data=[x.success_status for x in data]
+#             return sum(success_data).__int__()
+#         def get_client_err(daytime,domain=None):
+#             if domain:
+#                 data=Http_statistics.objects.filter(daytime=daytime,domain=domain)
+#             else:
+#                 data = Http_statistics.objects.filter(daytime=daytime)
+#             client_err_data=[x.client_err_status for x in data]
+#             return sum(client_err_data).__int__()
+#         def get_server_err(daytime,domain=None):
+#             if domain:
+#                 data=Http_statistics.objects.filter(daytime=daytime,domain=domain)
+#             else:
+#                 data = Http_statistics.objects.filter(daytime=daytime)
+#             server_err_data=[x.server_err_status for x in data]
+#             return sum(server_err_data).__int__()
+#
+#         time_line=[]
+#         for m in range(1,8):
+#             p_day = datetime.today() + timedelta(-m)
+#             p_day_format = p_day.strftime('%Y%m%d')
+#             time_line.append(p_day_format)
+#         time_line.reverse()
+#         unknown_count=[get_unknown(x,name) for x in time_line]
+#         client_err_count=[get_client_err(x,name) for x in time_line]
+#         server_err_count=[get_server_err(x,name) for x in time_line]
+#         success_count=[get_success(x,name) for x in time_line]
+#         total_count=[get_total(x,name) for x in time_line]
+#         response = render(req, 'api/chart.html', {
+#                                                     "timeline": time_line,
+#                                                     "domain":name,
+#                                                     "active": "nginx",
+#                                                     "unknown_count":unknown_count,
+#                                                     "client_err_count":client_err_count,
+#                                                     "server_err_count":server_err_count,
+#                                                     "success_count":success_count,
+#                                                     "total_count":total_count
+#                                                    }
+#                           )
+#     else:
+#         response = redirect('login')
+#     return response
 
-
-def Http_request_statisticsView(req):
-    if req.user.is_authenticated():
+class Http_request_statisticsTemplate(Base_Template):
+    template_name = 'api/avg.html'
+    def get_context_data(self, **kwargs):
+        context=super(Http_request_statisticsTemplate,self).get_context_data(**kwargs)
         try:
-            limit=req.GET['limit']
+            limit=self.request.GET['limit']
         except:
             limit=100
-
         def get_total(daytime, domain=None):
             data = Http_statistics.objects.filter(daytime=daytime, domain=domain)
             total_data = [x.Unknown_status + x.success_status + x.client_err_status + x.server_err_status for x in
@@ -1320,15 +1519,48 @@ def Http_request_statisticsView(req):
                 all_info.append({"domain":m,"avg":avg})
 
         avg_list = sorted(all_info, key=lambda all_info: (all_info['avg']), reverse=False)
-        response = render(req, 'api/avg.html', {
-                                                    "all_info":avg_list,
-                                                    "avg_count":avg_list.__len__(),
-                                                    "limit":limit
-                                                   }
-                          )
-    else:
-        response = redirect('login')
-    return response
+        context['all_info']=avg_list
+        context['avg_count']=avg_list.__len__()
+        context['limit']=limit
+        return context
+
+
+# def Http_request_statisticsView(req):
+#     if req.user.is_authenticated():
+#         try:
+#             limit=req.GET['limit']
+#         except:
+#             limit=100
+#
+#         def get_total(daytime, domain=None):
+#             data = Http_statistics.objects.filter(daytime=daytime, domain=domain)
+#             total_data = [x.Unknown_status + x.success_status + x.client_err_status + x.server_err_status for x in
+#                           data]
+#             return sum(total_data).__int__()
+#         time_line = []
+#         for m in range(1, 8):
+#             p_day = datetime.today() + timedelta(-m)
+#             p_day_format = p_day.strftime('%Y%m%d')
+#             time_line.append(p_day_format)
+#         domain_list=[x.get('domain') for x in Http_statistics.objects.distinct().values('domain') if 'weimi.me' not in x.get('domain')]
+#
+#         all_info=[]
+#         for m in domain_list:
+#             avg=None
+#             avg=sum([get_total(x,m) for x in time_line])/7
+#             if avg<limit:
+#                 all_info.append({"domain":m,"avg":avg})
+#
+#         avg_list = sorted(all_info, key=lambda all_info: (all_info['avg']), reverse=False)
+#         response = render(req, 'api/avg.html', {
+#                                                     "all_info":avg_list,
+#                                                     "avg_count":avg_list.__len__(),
+#                                                     "limit":limit
+#                                                    }
+#                           )
+#     else:
+#         response = redirect('login')
+#     return response
 
 #
 # class Http_request_ListViewSet(Base_ListViewSet):

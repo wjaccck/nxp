@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a8356791-8dff-4783-a146-d6e83154db82" name="Default" comment="" />
+    <list default="true" id="a8356791-8dff-4783-a146-d6e83154db82" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/webui/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/webui/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webui/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/webui/views.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,11 +17,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/webui/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="970" column="41" selection-start-line="970" selection-start-column="29" selection-end-line="970" selection-end-column="41" />
+            <state relative-caret-position="184">
+              <caret line="348" selection-start-line="348" selection-start-column="2" selection-end-line="357" selection-end-column="21" />
               <folding>
                 <element signature="e#14#44#0" expanded="true" />
                 <element signature="e#916#1771#0" />
@@ -54,13 +57,12 @@
                 <element signature="e#10083#10575#0" />
                 <element signature="e#11687#11840#0" />
                 <element signature="e#11893#12310#0" />
-                <element signature="e#12356#12698#0" />
                 <element signature="e#11135#11652#0" />
                 <element signature="e#11855#11885#0" />
+                <element signature="e#12645#14481#0" />
                 <element signature="e#14474#14476#0" />
                 <element signature="e#20282#21783#0" />
                 <element signature="e#21779#21810#0" />
-                <element signature="e#25246#26155#0" />
                 <element signature="e#26177#26217#0" />
                 <element signature="e#27488#27918#0" />
                 <element signature="e#27929#27972#0" />
@@ -72,6 +74,8 @@
                 <element signature="e#35819#35872#0" />
                 <element signature="e#27761#28210#0" />
                 <element signature="e#28250#29815#0" />
+                <element signature="e#38951#40070#0" />
+                <element signature="e#40073#40098#0" />
                 <element signature="e#31114#31283#0" />
                 <element signature="e#31345#31514#0" />
                 <element signature="e#31576#31652#0" />
@@ -85,11 +89,16 @@
                 <element signature="e#33689#33747#0" />
                 <element signature="e#33796#34253#0" />
                 <element signature="e#34305#34756#0" />
-                <element signature="e#34800#35576#0" />
-                <element signature="e#35627#36433#0" />
-                <element signature="e#36465#40180#0" />
-                <element signature="e#40219#43533#0" />
-                <element signature="e#43579#45078#0" />
+                <element signature="e#45477#46142#0" />
+                <element signature="e#46143#46145#0" />
+                <element signature="e#47052#47056#0" />
+                <element signature="e#47759#47802#0" />
+                <element signature="e#48697#51503#0" />
+                <element signature="e#51505#51532#0" />
+                <element signature="e#55421#58404#0" />
+                <element signature="e#58414#58448#0" />
+                <element signature="e#63307#63346#0" />
+                <element signature="e#45080#45081#0" />
               </folding>
             </state>
           </provider>
@@ -143,8 +152,17 @@
       <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/webui/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="111" column="17" lean-forward="true" selection-start-line="111" selection-start-column="17" selection-end-line="111" selection-end-column="17" />
+            <state relative-caret-position="150">
+              <caret line="87" column="79" lean-forward="true" selection-start-line="87" selection-start-column="79" selection-end-line="87" selection-end-column="79" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="wiget.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/webui/wiget.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="28" column="36" selection-start-line="28" selection-start-column="6" selection-end-line="28" selection-end-column="36" />
             </state>
           </provider>
         </entry>
@@ -158,20 +176,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="serializers.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="serializers.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/api/serializers.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="375">
-              <caret line="84" column="8" selection-start-line="84" selection-start-column="8" selection-end-line="84" selection-end-column="8" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="vhost.j2" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/nginx/vhost.j2">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="45" lean-forward="true" selection-start-line="45" selection-end-line="45" />
+              <caret line="84" column="89" selection-start-line="84" selection-start-column="89" selection-end-line="84" selection-end-column="89" />
             </state>
           </provider>
         </entry>
@@ -234,7 +243,6 @@
         <option value="$PROJECT_DIR$/templates/webui/index.html" />
         <option value="$PROJECT_DIR$/api/views.py" />
         <option value="$PROJECT_DIR$/api/urls.py" />
-        <option value="$PROJECT_DIR$/api/serializers.py" />
         <option value="$PROJECT_DIR$/webui/wiget.py" />
         <option value="$PROJECT_DIR$/templates/api/apps_group.html" />
         <option value="$PROJECT_DIR$/templates/api/context.html" />
@@ -245,12 +253,13 @@
         <option value="$PROJECT_DIR$/core/common.py" />
         <option value="$PROJECT_DIR$/abstract/views.py" />
         <option value="$PROJECT_DIR$/templates/nginx/vhost.j2" />
-        <option value="$PROJECT_DIR$/webui/urls.py" />
         <option value="$PROJECT_DIR$/templates/api/detail.html" />
         <option value="$PROJECT_DIR$/templates/api/upstream_detail.html" />
         <option value="$PROJECT_DIR$/api/models.py" />
-        <option value="$PROJECT_DIR$/webui/views.py" />
         <option value="$PROJECT_DIR$/templates/api/fun_query.html" />
+        <option value="$PROJECT_DIR$/api/serializers.py" />
+        <option value="$PROJECT_DIR$/webui/urls.py" />
+        <option value="$PROJECT_DIR$/webui/views.py" />
       </list>
     </option>
   </component>
@@ -286,16 +295,6 @@
             <path>
               <item name="nxp" type="b2602c69:ProjectViewProjectNode" />
               <item name="nxp" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="nxp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="nxp" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="nxp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="nxp" type="462c0819:PsiDirectoryNode" />
-              <item name="webui" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -757,13 +756,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/webui/wiget.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="28" column="36" selection-start-line="28" selection-start-column="6" selection-end-line="28" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/api/apps_group.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
@@ -891,13 +883,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/webui/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="111" column="17" lean-forward="true" selection-start-line="111" selection-start-column="17" selection-end-line="111" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/api/detail.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -933,10 +918,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/api/fun_query.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="75" column="68" lean-forward="true" selection-start-line="75" selection-start-column="68" selection-end-line="75" selection-end-column="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/serializers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="84" column="89" selection-start-line="84" selection-start-column="89" selection-end-line="84" selection-end-column="89" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webui/wiget.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="28" column="36" selection-start-line="28" selection-start-column="6" selection-end-line="28" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webui/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="87" column="79" lean-forward="true" selection-start-line="87" selection-start-column="79" selection-end-line="87" selection-end-column="79" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/webui/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="970" column="41" selection-start-line="970" selection-start-column="29" selection-end-line="970" selection-end-column="41" />
+        <state relative-caret-position="184">
+          <caret line="348" selection-start-line="348" selection-start-column="2" selection-end-line="357" selection-end-column="21" />
           <folding>
             <element signature="e#14#44#0" expanded="true" />
             <element signature="e#916#1771#0" />
@@ -972,13 +985,12 @@
             <element signature="e#10083#10575#0" />
             <element signature="e#11687#11840#0" />
             <element signature="e#11893#12310#0" />
-            <element signature="e#12356#12698#0" />
             <element signature="e#11135#11652#0" />
             <element signature="e#11855#11885#0" />
+            <element signature="e#12645#14481#0" />
             <element signature="e#14474#14476#0" />
             <element signature="e#20282#21783#0" />
             <element signature="e#21779#21810#0" />
-            <element signature="e#25246#26155#0" />
             <element signature="e#26177#26217#0" />
             <element signature="e#27488#27918#0" />
             <element signature="e#27929#27972#0" />
@@ -990,6 +1002,8 @@
             <element signature="e#35819#35872#0" />
             <element signature="e#27761#28210#0" />
             <element signature="e#28250#29815#0" />
+            <element signature="e#38951#40070#0" />
+            <element signature="e#40073#40098#0" />
             <element signature="e#31114#31283#0" />
             <element signature="e#31345#31514#0" />
             <element signature="e#31576#31652#0" />
@@ -1003,26 +1017,17 @@
             <element signature="e#33689#33747#0" />
             <element signature="e#33796#34253#0" />
             <element signature="e#34305#34756#0" />
-            <element signature="e#34800#35576#0" />
-            <element signature="e#35627#36433#0" />
-            <element signature="e#36465#40180#0" />
-            <element signature="e#40219#43533#0" />
-            <element signature="e#43579#45078#0" />
+            <element signature="e#45477#46142#0" />
+            <element signature="e#46143#46145#0" />
+            <element signature="e#47052#47056#0" />
+            <element signature="e#47759#47802#0" />
+            <element signature="e#48697#51503#0" />
+            <element signature="e#51505#51532#0" />
+            <element signature="e#55421#58404#0" />
+            <element signature="e#58414#58448#0" />
+            <element signature="e#63307#63346#0" />
+            <element signature="e#45080#45081#0" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/api/fun_query.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="75" column="68" lean-forward="true" selection-start-line="75" selection-start-column="68" selection-end-line="75" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/serializers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="84" column="8" selection-start-line="84" selection-start-column="8" selection-end-line="84" selection-end-column="8" />
         </state>
       </provider>
     </entry>
