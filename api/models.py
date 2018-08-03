@@ -131,7 +131,7 @@ class Site_context(CommonModel,NGINX_BASE):
 
 class Nxp_mission(CommonModel,NGINX_BASE):
     mark=models.CharField(max_length=50,db_index=True)
-    site=models.ForeignKey(Site,blank=True,null=True)
+    site=models.CharField(max_length=100)
     files=models.TextField()
     host=models.ForeignKey(Ipv4Address)
     status=models.ForeignKey(Status)

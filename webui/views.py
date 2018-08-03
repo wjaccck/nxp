@@ -658,7 +658,7 @@ class Create_tran_mission(Base_Redirect):
         file_list.append(vhost_online_file.format(site.name))
         mark=uuid.uuid4()
         for i in site.group.hosts.all():
-            Nxp_mission.objects.create(site=site,
+            Nxp_mission.objects.create(site=site.name,
                                        mark=mark,
                                        host=i,
                                        files=','.join(file_list),
