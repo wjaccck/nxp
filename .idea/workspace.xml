@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a8356791-8dff-4783-a146-d6e83154db82" name="Default" comment="" />
+    <list default="true" id="a8356791-8dff-4783-a146-d6e83154db82" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/api/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/models.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,7 +16,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/webui/views.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="5">
@@ -103,6 +105,13 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="nxp_mission.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/api/nxp_mission.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-2520" />
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/api/views.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -111,15 +120,6 @@
               <folding>
                 <element signature="e#18#52#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="fun_query.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/api/fun_query.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="75" column="68" lean-forward="true" selection-start-line="75" selection-start-column="68" selection-end-line="75" selection-end-column="68" />
             </state>
           </provider>
         </entry>
@@ -169,11 +169,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/api/models.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="185">
-              <caret line="54" column="6" selection-start-line="54" selection-start-column="6" selection-end-line="54" selection-end-column="6" />
+              <caret line="108" column="47" lean-forward="true" selection-start-line="108" selection-start-column="47" selection-end-line="108" selection-end-column="47" />
             </state>
           </provider>
         </entry>
@@ -278,7 +278,7 @@
       <path value="$PROJECT_DIR$/static/assets/global/plugins/bootstrap-sessiontimeout/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1378" />
@@ -306,7 +306,13 @@
             <path>
               <item name="nxp" type="b2602c69:ProjectViewProjectNode" />
               <item name="nxp" type="462c0819:PsiDirectoryNode" />
-              <item name="webui" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="nxp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="nxp" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -601,13 +607,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/templates/nginx/redirect.conf">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="4" column="1" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/api/upstream_conf.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
@@ -951,13 +950,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="54" column="6" selection-start-line="54" selection-start-column="6" selection-end-line="54" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/webui/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5">
@@ -1042,6 +1034,18 @@
             <element signature="e#63307#63346#0" />
             <element signature="e#45080#45081#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/api/nxp_mission.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2520" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="185">
+          <caret line="108" column="47" lean-forward="true" selection-start-line="108" selection-start-column="47" selection-end-line="108" selection-end-column="47" />
         </state>
       </provider>
     </entry>

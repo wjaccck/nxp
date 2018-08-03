@@ -106,7 +106,7 @@ class Site(CommonModel,NGINX_BASE):
     trace_status=models.BooleanField(default=False)
     redirect_status=models.BooleanField(default=False)
     extra_parameters=models.ManyToManyField(Site_headers,blank=True)
-    status=models.ForeignKey(Status)
+    status=models.ForeignKey(Status,blank=True)
     def __unicode__(self):
         if self.https:
             return "https://{0}".format(self.name)
