@@ -3,6 +3,6 @@ upstream {{ upstream }}  {
     ip_hash;
     {% endif %}
     {% for m in upstream_server %}
-    {{ m }};
+    server {{ m }};
     {% endfor %}
 }
