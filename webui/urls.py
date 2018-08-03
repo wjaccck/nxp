@@ -85,7 +85,7 @@ urlpatterns = [
     ### redis-task
     url(r'^redis-task/$', views.Redis_tas_ListViewSet.as_view(), name='redis-task-list'),
     url(r'^redis-task/create/$', views.Redis_task_CreateViewSet.as_view(), name='redis-task-create'),
-    url(r'^redis-task-run/(?P<redis_task_id>\d+)/$', login_required(views.Run_redis_task), name='run-redis-task'),
+    url(r'^redis-task-run/(?P<redis_task_id>\d+)/$', views.Run_redis_taskView.as_view(), name='run-redis-task'),
 
     ### sentinel
     url(r'^sentinel/$', views.Sentinel_ListViewSet.as_view(), name='sentinel-list'),
