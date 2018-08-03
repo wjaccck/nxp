@@ -427,7 +427,7 @@ class Generate_vhostTemplate(Base_Template):
             "trace_status":site.trace_status,
             "context_all": [{
                 "domain_proxy":y.upstream.domain_proxy,
-                "app_name":y.upstream.app.name,
+                "app_name":y.upstream.name,
                 "context":y.context,
                 "default_proxy_set":y.default_proxy_set,
                 "proxy_headers":[i.extra_parameter for i in y.extra_parametres.all()],

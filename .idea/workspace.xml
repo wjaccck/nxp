@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a8356791-8dff-4783-a146-d6e83154db82" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/templates/nginx/upstream.j2" beforeDir="false" afterPath="$PROJECT_DIR$/templates/nginx/upstream.j2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webui/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/webui/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -16,11 +16,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/webui/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-176">
-              <caret line="348" selection-start-line="348" selection-start-column="2" selection-end-line="357" selection-end-column="21" />
+            <state relative-caret-position="285">
+              <caret line="430" column="36" lean-forward="true" selection-start-line="430" selection-start-column="36" selection-end-line="430" selection-end-column="36" />
               <folding>
                 <element signature="e#14#44#0" expanded="true" />
                 <element signature="e#916#1771#0" />
@@ -56,9 +56,10 @@
                 <element signature="e#10083#10575#0" />
                 <element signature="e#11687#11840#0" />
                 <element signature="e#11893#12310#0" />
+                <element signature="e#10606#10954#0" />
+                <element signature="e#10964#11004#0" />
                 <element signature="e#11135#11652#0" />
                 <element signature="e#11855#11885#0" />
-                <element signature="e#12645#14481#0" />
                 <element signature="e#14474#14476#0" />
                 <element signature="e#20282#21783#0" />
                 <element signature="e#21779#21810#0" />
@@ -121,7 +122,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="upstream.j2" pinned="false" current-in-tab="true">
+      <file leaf-file-name="upstream.j2" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/nginx/upstream.j2">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="150">
@@ -151,8 +152,8 @@
       <file leaf-file-name="vhost.j2" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/nginx/vhost.j2">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="45" lean-forward="true" selection-start-line="45" selection-end-line="45" />
+            <state relative-caret-position="360">
+              <caret line="55" column="48" selection-start-line="55" selection-start-column="40" selection-end-line="55" selection-end-column="48" />
             </state>
           </provider>
         </entry>
@@ -256,9 +257,9 @@
         <option value="$PROJECT_DIR$/api/models.py" />
         <option value="$PROJECT_DIR$/templates/api/fun_query.html" />
         <option value="$PROJECT_DIR$/api/serializers.py" />
-        <option value="$PROJECT_DIR$/webui/views.py" />
         <option value="$PROJECT_DIR$/webui/urls.py" />
         <option value="$PROJECT_DIR$/templates/nginx/upstream.j2" />
+        <option value="$PROJECT_DIR$/webui/views.py" />
       </list>
     </option>
   </component>
@@ -940,10 +941,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/webui/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="87" column="86" selection-start-line="87" selection-start-column="86" selection-end-line="87" selection-end-column="86" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/nginx/upstream.j2">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="5" column="11" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/nginx/vhost.j2">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="55" column="48" selection-start-line="55" selection-start-column="40" selection-end-line="55" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/webui/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-176">
-          <caret line="348" selection-start-line="348" selection-start-column="2" selection-end-line="357" selection-end-column="21" />
+        <state relative-caret-position="285">
+          <caret line="430" column="36" lean-forward="true" selection-start-line="430" selection-start-column="36" selection-end-line="430" selection-end-column="36" />
           <folding>
             <element signature="e#14#44#0" expanded="true" />
             <element signature="e#916#1771#0" />
@@ -979,9 +1001,10 @@
             <element signature="e#10083#10575#0" />
             <element signature="e#11687#11840#0" />
             <element signature="e#11893#12310#0" />
+            <element signature="e#10606#10954#0" />
+            <element signature="e#10964#11004#0" />
             <element signature="e#11135#11652#0" />
             <element signature="e#11855#11885#0" />
-            <element signature="e#12645#14481#0" />
             <element signature="e#14474#14476#0" />
             <element signature="e#20282#21783#0" />
             <element signature="e#21779#21810#0" />
@@ -1022,27 +1045,6 @@
             <element signature="e#63307#63346#0" />
             <element signature="e#45080#45081#0" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webui/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="87" column="86" selection-start-line="87" selection-start-column="86" selection-end-line="87" selection-end-column="86" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/nginx/vhost.j2">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="45" lean-forward="true" selection-start-line="45" selection-end-line="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/nginx/upstream.j2">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="5" column="11" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
         </state>
       </provider>
     </entry>
