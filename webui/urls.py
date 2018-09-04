@@ -13,12 +13,17 @@ urlpatterns = [
     url(r'^status/update/(?P<pk>\d+)/$',views.Status_UpdateViewSet.as_view(),name='status-update'),
     url(r'^status/create/$',views.Status_CreateViewSet.as_view(),name='status-create'),
 
-    ### status
+    ### apps-group
+    url(r'^apps/$', views.Apps_ListViewSet.as_view(), name='apps-list'),
+    url(r'^apps/update/(?P<pk>\d+)/$', views.Apps_UpdateViewSet.as_view(), name='apps-update'),
+    url(r'^apps/create/$', views.Apps_CreateViewSet.as_view(), name='apps-create'),
+
+    ### apps-group
     url(r'^apps-group/$', views.Apps_group_ListViewSet.as_view(), name='apps-group-list'),
     url(r'^apps-group/update/(?P<pk>\d+)/$', views.Apps_group_UpdateViewSet.as_view(), name='apps-group-update'),
     url(r'^apps-group/create/$', views.Apps_group_CreateViewSet.as_view(), name='apps-group-create'),
 
-    ### status
+    ### group
     url(r'^group/$', views.Group_ListViewSet.as_view(), name='group-list'),
     url(r'^group/update/(?P<pk>\d+)/$', views.Group_UpdateViewSet.as_view(), name='group-update'),
     url(r'^group/create/$', views.Group_CreateViewSet.as_view(), name='group-create'),
@@ -74,14 +79,6 @@ urlpatterns = [
     url(r'^codis/delete/(?P<pk>\d+)/$', views.Codis_DeleteViewSet.as_view(),
         name='codis-delete'),
 
-    # ### docker
-    # url(r'^docker/$', login_required(views.Docker_app_ListViewSet.as_view()), name='docker-list'),
-    # url(r'^docker/update/(?P<pk>\d+)/$', login_required(views.Docker_app_UpdateViewSet.as_view()),
-    #     name='codis-update'),
-    # url(r'^docker/create/$', login_required(views.Docker_app_CreateViewSet.as_view()), name='docker-create'),
-    # url(r'^docker/delete/(?P<pk>\d+)/$', login_required(views.Docker_app_DeleteViewSet.as_view()),
-    #     name='docker-delete'),
-
     ### redis-task
     url(r'^redis-task/$', views.Redis_tas_ListViewSet.as_view(), name='redis-task-list'),
     url(r'^redis-task/create/$', views.Redis_task_CreateViewSet.as_view(), name='redis-task-create'),
@@ -89,11 +86,6 @@ urlpatterns = [
 
     ### sentinel
     url(r'^sentinel/$', views.Sentinel_ListViewSet.as_view(), name='sentinel-list'),
-    # url(r'^codis/update/(?P<pk>\d+)/$', login_required(views.Codis_UpdateViewSet.as_view()),
-    #     name='codis-update'),
-    # url(r'^codis/create/$', login_required(views.Codis_CreateViewSet.as_view()), name='codis-create'),
-    # url(r'^codis/delete/(?P<pk>\d+)/$', login_required(views.Codis_DeleteViewSet.as_view()),
-    #     name='codis-delete'),
 
     ### context
     url(r'^context/$', views.Site_context_ListViewSet.as_view(), name='context-list'),
@@ -109,10 +101,6 @@ urlpatterns = [
     url(r'^create-mission/(?P<site_id>\d+)/$', views.Create_tran_mission.as_view(), name='create-mission'),
     url(r'^create-upstream-mission/(?P<upstream_id>\d+)/$', views.Create_upstream_tran_mission.as_view(), name='create-upstream-mission'),
     #
-    # ### version
-    # url(r'^version/$', login_required(views.Version_historyViewSet.as_view()), name='version-list'),
-    # url(r'^progress/$', login_required(views.Progress_ViewSet.as_view()), name='progress-list'),
-    # #
     url(r'^detail/(?P<site_id>\d+)/$', views.Get_detailTemplate.as_view(), name='get-detail'),
     url(r'^upstream-detail/(?P<upstream_id>\d+)/$', views.Get_upstream_detailTemplate.as_view(), name='get-upstream-detail'),
     url(r'^codis-detail/(?P<codis_id>\d+)/$', views.Codis_detailTemplate.as_view(), name='get-codis-detail'),

@@ -81,6 +81,18 @@ class Apps_ListViewSet(Base_ListViewSet):
         else:
             return self.model.objects.all()
 
+class Apps_CreateViewSet(Base_CreateViewSet):
+    model = Apps
+    form_class = forms.AppsForm
+    template_name = 'api/apps_form.html'
+    success_url = reverse_lazy('apps-list')
+
+class Apps_UpdateViewSet(Base_UpdateViewSet):
+    model = Apps
+    form_class = forms.AppsForm
+    template_name = 'api/apps_form.html'
+    success_url = reverse_lazy('apps-list')
+
 class Apps_group_ListViewSet(Base_ListViewSet):
     Apps_group.objects.all().count()
     model = Apps_group

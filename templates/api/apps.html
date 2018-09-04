@@ -56,6 +56,9 @@
 						</div>
 
                         <div class="portlet-body">
+                        {% if user.is_superuser %}
+                            <a href="{% url 'apps-create' %}" class="btn btn-success">{{ create }}</a>
+                        {% endif %}
                         <div class="table-responsive">
                             <table class="table table-bordered">
 {#							<table class="table table-striped table-hover table-bordered" id="sample_editable_1">#}

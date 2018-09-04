@@ -26,6 +26,12 @@ class ModelSelect2MultipleWidget(BaseModelSelect2MultipleWidget):
         'pk__startswith',
     ]
 
+class ApphostSelect2Widget(BaseModelSelect2Widget):
+    pass
+
+class AppstatusSelect2Widget(BaseModelSelect2Widget):
+    pass
+
 class AppsModelSelect2MultipleWidget(BaseModelSelect2MultipleWidget):
     search_fields = [
         'host_name__istartswith',

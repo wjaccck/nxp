@@ -38,6 +38,24 @@ class Nginx_groupForm(forms.ModelForm):
         }
         exclude = ['created_date', 'modified_date']
 
+class AppsForm(forms.ModelForm):
+
+    port = forms.CharField(label='端口', max_length=50, widget=forms.TextInput({'class': 'form-control'}))
+
+    class Meta:
+        fields = (
+                    'host',
+                    'port',
+                    'status',
+                )
+        model = Apps
+        widgets = {
+            'host':ApphostSelect2Widget,
+            'status': AppstatusSelect2Widget,
+        }
+        exclude = ['created_date', 'modified_date']
+
+
 
 class Apps_groupForm(forms.ModelForm):
 
