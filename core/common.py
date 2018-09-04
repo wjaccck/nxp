@@ -1,7 +1,7 @@
 __author__ = 'jinhongjun'
 import logging
 logger = logging.getLogger("nxp")
-from jinja2 import Template,Environment
+from jinja2 import Template
 import commands
 import paramiko
 import requests
@@ -15,24 +15,15 @@ from ansible.plugins.callback import CallbackBase
 from ansible.executor.playbook_executor import PlaybookExecutor
 
 pkey='/root/.ssh/id_rsa'
-head_file="/opt/app/nxp/templates/nginx/head.conf"
-shihui_https_file="/opt/app/nxp/templates/nginx/17shihui_https.conf"
 vhost_j2="/opt/app/nxp/templates/nginx/vhost.j2"
 upstream_j2="/opt/app/nxp/templates/nginx/upstream.j2"
-hiwemeet_https_file="/opt/app/nxp/templates/nginx/hiwemeet_https.conf"
-context_file="/opt/app/nxp/templates/nginx/context.conf"
 redirect_file="/opt/app/nxp/templates/nginx/redirect.conf"
-tail_file="/opt/app/nxp/templates/nginx/tail.conf"
-upstream_file="/opt/app/nxp/templates/nginx/upstream.conf"
 upstream_tmp_file="/opt/app/nxp/templates/conf/tmp/upstream/{0}.conf"
 vhost_tmp_file="/opt/app/nxp/templates/conf/tmp/vhost.d/{0}.conf"
-ssl_vhost_tmp_file="/opt/app/nxp/templates/conf/tmp/vhost.d/ssl.{0}.conf"
 upstream_release_file="/opt/app/nxp/templates/conf/release/upstream/{0}.conf"
 vhost_release_file="/opt/app/nxp/templates/conf/release/vhost.d/{0}.conf"
-ssl_vhost_release_file="/opt/app/nxp/templates/conf/release/vhost.d/ssl.{0}.conf"
-upstream_online_file="/opt/nginx/conf/upstream/{0}.conf"
-vhost_online_file="/opt/nginx/conf/vhost.d/{0}.conf"
-ssl_vhost_online_file="/opt/nginx/conf/vhost.d/ssl.{0}.conf"
+upstream_online_file="/opt/app/nginx/conf/upstream/{0}.conf"
+vhost_online_file="/opt/app/nginx/conf/vhost.d/{0}.conf"
 
 ###
 sentinel_host=[{"host":"10.0.8.119","port":"26379","db":0}]
@@ -377,7 +368,7 @@ class ANSRunner(object):
         for host, result in self.callback.host_unreachable.items():
             self.results_raw['unreachable'][host] = result._result
 
-        return json.dumps(self.results_raw)
+        return self.results_raw
 
     def get_playbook_result(self):
         self.results_raw = {'skipped': {}, 'failed': {}, 'ok': {}, "status": {}, 'unreachable': {}}

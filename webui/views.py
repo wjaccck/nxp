@@ -1,6 +1,5 @@
 # coding=utf8
-from django.db.models import Q
-from django.shortcuts import render,redirect
+from django.shortcuts import redirect
 from api.models import *
 from django.core.urlresolvers import reverse_lazy
 import forms
@@ -346,23 +345,8 @@ class Run_redis_taskView(Base_Redirect):
         Run_ansible_redis_task().apply_async(args=(redis_task_id,))
         return HttpResponseRedirect('redis-task-list')
 
-# def Run_redis_task(req,redis_task_id):
-#     if req.user.is_authenticated():
-#         task=Redis_task.objects.get(id=redis_task_id)
-#         task.status=Status.objects.get(name='in_queue')
-#         task.save()
-#         Run_ansible_redis_task().apply_async(args=(redis_task_id,))
-#         response = redirect('redis-task-list')
-#     else:
-#         response =redirect('login')
-#     return response
-
 class Get_detailTemplate(Base_Template):
     template_name = 'api/detail.html'
-    # def get(self, request, *args, **kwargs):
-    #     site_id=self.kwargs.get('site_id',None)
-    #     context=self.get_context_data(**kwargs)
-    #     return self.render_to_response(context)
     def get_context_data(self, **kwargs):
         context=super(Get_detailTemplate,self).get_context_data(**kwargs)
         site_id=self.kwargs.get('site_id',None)
@@ -374,22 +358,6 @@ class Get_detailTemplate(Base_Template):
         context['detail']=detail
         context['site_id']=site_id
         return context
-
-# def Get_detail(req,site_id):
-#     if req.user.is_authenticated():
-#         site=Site.objects.get(id=site_id)
-#         detail=[x for x in Site_context.objects.filter(site=site)]
-#
-#         response = render(req,'api/detail.html',{"username":req.user.last_name,
-#                                                   "active":"nginx",
-#                                                    "site":site.name,
-#                                                    "detail":detail,
-#                                                     "site_id":site_id
-#                                                   }
-#                           )
-#     else:
-#         response =redirect('login')
-#     return response
 
 class Generate_vhostTemplate(Base_Template):
     template_name = 'api/conf.html'
@@ -458,100 +426,7 @@ class Generate_vhostTemplate(Base_Template):
         context['site_id']=site_id
         context['conf']=new_content
         return context
-#
-# def Generate_conf(req, site_id):
-#     if req.user.is_authenticated():
-#         site = Site.objects.get(id=site_id)
-#         file_list = []
-#         if site.redirect_status:
-#             content = get_file_content(redirect_file)
-#             vhost_tmp_conf = open(vhost_tmp_file.format(site.name), 'w')
-#             vhost_tmp_conf.write(content.replace('http_host', site.name))
-#             vhost_tmp_conf.write('\r\n    ')
-#             for m in Site_headers.objects.filter(site=site):
-#                 vhost_tmp_conf.write(';\r\n        '.join(m.extra_conf.__str__().split(';')))
-#             vhost_tmp_conf.close()
-#         else:
-#             detail = [x for x in Site_context.objects.filter(site=site)]
-#             ## get template for nginx vhost and upstream
-#             if site.https:
-#                 if site.name.endswith('17shihui.com'):
-#                     head_content = get_file_content(shihui_https_file)
-#                 else:
-#                     head_content = get_file_content(hiwemeet_https_file)
-#             else:
-#                 head_content=get_file_content(head_file)
-#             context_content=get_file_content(context_file)
-#             tail_content = get_file_content(tail_file)
-#             upstream_content = get_file_content(upstream_file)
-#
-#             upstreams=[ x.upstream for x in detail if x.upstream.status.name=='undo']
-#
-#             for m in upstreams:
-#                 m_content=None
-#                 if m.direct_status:
-#                     pass
-#                 else:
-#                     upstream_tmp_conf=open(upstream_tmp_file.format(m.name),'w')
-#                     m_content=upstream_content.replace('upstream_name',m.name)
-#                     back_end_list=[ "server {0}:{1};".format(x.name,m.port) for x in m.hosts.all()]+["server {0}:{1};".format(x.host.name,x.port) for x in m.docker_list.all()]
-#                     if m.ip_hash:
-#                         back_end_list.insert(0,'ip_hash;')
-#                     m_content=m_content.replace('back_end','\n    '.join(back_end_list))
-#                     upstream_tmp_conf.write(m_content)
-#                     upstream_tmp_conf.close()
-#                     logger.info("create upstream conf {0}".format(upstream_tmp_file.format(m.name)))
-#                     file_list.append(upstream_tmp_file.format(m.name))
-#             if site.https:
-#                 vhost_tmp_conf=open(ssl_vhost_tmp_file.format(site.name),'w')
-#             else:
-#                 vhost_tmp_conf=open(vhost_tmp_file.format(site.name),'w')
-#
-#             vhost_tmp_conf.write(head_content.replace('http_host',site.name))
-#             vhost_tmp_conf.write('\r\n    ')
-#             for n in Site_headers.objects.filter(site=site):
-#                 vhost_tmp_conf.write(';\r\n        '.join(n.extra_conf.split(';')))
-#             for m in detail:
-#                 m_content=context_content.replace('context_path',m.context)
-#                 if m.upstream:
-#                     if m.proxy_path:
-#                         m_upstream_name=m.upstream.name.strip()+m.proxy_path.strip()
-#                     else:
-#                         m_upstream_name=m.upstream.name
-#                     m_content=m_content.replace('upstream_name',m_upstream_name)
-#                 else:
-#                     m_content=m_content.replace('proxy_pass  http://upstream_name;','')
-#                 m_parametres=[x.strip() for x in m.extra_parametres.split(';')]
-#                 if m.default_proxy_set:
-#                     m_parametres.insert(0,'include proxy_conf')
-#                 if m.lua_status:
-#                     m_parametres.insert(1,'log_by_lua_file /opt/nginx/conf/status/kafka.lua')
-#                 m_content=m_content.replace('extra_parametres',';\r\n        '.join(m_parametres))
-#                 vhost_tmp_conf.write(m_content)
-#
-#             vhost_tmp_conf.write(tail_content)
-#             vhost_tmp_conf.close()
-#         if site.https:
-#             logger.info("create upstream conf {0}".format(ssl_vhost_tmp_file.format(site.name)))
-#             file_list.append(ssl_vhost_tmp_file.format(site.name))
-#         else:
-#             logger.info("create upstream conf {0}".format(vhost_tmp_file.format(site.name)))
-#             file_list.append(vhost_tmp_file.format(site.name))
-#
-#         new_content=''
-#         for m in file_list:
-#             new_content=new_content+"\r\n####%s####\r\n%s\r\n" %(m,get_file_content(m))
-#
-#         response = render(req, 'api/conf.html', {"username": req.user.last_name,
-#                                                    "active": "nginx",
-#                                                    "conf": new_content,
-#                                                     "site": site.name,
-#                                                     "site_id": site_id
-#                                                    }
-#                           )
-#     else:
-#         response = redirect('login')
-#     return response
+
 class Check_confTemplate(Base_Template):
     template_name = 'api/check.html'
 
@@ -588,64 +463,6 @@ class Check_confTemplate(Base_Template):
 
         return context
 
-# def Conf_check(req, site_id):
-#     if req.user.is_authenticated():
-#         all_status=True
-#         site = Site.objects.get(id=site_id)
-#         if site.https:
-#             result =getComStr("rsync -av {0} {1}".format(ssl_vhost_tmp_file.format(site.name),ssl_vhost_release_file.format(site.name)))
-#         else:
-#             result =getComStr("rsync -av {0} {1}".format(vhost_tmp_file.format(site.name),vhost_release_file.format(site.name)))
-#         if result.get('retcode') != 0:
-#             all_status = False
-#             logger.error(result)
-#         detail = [x for x in Site_context.objects.filter(site=site)]
-#         upstreams=[ x.upstream for x in detail if x.upstream.status.name=='undo']
-#         for m in upstreams:
-#             if not m.direct_status:
-#                 result=getComStr("rsync -av {0} {1}".format(upstream_tmp_file.format(m.name), upstream_release_file.format(m.name)))
-#                 if result.get('retcode') != 0:
-#                     all_status=False
-#                     logger.error(result)
-#         # if site.https:
-#         #     result=getComStr("rsync -av {0} {1}".format(ssl_vhost_release_file.format(site.name),ssl_vhost_online_file.format(site.name)))
-#         # else:
-#         #     result=getComStr("rsync -av {0} {1}".format(vhost_release_file.format(site.name),vhost_online_file.format(site.name)))
-#         # if result.get('retcode') != 0:
-#         #     all_status = False
-#         #     logger.error(result)
-#         # for m in upstreams:
-#         #     result=getComStr("rsync -av {0} {1}".format(upstream_release_file.format(m.name), upstream_online_file.format(m.name)))
-#         #     if result.get('retcode') != 0:
-#         #         all_status=False
-#         #         logger.error(result)
-#         result =getComStr("/opt/nginx/sbin/nginx -t -c /opt/nginx/conf/nginx.conf")
-#         if result.get('retcode') != 0:
-#             all_status = False
-#             logger.error(result)
-#         if all_status:
-#             response = render(req, 'api/check.html', {"username": req.user.last_name,
-#                                                        "active": "nginx",
-#                                                        "site": site.name,
-#                                                        "site_id": site_id,
-#                                                        "group":site.group,
-#                                                        "content":"Check pass",
-#                                                        "all_status":all_status
-#                                                        }
-#                               )
-#         else:
-#             response = render(req, 'api/check.html', {"username": req.user.last_name,
-#                                                        "active": "nginx",
-#                                                        "site": site.name,
-#                                                        "site_id": site_id,
-#                                                        "content":"Check failed ! please check cmd.log",
-#                                                         "all_status":all_status
-#                                                        }
-#                               )
-#     else:
-#         response = redirect('login')
-#     return response
-
 class Create_tran_mission(Base_Redirect):
     def get(self, request, *args, **kwargs):
         site_id = self.kwargs.get('site_id', None)
@@ -666,40 +483,6 @@ class Create_tran_mission(Base_Redirect):
                                        )
         return HttpResponseRedirect('/mission/?keyword={0}'.format(mark))
 
-# def Create_tran_mission(req, site_id):
-#     if req.user.is_authenticated():
-#         site = Site.objects.get(id=site_id)
-#         detail = [x for x in Site_context.objects.filter(site=site)]
-#         file_list = []
-#         ## get template for nginx vhost and upstream
-#         upstreams=[ x.upstream for x in detail if x.upstream.status.name=='undo']
-#
-#         file_list=[]
-#
-#         for m in upstreams:
-#             if not m.direct_status:
-#                 file_list.append(upstream_online_file.format(m.name))
-#         if site.https:
-#             file_list.append(ssl_vhost_online_file.format(site.name))
-#         else:
-#             file_list.append(vhost_online_file.format(site.name))
-#
-#         mark=uuid.uuid4()
-#         for i in site.group.hosts.all():
-#             Nxp_mission.objects.create(site=site,
-#                                        mark=mark,
-#                                        host=i,
-#                                        files=','.join(file_list),
-#                                        status=Status.objects.get(name='undo')
-#                                        )
-#
-#
-#
-#         response = redirect('/mission/?keyword={0}'.format(mark))
-#     else:
-#         response = redirect('login')
-#     return response
-
 class Get_upstream_detailTemplate(Base_Template):
     template_name = 'api/upstream_detail.html'
     def get_context_data(self, **kwargs):
@@ -710,18 +493,6 @@ class Get_upstream_detailTemplate(Base_Template):
         context['active']='nginx'
         context['upstream']=upstream
         return context
-
-# def Get_upstream_detail(req,upstream_id):
-#     if req.user.is_authenticated():
-#         upstream=Upstream.objects.get(id=upstream_id)
-#         response = render(req,'api/upstream_detail.html',{"username":req.user.last_name,
-#                                                   "active":"nginx",
-#                                                    "upstream":upstream,
-#                                                   }
-#                           )
-#     else:
-#         response =redirect('login')
-#     return response
 
 class Generate_upstream_confTemplate(Base_Template):
     template_name = 'api/upstream_conf.html'
@@ -749,40 +520,6 @@ class Generate_upstream_confTemplate(Base_Template):
         context['conf']=new_content
         context['upstream']=upstream
         return context
-#
-# def Generate_upstream_conf(req, upstream_id):
-#     if req.user.is_authenticated():
-#         upstream = Upstream.objects.get(id=upstream_id)
-#         file_list = []
-#         upstream_content = get_file_content(upstream_file)
-#
-#         if upstream.direct_status:
-#             pass
-#         else:
-#             upstream_tmp_conf=open(upstream_tmp_file.format(upstream.name),'w')
-#             upstream_content=upstream_content.replace('upstream_name',upstream.name)
-#             back_end_list=[ "server {0}:{1};".format(x.name,upstream.port) for x in upstream.hosts.all()]+["server {0}:{1};".format(x.host.name,x.port) for x in upstream.docker_list.all()]
-#             if upstream.ip_hash:
-#                 back_end_list.insert(0,'ip_hash;')
-#             upstream_content=upstream_content.replace('back_end','\n    '.join(back_end_list))
-#             upstream_tmp_conf.write(upstream_content)
-#             upstream_tmp_conf.close()
-#             logger.info("create upstream conf {0}".format(upstream_tmp_file.format(upstream.name)))
-#             file_list.append(upstream_tmp_file.format(upstream.name))
-#
-#         new_content=''
-#         for m in file_list:
-#             new_content=new_content+"\r\n####%s####\r\n%s\r\n" %(m,get_file_content(m))
-#
-#         response = render(req, 'api/upstream_conf.html', {"username": req.user.last_name,
-#                                                    "active": "nginx",
-#                                                    "conf": new_content,
-#                                                     "upstream": upstream,
-#                                                    }
-#                           )
-#     else:
-#         response = redirect('login')
-#     return response
 
 class Check_upstreamTemplate(Base_Template):
     template_name = 'api/upstream_check.html'
@@ -799,7 +536,7 @@ class Check_upstreamTemplate(Base_Template):
             if result.get('retcode') != 0:
                 all_status = False
                 logger.error(result)
-            result = getComStr("/opt/nginx/sbin/nginx -t -c /opt/nginx/conf/nginx.conf")
+            result = getComStr("/opt/app/nginx/sbin/nginx -t -c /opt/app/nginx/conf/nginx.conf")
             if result.get('retcode') != 0:
                 all_status = False
                 logger.error(result)
@@ -812,39 +549,6 @@ class Check_upstreamTemplate(Base_Template):
         context['content']=content
         context['upstream']=upstream
         return context
-
-# def Conf_upstream_check(req, upstream_id):
-#     if req.user.is_authenticated():
-#         all_status=True
-#         upstream=Upstream.objects.get(id=upstream_id)
-#         if not upstream.direct_status:
-#             result=getComStr("rsync -av {0} {1}".format(upstream_tmp_file.format(upstream.name), upstream_release_file.format(upstream.name)))
-#             if result.get('retcode') != 0:
-#                 all_status=False
-#                 logger.error(result)
-#         result =getComStr("/opt/nginx/sbin/nginx -t -c /opt/nginx/conf/nginx.conf")
-#         if result.get('retcode') != 0:
-#             all_status = False
-#             logger.error(result)
-#         if all_status:
-#             response = render(req, 'api/upstream_check.html', {"username": req.user.last_name,
-#                                                        "active": "nginx",
-#                                                        "upstream": upstream,
-#                                                        "content":"Check pass",
-#                                                        "all_status":all_status
-#                                                        }
-#                               )
-#         else:
-#             response = render(req, 'api/upstream_check.html', {"username": req.user.last_name,
-#                                                        "active": "nginx",
-#                                                        "upstream": upstream,
-#                                                        "content":"Check failed ! please check cmd.log",
-#                                                         "all_status":all_status
-#                                                        }
-#                               )
-#     else:
-#         response = redirect('login')
-#     return response
 
 class Create_upstream_tran_mission(Base_Redirect):
     def get(self, request, *args, **kwargs):
@@ -873,39 +577,6 @@ class Create_upstream_tran_mission(Base_Redirect):
                                            )
             response=HttpResponseRedirect('/mission/?keyword={0}'.format(mark))
         return response
-
-# def Create_upstream_tran_mission(req, upstream_id):
-#     if req.user.is_authenticated():
-#         upstream=Upstream.objects.get(id=upstream_id)
-#         file_list=[]
-#
-#         if not upstream.direct_status:
-#             file_list.append(upstream_online_file.format(upstream.name))
-#
-#         mark=uuid.uuid4()
-#         all_host=[]
-#         if upstream.group:
-#             all_host.extend(upstream.group.hosts.all())
-#
-#         else:
-#             for m in Nginx_group.objects.filter(name='intra'):
-#                 all_host.extend(m.hosts.all())
-#             for m in Nginx_group.objects.filter(name='public'):
-#                 all_host.extend(m.hosts.all())
-#         for i in all_host:
-#             Nxp_mission.objects.create(
-#                                        mark=mark,
-#                                        host=i,
-#                                        files=','.join(file_list),
-#                                        status=Status.objects.get(name='undo')
-#                                        )
-#
-#
-#
-#         response = redirect('/mission/?keyword={0}'.format(mark))
-#     else:
-#         response = redirect('login')
-#     return response
 
 class Tran_missionViewSet(Base_ListViewSet):
     Nxp_mission.objects.all().count()
@@ -991,47 +662,6 @@ class Fun_queryTemplate(Base_Template):
         context['username']=self.request.user.last_name
         context['active']='nginx'
         return context
-
-# def Fun_queryView(req):
-#     if req.user.is_authenticated():
-#         try:
-#             name=req.GET['name']
-#         except:
-#             name=None
-#         if name:
-#             info_status = True
-#             all_info=[]
-#             host = Ipv4Address.objects.get(name=name)
-#             apps=host.app_host.all()
-#             for m in Upstream.objects.all():
-#                 for n in m.app.apps.all():
-#                     if n in apps:
-#                         all_info.append({
-#                             "app":n,
-#                             "upstream":m,
-#                             "site_context":m.context_upstream.all()
-#                         })
-#
-#             # site=[{"host":host,"site_all":x.context_upstream.all(),"upstream":x} for x in upstreams]
-#             # context['all_info'] = map(lambda x: {"host": name, "upstream": x.name, "site": x.context_upstream.all()},
-#             #                           host.upstream_host.all())
-#
-#             # all_info = [{"host":host,"site_all":x.context_upstream.all(),"upstream":x} for x in upstreams]
-#         else:
-#             all_info = []
-#             info_status = False
-#         response = render(req, 'api/fun_query.html', {"username": req.user.last_name,
-#                                                    "active": "nginx",
-#                                                    "info_status":info_status,
-#                                                    "all_info":all_info
-#                                                    }
-#                           )
-#     else:
-#         response = redirect('login')
-#     return response
-
-
-#### redis views
 
 class Redis_instance_CreateViewSet(Base_CreateViewSet):
     model = Redis_instance
@@ -1177,29 +807,6 @@ class Codis_detailTemplate(Base_Template):
         context['all_info']=all_info
         return context
 
-#
-# def Codis_detailView(req,codis_id):
-#     if req.user.is_authenticated():
-#         try:
-#             codis=Codis.objects.get(id=codis_id)
-#         except:
-#             codis=[]
-#
-#
-#         if codis:
-#             all_info=codis.member.all()
-#             response = render(req, 'api/codis-detail.html', {"username": req.user.last_name,
-#                                                              "active": "redis",
-#                                                              "all_info": all_info,
-#                                                              "codis": codis.name
-#                                                              }
-#                               )
-#         else:
-#             response = HttpResponseBadRequest("not existed this codis")
-#     else:
-#         response = redirect('login')
-#     return response
-
 class Sentinel_detailTemplate(Base_Template):
     template_name = 'api/sentinel-detail.html'
     def get_context_data(self, **kwargs):
@@ -1221,27 +828,6 @@ class Sentinel_detailTemplate(Base_Template):
         context['active']='redis'
         context['all_info']=all_info
         return context
-
-# def Sentinel_detailView(req,sentinel_id):
-#     if req.user.is_authenticated():
-#         try:
-#             sentinel=Sentinel.objects.get(id=sentinel_id)
-#         except:
-#             sentinel=None
-#
-#         if sentinel:
-#             all_info=sentinel.member.all()
-#             response = render(req, 'api/sentinel-detail.html', {"username": req.user.last_name,
-#                                                              "active": "redis",
-#                                                              "all_info": all_info,
-#                                                              "sentinel": sentinel.name
-#                                                              }
-#                               )
-#         else:
-#             response = HttpResponseBadRequest("not existed this sentinel")
-#     else:
-#         response = redirect('login')
-#     return response
 
 class Codis_queryTemplate(Base_Template):
     template_name = 'api/query-detail.html'
@@ -1296,67 +882,6 @@ class Codis_queryTemplate(Base_Template):
         context['sentinel_slave']=sentinel_slave
         context['sentinel_offline']=sentinel_offline
         return context
-
-# def Codis_queryView(req):
-#     if req.user.is_authenticated():
-#         try:
-#             name = req.GET['name']
-#             host = Ipv4Address.objects.get(name=name)
-#         except:
-#             host=None
-#
-#
-#
-#         if host:
-#             redis_instrance=Redis_instance.objects.filter(host=host)
-#             host_name=host.name
-#             group_master=[]
-#             group_offline=[]
-#             group_slave=[]
-#             for m in redis_instrance:
-#                 for n in Redis_group.objects.filter(master=m):
-#                     group_master.append({"group":n,"host":host_name,"port":m.port})
-#             for m in redis_instrance:
-#                 for n in Redis_group.objects.filter(offline=m):
-#                     group_offline.append({"group":n,"host":host_name,"port":m.port})
-#
-#             for m in redis_instrance:
-#                 for n in Redis_group.objects.filter(slave=m):
-#                     group_slave.append({"group":n,"host":host_name,"port":m.port})
-#             # codis
-#             codis_master=[{"codis":x.get("group").codis_group.all(),"group":x.get("group"),"host":x.get("host"),"name":"master","port":x.get("port")} for x in group_master]
-#             codis_offline=[{"codis":x.get("group").codis_group.all(),"group":x.get("group"),"host":x.get("host"),"name":"offline","port":x.get("port")} for x in group_offline]
-#             codis_slave=[{"codis":x.get("group").codis_group.all(),"group":x.get("group"),"host":x.get("host"),"name":"slave","port":x.get("port")} for x in group_slave]
-#
-#             #sentinel
-#             sentinel_master=[{"sentinel":x.get("group").sentinel_group.all(),"group":x.get("group"),"host":x.get("host"),"name":"master","port":x.get("port")} for x in group_master]
-#             sentinel_offline=[{"sentinel":x.get("group").sentinel_group.all(),"group":x.get("group"),"host":x.get("host"),"name":"offline","port":x.get("port")} for x in group_offline]
-#             sentinel_slave=[{"sentinel":x.get("group").sentinel_group.all(),"group":x.get("group"),"host":x.get("host"),"name":"slave","port":x.get("port")} for x in group_slave]
-#
-#             response = render(req, 'api/query-detail.html', {"username": req.user.last_name,
-#                                                              "active": "redis",
-#                                                              "codis_master": codis_master,
-#                                                              "codis_slave": codis_slave,
-#                                                              "codis_offline": codis_offline,
-#                                                              "sentinel_master": sentinel_master,
-#                                                              "sentinel_slave": sentinel_slave,
-#                                                              "sentinel_offline": sentinel_offline,
-#                                                              }
-#                               )
-#         else:
-#             response = render(req, 'api/query-detail.html', {"username": req.user.last_name,
-#                                                              "active": "redis",
-#                                                              "codis_master": [],
-#                                                              "codis_slave": [],
-#                                                              "codis_offline": [],
-#                                                              "sentinel_master": [],
-#                                                              "sentinel_slave": [],
-#                                                              "sentinel_offline": [],
-#                                                              }
-#                               )
-#     else:
-#         response = redirect('login')
-#     return response
 
 class Http_request_countTemplate(Base_Template):
     template_name = 'api/chart.html'
@@ -1423,74 +948,6 @@ class Http_request_countTemplate(Base_Template):
         context['total_count']=total_count
         return context
 
-# def Http_request_countView(req):
-#     if req.user.is_authenticated():
-#         try:
-#             name=req.GET['domain'].strip()
-#         except:
-#             name=None
-#         def get_total(daytime,domain=None):
-#             if domain:
-#                 data=Http_statistics.objects.filter(daytime=daytime,domain=domain)
-#             else:
-#                 data = Http_statistics.objects.filter(daytime=daytime)
-#             total_data=[x.Unknown_status+x.success_status+x.client_err_status+x.server_err_status for x in data]
-#             return sum(total_data).__int__()
-#         def get_unknown(daytime,domain=None):
-#             if domain:
-#                 data=Http_statistics.objects.filter(daytime=daytime,domain=domain)
-#             else:
-#                 data = Http_statistics.objects.filter(daytime=daytime)
-#             unknown_data=[x.Unknown_status for x in data]
-#             return sum(unknown_data).__int__()
-#         def get_success(daytime,domain=None):
-#             if domain:
-#                 data=Http_statistics.objects.filter(daytime=daytime,domain=domain)
-#             else:
-#                 data = Http_statistics.objects.filter(daytime=daytime)
-#             success_data=[x.success_status for x in data]
-#             return sum(success_data).__int__()
-#         def get_client_err(daytime,domain=None):
-#             if domain:
-#                 data=Http_statistics.objects.filter(daytime=daytime,domain=domain)
-#             else:
-#                 data = Http_statistics.objects.filter(daytime=daytime)
-#             client_err_data=[x.client_err_status for x in data]
-#             return sum(client_err_data).__int__()
-#         def get_server_err(daytime,domain=None):
-#             if domain:
-#                 data=Http_statistics.objects.filter(daytime=daytime,domain=domain)
-#             else:
-#                 data = Http_statistics.objects.filter(daytime=daytime)
-#             server_err_data=[x.server_err_status for x in data]
-#             return sum(server_err_data).__int__()
-#
-#         time_line=[]
-#         for m in range(1,8):
-#             p_day = datetime.today() + timedelta(-m)
-#             p_day_format = p_day.strftime('%Y%m%d')
-#             time_line.append(p_day_format)
-#         time_line.reverse()
-#         unknown_count=[get_unknown(x,name) for x in time_line]
-#         client_err_count=[get_client_err(x,name) for x in time_line]
-#         server_err_count=[get_server_err(x,name) for x in time_line]
-#         success_count=[get_success(x,name) for x in time_line]
-#         total_count=[get_total(x,name) for x in time_line]
-#         response = render(req, 'api/chart.html', {
-#                                                     "timeline": time_line,
-#                                                     "domain":name,
-#                                                     "active": "nginx",
-#                                                     "unknown_count":unknown_count,
-#                                                     "client_err_count":client_err_count,
-#                                                     "server_err_count":server_err_count,
-#                                                     "success_count":success_count,
-#                                                     "total_count":total_count
-#                                                    }
-#                           )
-#     else:
-#         response = redirect('login')
-#     return response
-
 class Http_request_statisticsTemplate(Base_Template):
     template_name = 'api/avg.html'
     def get_context_data(self, **kwargs):
@@ -1523,87 +980,3 @@ class Http_request_statisticsTemplate(Base_Template):
         context['avg_count']=avg_list.__len__()
         context['limit']=limit
         return context
-
-
-# def Http_request_statisticsView(req):
-#     if req.user.is_authenticated():
-#         try:
-#             limit=req.GET['limit']
-#         except:
-#             limit=100
-#
-#         def get_total(daytime, domain=None):
-#             data = Http_statistics.objects.filter(daytime=daytime, domain=domain)
-#             total_data = [x.Unknown_status + x.success_status + x.client_err_status + x.server_err_status for x in
-#                           data]
-#             return sum(total_data).__int__()
-#         time_line = []
-#         for m in range(1, 8):
-#             p_day = datetime.today() + timedelta(-m)
-#             p_day_format = p_day.strftime('%Y%m%d')
-#             time_line.append(p_day_format)
-#         domain_list=[x.get('domain') for x in Http_statistics.objects.distinct().values('domain') if 'weimi.me' not in x.get('domain')]
-#
-#         all_info=[]
-#         for m in domain_list:
-#             avg=None
-#             avg=sum([get_total(x,m) for x in time_line])/7
-#             if avg<limit:
-#                 all_info.append({"domain":m,"avg":avg})
-#
-#         avg_list = sorted(all_info, key=lambda all_info: (all_info['avg']), reverse=False)
-#         response = render(req, 'api/avg.html', {
-#                                                     "all_info":avg_list,
-#                                                     "avg_count":avg_list.__len__(),
-#                                                     "limit":limit
-#                                                    }
-#                           )
-#     else:
-#         response = redirect('login')
-#     return response
-
-#
-# class Http_request_ListViewSet(Base_ListViewSet):
-#     Redis_group.objects.all().count()
-#     model = Redis_group
-#     template_name = 'api/request_count.html'
-#     paginate_by = 10
-#
-#     def get_queryset(self):
-#         try:
-#             limit = int(self.request.GET['keyword'])
-#         except:
-#             limit = 100
-#         time_line=[]
-#         for m in range(1,8):
-#             p_day = datetime.today() + timedelta(-m)
-#             p_day_format = p_day.strftime('%Y%m%d')
-#             time_line.append(p_day_format)
-#         time_line.reverse()
-#
-#         all_domain=[x.get('domain') for x in Http_statistics.objects.distinct().values('domain')]
-#
-#         def get_statistics(s_data):
-#             ret_status=True
-#             for i in s_data:
-#                 i_total=i.Unknown_status+i.success_status+i.client_err_status+i.server_err_status
-#                 if i_total>limit:
-#                     ret_status=False
-#
-#             return ret_status
-#
-#         for n in all_domain:
-#             for p in time_line:
-#                 if get_statistics(Http_statistics.objects.filter(domain=n,daytime=p)):
-#
-#
-#
-#         try:
-#             name = self.request.GET['keyword']
-#         except:
-#             pass
-#
-#         if name:
-#             return self.model.objects.filter(name__icontains=name).order_by("-modified_date")
-#         else:
-#             return self.model.objects.all().order_by("-modified_date")
