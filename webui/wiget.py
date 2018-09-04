@@ -28,13 +28,13 @@ class ModelSelect2MultipleWidget(BaseModelSelect2MultipleWidget):
 
 class ApphostSelect2Widget(BaseModelSelect2Widget):
     search_fields = [
-        'host_name__istartswith',
+        'name__istartswith',
         'pk__startswith',
     ]
 
 class AppstatusSelect2Widget(BaseModelSelect2Widget):
     search_fields = [
-        'host_name__istartswith',
+        'name__istartswith',
         'pk__startswith',
     ]
 
