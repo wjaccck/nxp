@@ -458,7 +458,7 @@ class Check_confTemplate(Base_Template):
             if result.get('retcode') != 0:
                 all_status=False
                 logger.error(result)
-        result =getComStr("/opt/nginx/sbin/nginx -t -c /opt/nginx/conf/nginx.conf")
+        result =getComStr("/opt/app/nginx/sbin/nginx -t -c /opt/app/nginx/conf/nginx.conf")
         if result.get('retcode') != 0:
             all_status = False
             logger.error(result)
@@ -616,7 +616,7 @@ def Run_mission(req, mission_id):
         for m in mission.files.split(','):
             m_result=ssh.upload(m,m)
             logger.info("{0} upload {1} to {2} {3}".format(mission.id,m,mission.host.name,m_result))
-        result=ssh.run(' /opt/nginx/sbin/nginx -t -c /opt/nginx/conf/nginx.conf  && /etc/init.d/nginx reload')
+        result=ssh.run(' /opt/app/nginx/sbin/nginx -t -c /opt/app/nginx/conf/nginx.conf  && /etc/init.d/nginx reload')
         logger.info("{0} {1} reload nginx : {2}".format(mission.id,mission.host.name,result))
         if result.get('retcode')==0:
             if mission.site:
