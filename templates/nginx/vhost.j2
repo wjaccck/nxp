@@ -16,7 +16,7 @@ server {
 
     access_log  /data/logs/nginx/{{ domain }}.access.log main;
     error_log  /data/logs/nginx/{{ domain }}.error.log;
-    
+
     {% for header in site_headers %}
     {{ header }};
     {% endfor %}

@@ -620,7 +620,7 @@ def Run_mission(req, mission_id):
         logger.info("{0} {1} reload nginx : {2}".format(mission.id,mission.host.name,result))
         if result.get('retcode')==0:
             if mission.site:
-                for m in Site_context.objects.filter(site=mission.site):
+                for m in Site_context.objects.filter(site=Site.objects.get(name=mission.site)):
                     m.upstream.status=Status.objects.get(name='online')
                     m.upstream.save()
 
