@@ -12,13 +12,11 @@ server {
     ssl_ciphers EECDH+CHACHA20:EECDH+AES128:RSA+AES128:EECDH+AES256:RSA+AES256:EECCDH+3DES:RSA+3DES:!MD5;
     ssl_prefer_server_ciphers on;
 
-    access_log  /data/logs/nginx/{{ domain }}.access.log main;
-    error_log  /data/logs/nginx/{{ domain }}.error.log;
-    {% else %}
-    access_log  /data/logs/nginx/ssl.{{ domain }}.access.log main;
-    error_log  /data/logs/nginx/ssl.{{ domain }}.error.log;
     {% endif %}
 
+    access_log  /data/logs/nginx/{{ domain }}.access.log main;
+    error_log  /data/logs/nginx/{{ domain }}.error.log;
+    
     {% for header in site_headers %}
     {{ header }};
     {% endfor %}

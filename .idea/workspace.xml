@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a8356791-8dff-4783-a146-d6e83154db82" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/nginx/vhost.j2" beforeDir="false" afterPath="$PROJECT_DIR$/templates/nginx/vhost.j2" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -19,14 +19,16 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/webui/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="957">
-              <caret line="91" column="31" lean-forward="true" selection-start-line="91" selection-start-column="31" selection-end-line="91" selection-end-column="31" />
+            <state relative-caret-position="220">
+              <caret line="618" column="109" selection-start-line="618" selection-start-column="92" selection-end-line="618" selection-end-column="109" />
               <folding>
                 <element signature="e#14#58#0" expanded="true" />
                 <element signature="e#754#1610#0" />
                 <element signature="e#1664#1801#0" />
                 <element signature="e#1855#1992#0" />
                 <element signature="e#2042#2433#0" />
+                <element signature="e#2482#2867#0" />
+                <element signature="e#2887#3040#0" />
                 <element signature="e#2921#3324#0" />
                 <element signature="e#3382#3535#0" />
                 <element signature="e#3593#3746#0" />
@@ -58,14 +60,12 @@
                 <element signature="e#10606#10962#0" />
                 <element signature="e#11416#12134#0" />
                 <element signature="e#12891#15468#0" />
-                <element signature="e#20519#22042#0" />
                 <element signature="e#25429#26379#0" />
                 <element signature="e#27708#28138#0" />
                 <element signature="e#28727#29887#0" />
                 <element signature="e#31680#32920#0" />
                 <element signature="e#34797#36038#0" />
                 <element signature="e#37275#37724#0" />
-                <element signature="e#37764#39329#0" />
                 <element signature="e#39375#40486#0" />
                 <element signature="e#42210#42379#0" />
                 <element signature="e#42441#42610#0" />
@@ -108,15 +108,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="apps_group.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/api/apps_group.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="58" selection-start-line="58" selection-end-line="60" selection-end-column="35" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/webui/urls.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -135,24 +126,27 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/models.py">
+      <file leaf-file-name="vhost.j2" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/nginx/vhost.j2">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <folding>
-                <element signature="e#0#39#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="-360">
+              <caret line="18" column="4" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="4" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/api/models.py">
+      <file leaf-file-name="common.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/common.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="840">
-              <caret line="59" column="24" lean-forward="true" selection-start-line="59" selection-start-column="24" selection-end-line="59" selection-end-column="24" />
+            <state relative-caret-position="185">
+              <caret line="135" column="8" selection-start-line="135" selection-start-column="8" selection-end-line="135" selection-end-column="8" />
             </state>
           </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/views.py">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
@@ -167,7 +161,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="wiget.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="wiget.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/webui/wiget.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="361">
@@ -237,7 +231,6 @@
         <option value="$PROJECT_DIR$/templates/api/site.html" />
         <option value="$PROJECT_DIR$/templates/nginx/nginx.j2" />
         <option value="$PROJECT_DIR$/abstract/views.py" />
-        <option value="$PROJECT_DIR$/templates/nginx/vhost.j2" />
         <option value="$PROJECT_DIR$/templates/api/detail.html" />
         <option value="$PROJECT_DIR$/templates/api/upstream_detail.html" />
         <option value="$PROJECT_DIR$/templates/api/fun_query.html" />
@@ -246,12 +239,13 @@
         <option value="$PROJECT_DIR$/api/models.py" />
         <option value="$PROJECT_DIR$/core/common.py" />
         <option value="$PROJECT_DIR$/webui/forms.py" />
-        <option value="$PROJECT_DIR$/webui/views.py" />
         <option value="$PROJECT_DIR$/templates/api/apps_form.html" />
         <option value="$PROJECT_DIR$/templates/api/apps.html" />
         <option value="$PROJECT_DIR$/webui/urls.py" />
         <option value="$PROJECT_DIR$/templates/webui/index.html" />
         <option value="$PROJECT_DIR$/webui/wiget.py" />
+        <option value="$PROJECT_DIR$/webui/views.py" />
+        <option value="$PROJECT_DIR$/templates/nginx/vhost.j2" />
       </list>
     </option>
   </component>
@@ -268,7 +262,7 @@
       <path value="$PROJECT_DIR$/static/assets/global/plugins/bootstrap-sessiontimeout/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1378" />
@@ -291,13 +285,24 @@
             <path>
               <item name="nxp" type="b2602c69:ProjectViewProjectNode" />
               <item name="nxp" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="nxp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="nxp" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="nxp" type="b2602c69:ProjectViewProjectNode" />
               <item name="nxp" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="webui" type="462c0819:PsiDirectoryNode" />
+              <item name="conf" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="nxp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="nxp" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="nginx" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="nxp" type="b2602c69:ProjectViewProjectNode" />
@@ -556,7 +561,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -597,13 +602,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/templates/nginx/head.conf">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="11" column="39" lean-forward="true" selection-end-line="11" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/api/conf.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="519">
@@ -812,13 +810,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/nginx/vhost.j2">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1650">
-          <caret line="55" column="48" selection-start-line="55" selection-start-column="40" selection-end-line="55" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/api/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="630">
@@ -873,13 +864,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/common.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="21" selection-start-line="21" selection-end-line="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/core/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -917,16 +901,59 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/webui/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/webui/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="120" column="24" lean-forward="true" selection-start-line="120" selection-start-column="24" selection-end-line="120" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webui/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="53" column="44" selection-start-line="53" selection-start-column="44" selection-end-line="53" selection-end-column="44" />
+          <folding>
+            <element signature="e#15#71#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webui/wiget.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="36" column="9" selection-start-line="36" selection-start-column="9" selection-end-line="36" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/views.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/common.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="185">
+          <caret line="135" column="8" selection-start-line="135" selection-start-column="8" selection-end-line="135" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/webui/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="957">
-          <caret line="91" column="31" lean-forward="true" selection-start-line="91" selection-start-column="31" selection-end-line="91" selection-end-column="31" />
+        <state relative-caret-position="220">
+          <caret line="618" column="109" selection-start-line="618" selection-start-column="92" selection-end-line="618" selection-end-column="109" />
           <folding>
             <element signature="e#14#58#0" expanded="true" />
             <element signature="e#754#1610#0" />
             <element signature="e#1664#1801#0" />
             <element signature="e#1855#1992#0" />
             <element signature="e#2042#2433#0" />
+            <element signature="e#2482#2867#0" />
+            <element signature="e#2887#3040#0" />
             <element signature="e#2921#3324#0" />
             <element signature="e#3382#3535#0" />
             <element signature="e#3593#3746#0" />
@@ -958,14 +985,12 @@
             <element signature="e#10606#10962#0" />
             <element signature="e#11416#12134#0" />
             <element signature="e#12891#15468#0" />
-            <element signature="e#20519#22042#0" />
             <element signature="e#25429#26379#0" />
             <element signature="e#27708#28138#0" />
             <element signature="e#28727#29887#0" />
             <element signature="e#31680#32920#0" />
             <element signature="e#34797#36038#0" />
             <element signature="e#37275#37724#0" />
-            <element signature="e#37764#39329#0" />
             <element signature="e#39375#40486#0" />
             <element signature="e#42210#42379#0" />
             <element signature="e#42441#42610#0" />
@@ -989,34 +1014,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/webui/urls.py">
+    <entry file="file://$PROJECT_DIR$/templates/nginx/vhost.j2">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/webui/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="120" column="24" lean-forward="true" selection-start-line="120" selection-start-column="24" selection-end-line="120" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webui/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="53" column="44" selection-start-line="53" selection-start-column="44" selection-end-line="53" selection-end-column="44" />
-          <folding>
-            <element signature="e#15#71#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webui/wiget.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="36" column="9" selection-start-line="36" selection-start-column="9" selection-end-line="36" selection-end-column="9" />
+        <state relative-caret-position="-360">
+          <caret line="18" column="4" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="4" />
         </state>
       </provider>
     </entry>
