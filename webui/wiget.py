@@ -41,6 +41,7 @@ class AppstatusSelect2Widget(BaseModelSelect2Widget):
 class AppsModelSelect2MultipleWidget(BaseModelSelect2MultipleWidget):
     search_fields = [
         'host__name__istartswith',
+        'port__istartswith',
         'pk__startswith',
     ]
 
