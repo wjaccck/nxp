@@ -19,18 +19,18 @@ class IndexTemplateView(Base_Template):
 
     def get_context_data(self, **kwargs):
         context=super(IndexTemplateView,self).get_context_data(**kwargs)
-        http_count = Site.objects.filter(https=False).count()
-        https_count = Site.objects.filter(https=True).count()
-        upstream_count = Upstream.objects.all().count()
-        public_count = Site.objects.filter(group=Nginx_group.objects.get(name='public')).count()
-        intra_count = Site.objects.filter(group=Nginx_group.objects.get(name='intra')).count()
+        # http_count = Site.objects.filter(https=False).count()
+        # https_count = Site.objects.filter(https=True).count()
+        # upstream_count = Upstream.objects.all().count()
+        # public_count = Site.objects.filter(group=Nginx_group.objects.get(name='public')).count()
+        # intra_count = Site.objects.filter(group=Nginx_group.objects.get(name='intra')).count()
         context['username']=self.request.user.last_name
         context['active']='index'
-        context['http_count']=http_count
-        context['https_count']=https_count
-        context['upstream_count']=upstream_count
-        context['public_count']=public_count
-        context['intra_count']=intra_count
+        # context['http_count']=http_count
+        # context['https_count']=https_count
+        # context['upstream_count']=upstream_count
+        # context['public_count']=public_count
+        # context['intra_count']=intra_count
         return context
 
 class Status_CreateViewSet(Base_CreateViewSet):
