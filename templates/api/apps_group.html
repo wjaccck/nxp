@@ -74,6 +74,9 @@
 									 APPS
 								</th>
                                 <th>
+									 操作
+								</th>
+                                <th>
 									 创建日期
 								</th>
 							</tr>
@@ -89,6 +92,9 @@
                                             {% endfor %}
 
                                         </td>
+                                        {% if user.is_superuser %}
+                                        <td><a  href="{% url 'apps-group-update' m.id %} ">修改</a></td>
+                                        {% endif %}
                                         <td>{{ m.created_date |date:'Y-m-d H:i:s' }}</td>
                                     </tr>
                                 {% endfor %}
