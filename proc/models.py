@@ -10,7 +10,7 @@ class Machine_procs(CommonModel,NGINX_BASE):
     pid=models.IntegerField()
     name=models.CharField(max_length=200)
     username=models.CharField(max_length=50)
-    start_time=models.DateTimeField()
+    create_time=models.DateTimeField()
     status=models.CharField(max_length=10)
 
     @staticmethod
@@ -22,7 +22,7 @@ class History_procs(CommonModel,NGINX_BASE):
     pid=models.IntegerField()
     name=models.CharField(max_length=200)
     username=models.CharField(max_length=50)
-    start_time=models.DateTimeField()
+    create_time=models.DateTimeField()
     record=models.CharField(max_length=10)
 
     @staticmethod
