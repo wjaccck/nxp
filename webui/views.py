@@ -1,6 +1,7 @@
 # coding=utf8
 from django.shortcuts import redirect
 from api.models import *
+from proc.models import History_procs
 from django.core.urlresolvers import reverse_lazy
 import forms
 import uuid
@@ -992,3 +993,22 @@ class Http_request_statisticsTemplate(Base_Template):
         context['avg_count']=avg_list.__len__()
         context['limit']=limit
         return context
+
+
+class Historyprocs_ListViewSet(Base_ListViewSet):
+    History_procs.objects.all().count()
+    model = History_procs
+    template_name = 'api/procs.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        name = None
+        try:
+            name = self.request.GET['keyword']
+        except:
+            pass
+
+        if name:
+            return self.model.objects.filter(host=name)
+        else:
+            return self.model.objects.all()

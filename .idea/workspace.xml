@@ -2,7 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a8356791-8dff-4783-a146-d6e83154db82" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/webui/wiget.py" beforeDir="false" afterPath="$PROJECT_DIR$/webui/wiget.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proc/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proc/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proc/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proc/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proc/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proc/serializers.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proc/tasks.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proc/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proc/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proc/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/api/porcs.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/webui/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/webui/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webui/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/webui/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webui/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/webui/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -16,80 +30,57 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="apps_group.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/api/apps_group.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="97" column="89" lean-forward="true" selection-start-line="97" selection-start-column="89" selection-end-line="97" selection-end-column="89" />
-            </state>
-          </provider>
+      <file leaf-file-name="serializers.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/proc/serializers.py">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/api/views.py">
+        <entry file="file://$PROJECT_DIR$/proc/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2091">
-              <caret line="22" column="33" selection-start-line="22" selection-start-column="33" selection-end-line="22" selection-end-column="33" />
+            <state relative-caret-position="270">
+              <caret line="9" column="31" lean-forward="true" selection-start-line="9" selection-start-column="31" selection-end-line="9" selection-end-column="31" />
               <folding>
-                <element signature="e#18#52#0" expanded="true" />
+                <element signature="e#13#51#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/abstract/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="serializers.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/api/serializers.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="83" column="26" lean-forward="true" selection-start-line="83" selection-start-column="26" selection-end-line="83" selection-end-column="26" />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/api/urls.py">
+        <entry file="file://$PROJECT_DIR$/proc/urls.py">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="tasks.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/webui/tasks.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="10" column="40" selection-start-line="10" selection-start-column="40" selection-end-line="10" selection-end-column="40" />
+            <state relative-caret-position="-360">
+              <caret line="16" column="26" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/api/models.py">
+      <file leaf-file-name="tasks.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/proc/tasks.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="32" column="17" selection-start-line="32" selection-start-column="17" selection-end-line="32" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/webui/forms.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="70" column="37" selection-start-line="70" selection-start-column="37" selection-end-line="70" selection-end-column="37" />
+            <state relative-caret-position="-195">
+              <caret line="34" column="22" selection-start-line="34" selection-start-column="22" selection-end-line="34" selection-end-column="22" />
               <folding>
-                <element signature="e#15#71#0" expanded="true" />
+                <element signature="e#14#42#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="wiget.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/webui/wiget.py">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/webui/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="43" column="13" selection-start-line="43" selection-start-column="13" selection-end-line="43" selection-end-column="13" />
+            <state relative-caret-position="511">
+              <caret line="1012" column="13" lean-forward="true" selection-start-line="1012" selection-start-column="13" selection-end-line="1012" selection-end-column="13" />
+              <folding>
+                <element signature="e#14#51#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -98,16 +89,40 @@
         <entry file="file://$PROJECT_DIR$/webui/urls.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="390">
-              <caret line="22" column="110" selection-start-line="22" selection-start-column="93" selection-end-line="22" selection-end-column="110" />
+              <caret line="13" column="83" selection-start-line="13" selection-start-column="73" selection-end-line="13" selection-end-column="83" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="group.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/api/group.html">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/webui/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="98" selection-start-line="98" selection-end-line="100" selection-end-column="51" />
+            <state relative-caret-position="345">
+              <caret line="156" column="28" lean-forward="true" selection-start-line="156" selection-start-column="28" selection-end-line="156" selection-end-column="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="porcs.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/api/porcs.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="435">
+              <caret line="99" column="63" selection-start-line="99" selection-start-column="63" selection-end-line="99" selection-end-column="63" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/proc/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-45">
+              <caret line="12" column="14" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="14" />
+              <folding>
+                <element signature="e#14#53#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -137,12 +152,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/templates/api/codis.html" />
-        <option value="$PROJECT_DIR$/templates/api/codis-detail.html" />
-        <option value="$PROJECT_DIR$/templates/api/query-detail.html" />
-        <option value="$PROJECT_DIR$/templates/api/docker_form.html" />
-        <option value="$PROJECT_DIR$/templates/api/docker.html" />
-        <option value="$PROJECT_DIR$/templates/nginx/shihui_https.conf" />
         <option value="$PROJECT_DIR$/templates/nginx/hiwemeet_https.conf" />
         <option value="$PROJECT_DIR$/templates/api/redis_task_form.html" />
         <option value="$PROJECT_DIR$/templates/api/redis_task.html" />
@@ -182,12 +191,18 @@
         <option value="$PROJECT_DIR$/webui/forms.py" />
         <option value="$PROJECT_DIR$/templates/api/apps_form.html" />
         <option value="$PROJECT_DIR$/templates/api/apps.html" />
-        <option value="$PROJECT_DIR$/webui/urls.py" />
         <option value="$PROJECT_DIR$/templates/nginx/vhost.j2" />
-        <option value="$PROJECT_DIR$/templates/webui/index.html" />
-        <option value="$PROJECT_DIR$/webui/views.py" />
         <option value="$PROJECT_DIR$/templates/api/apps_group.html" />
         <option value="$PROJECT_DIR$/webui/wiget.py" />
+        <option value="$PROJECT_DIR$/proc/apps.py" />
+        <option value="$PROJECT_DIR$/proc/serializers.py" />
+        <option value="$PROJECT_DIR$/proc/models.py" />
+        <option value="$PROJECT_DIR$/proc/tasks.py" />
+        <option value="$PROJECT_DIR$/templates/api/porcs.html" />
+        <option value="$PROJECT_DIR$/proc/views.py" />
+        <option value="$PROJECT_DIR$/webui/views.py" />
+        <option value="$PROJECT_DIR$/webui/urls.py" />
+        <option value="$PROJECT_DIR$/templates/webui/index.html" />
       </list>
     </option>
   </component>
@@ -217,6 +232,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -227,17 +243,13 @@
             <path>
               <item name="nxp" type="b2602c69:ProjectViewProjectNode" />
               <item name="nxp" type="462c0819:PsiDirectoryNode" />
-              <item name="abstract" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="nxp" type="b2602c69:ProjectViewProjectNode" />
               <item name="nxp" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="nxp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="nxp" type="462c0819:PsiDirectoryNode" />
-              <item name="core" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="webui" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="nxp" type="b2602c69:ProjectViewProjectNode" />
@@ -248,22 +260,21 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ips" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PythonContentEntriesConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\work\open\nxp\templates\api" />
+      <recent name="C:\work\open\nxp\proc" />
+      <recent name="C:\work\open\nxp" />
       <recent name="C:\work\open\nxp\templates\nginx" />
       <recent name="C:\work\open\nxp\webui" />
-      <recent name="C:\work\open\nxp\nxp" />
-      <recent name="C:\work\open\nxp\core" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -496,7 +507,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -505,8 +516,8 @@
       <window_info anchor="bottom" id="Run" order="2" weight="0.14617941" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" weight="0.22757475" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.16943522" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20801815" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.47603306" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21331316" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="right" id="SciView" order="3" />
@@ -533,59 +544,10 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="1" />
+      <option name="time" value="2" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/templates/api/conf.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="519">
-          <caret line="42" column="48" selection-start-line="42" selection-start-column="29" selection-end-line="42" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/nginx/context.conf">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="1" selection-start-line="1" selection-end-line="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/nginx/hiwemeet_https.conf">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/api/redis_group.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="58" selection-start-line="58" selection-end-line="60" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/api/apps_group_form.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="69" column="71" selection-start-line="69" selection-start-column="71" selection-end-line="69" selection-end-column="71" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/api/site_headers.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="72" column="36" lean-forward="true" selection-start-line="72" selection-start-column="36" selection-end-line="72" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/api/site_headers_form.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="519">
-          <caret line="77" column="37" selection-start-line="77" selection-start-column="37" selection-end-line="77" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/api/site_headers_confirm_delete.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="151">
@@ -712,13 +674,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/webui/tasks.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="20" column="44" selection-start-line="20" selection-start-column="44" selection-end-line="20" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/env/Lib/site-packages/ansible/executor/task_queue_manager.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="224">
@@ -733,35 +688,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/tests.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/kafka.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-675">
           <caret line="9" column="13" lean-forward="true" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/requirements.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="399">
           <caret line="16" column="16" lean-forward="true" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -786,89 +723,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/views.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/webui/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="263" column="41" lean-forward="true" selection-start-line="263" selection-start-column="41" selection-end-line="263" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webui/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-473">
-          <caret line="16" column="39" selection-start-line="16" selection-start-column="39" selection-end-line="16" selection-end-column="39" />
-          <folding>
-            <element signature="e#14#58#0" expanded="true" />
-            <element signature="e#754#1610#0" />
-            <element signature="e#1664#1801#0" />
-            <element signature="e#1855#1992#0" />
-            <element signature="e#2042#2433#0" />
-            <element signature="e#2482#2867#0" />
-            <element signature="e#2887#3040#0" />
-            <element signature="e#2921#3324#0" />
-            <element signature="e#3382#3535#0" />
-            <element signature="e#3800#3945#0" />
-            <element signature="e#3998#4143#0" />
-            <element signature="e#4192#4592#0" />
-            <element signature="e#4645#4774#0" />
-            <element signature="e#4826#4955#0" />
-            <element signature="e#5007#5063#0" />
-            <element signature="e#5111#5550#0" />
-            <element signature="e#5611#5772#0" />
-            <element signature="e#5832#5993#0" />
-            <element signature="e#6053#6125#0" />
-            <element signature="e#6181#6644#0" />
-            <element signature="e#6706#6871#0" />
-            <element signature="e#6932#7096#0" />
-            <element signature="e#7157#7231#0" />
-            <element signature="e#7288#7754#0" />
-            <element signature="e#7811#7956#0" />
-            <element signature="e#8012#8157#0" />
-            <element signature="e#8213#8277#0" />
-            <element signature="e#8329#8780#0" />
-            <element signature="e#8841#8992#0" />
-            <element signature="e#9052#9203#0" />
-            <element signature="e#9263#9330#0" />
-            <element signature="e#9386#9878#0" />
-            <element signature="e#9936#10089#0" />
-            <element signature="e#10142#10559#0" />
-            <element signature="e#10606#10962#0" />
-            <element signature="e#11416#12134#0" />
-            <element signature="e#12891#15468#0" />
-            <element signature="e#20519#22042#0" />
-            <element signature="e#25429#26379#0" />
-            <element signature="e#27708#28138#0" />
-            <element signature="e#28727#29887#0" />
-            <element signature="e#31680#32920#0" />
-            <element signature="e#34797#36038#0" />
-            <element signature="e#37275#37724#0" />
-            <element signature="e#37764#39329#0" />
-            <element signature="e#39375#40486#0" />
-            <element signature="e#42210#42379#0" />
-            <element signature="e#42441#42610#0" />
-            <element signature="e#42672#42748#0" />
-            <element signature="e#42806#43283#0" />
-            <element signature="e#43342#43499#0" />
-            <element signature="e#43558#43715#0" />
-            <element signature="e#43774#43844#0" />
-            <element signature="e#43899#44359#0" />
-            <element signature="e#44412#44545#0" />
-            <element signature="e#44598#44731#0" />
-            <element signature="e#44784#44842#0" />
-            <element signature="e#44891#45348#0" />
-            <element signature="e#45400#45851#0" />
-            <element signature="e#45900#46565#0" />
-            <element signature="e#47476#48180#0" />
-            <element signature="e#49121#51927#0" />
-            <element signature="e#55845#58828#0" />
-            <element signature="e#62374#63728#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/api/apps.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-690">
@@ -885,22 +739,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/api/group.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
+        <state relative-caret-position="2940">
           <caret line="98" selection-start-line="98" selection-end-line="100" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webui/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="22" column="110" selection-start-line="22" selection-start-column="93" selection-end-line="22" selection-end-column="110" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/api/apps_group.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="97" column="89" lean-forward="true" selection-start-line="97" selection-start-column="89" selection-end-line="97" selection-end-column="89" />
+        <state relative-caret-position="2910">
+          <caret line="97" column="89" selection-start-line="97" selection-start-column="89" selection-end-line="97" selection-end-column="89" />
         </state>
       </provider>
     </entry>
@@ -913,14 +760,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/api/serializers.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="83" column="26" lean-forward="true" selection-start-line="83" selection-start-column="26" selection-end-line="83" selection-end-column="26" />
+        <state relative-caret-position="2400">
+          <caret line="83" column="26" selection-start-line="83" selection-start-column="26" selection-end-line="83" selection-end-column="26" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/api/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2091">
+        <state relative-caret-position="510">
           <caret line="22" column="33" selection-start-line="22" selection-start-column="33" selection-end-line="22" selection-end-column="33" />
           <folding>
             <element signature="e#18#52#0" expanded="true" />
@@ -937,7 +784,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/webui/forms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
+        <state relative-caret-position="1980">
           <caret line="70" column="37" selection-start-line="70" selection-start-column="37" selection-end-line="70" selection-end-column="37" />
           <folding>
             <element signature="e#15#71#0" expanded="true" />
@@ -945,17 +792,122 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/webui/wiget.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="99">
+          <caret line="43" column="13" selection-start-line="43" selection-start-column="13" selection-end-line="43" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webui/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webui/apps.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proc/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/api/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
+        <state relative-caret-position="495">
           <caret line="32" column="17" selection-start-line="32" selection-start-column="17" selection-end-line="32" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/webui/wiget.py">
+    <entry file="file://$PROJECT_DIR$/proc/apps.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="43" column="13" selection-start-line="43" selection-start-column="13" selection-end-line="43" selection-end-column="13" />
+        <state relative-caret-position="180">
+          <caret line="6" column="16" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proc/admin.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webui/tasks.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-360">
+          <caret line="16" column="26" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/api/porcs.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="99" column="63" selection-start-line="99" selection-start-column="63" selection-end-line="99" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proc/serializers.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proc/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-45">
+          <caret line="12" column="14" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="14" />
+          <folding>
+            <element signature="e#14#53#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proc/tasks.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-195">
+          <caret line="34" column="22" selection-start-line="34" selection-start-column="22" selection-end-line="34" selection-end-column="22" />
+          <folding>
+            <element signature="e#14#42#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webui/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="511">
+          <caret line="1012" column="13" lean-forward="true" selection-start-line="1012" selection-start-column="13" selection-end-line="1012" selection-end-column="13" />
+          <folding>
+            <element signature="e#14#51#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proc/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="9" column="31" lean-forward="true" selection-start-line="9" selection-start-column="31" selection-end-line="9" selection-end-column="31" />
+          <folding>
+            <element signature="e#13#51#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proc/urls.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webui/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="13" column="83" selection-start-line="13" selection-start-column="73" selection-end-line="13" selection-end-column="83" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/webui/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="156" column="28" lean-forward="true" selection-start-line="156" selection-start-column="28" selection-end-line="156" selection-end-column="28" />
         </state>
       </provider>
     </entry>

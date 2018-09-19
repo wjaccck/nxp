@@ -2,12 +2,17 @@ from django.conf.urls import include, url
 # from django.contrib import admin
 from webui import views
 from webui.forms import LoginForm
+from proc.views import Process_ViewSet
 # from info_api.models import List
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.views import login,logout
 
 urlpatterns = [
     url(r'^$',views.IndexTemplateView.as_view(),name='index'),
+    ### procs
+    url(r'^proc/$', Process_ViewSet.as_view(),name='procs'),
+    url(r'^proc-list/$', views.Historyprocs_ListViewSet.as_view(), name='procs-list'),
+
     ### status
     url(r'^status/$',views.Status_ListViewSet.as_view(),name='status-list'),
     url(r'^status/update/(?P<pk>\d+)/$',views.Status_UpdateViewSet.as_view(),name='status-update'),
