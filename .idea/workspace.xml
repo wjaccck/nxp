@@ -2,21 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a8356791-8dff-4783-a146-d6e83154db82" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/proc/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/proc/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/proc/apps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/proc/migrations/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/proc/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/proc/serializers.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/proc/tasks.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/proc/tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/proc/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/proc/views.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/api/porcs.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/webui/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/webui/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webui/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/webui/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webui/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/webui/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/api/porcs.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/api/procs.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -73,11 +59,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/webui/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="511">
-              <caret line="1012" column="13" lean-forward="true" selection-start-line="1012" selection-start-column="13" selection-end-line="1012" selection-end-column="13" />
+            <state relative-caret-position="151">
+              <caret line="1000" column="30" lean-forward="true" selection-start-line="1000" selection-start-column="30" selection-end-line="1000" selection-end-column="30" />
               <folding>
                 <element signature="e#14#51#0" expanded="true" />
               </folding>
@@ -97,7 +83,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/webui/index.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="345">
@@ -106,8 +92,8 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="porcs.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/api/porcs.html">
+      <file leaf-file-name="procs.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/api/procs.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="435">
               <caret line="99" column="63" selection-start-line="99" selection-start-column="63" selection-end-line="99" selection-end-column="63" />
@@ -219,7 +205,7 @@
       <path value="$PROJECT_DIR$/static/assets/global/plugins/bootstrap-sessiontimeout/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1378" />
@@ -244,6 +230,12 @@
               <item name="nxp" type="b2602c69:ProjectViewProjectNode" />
               <item name="nxp" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="nxp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="nxp" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="nxp" type="b2602c69:ProjectViewProjectNode" />
@@ -508,7 +500,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
@@ -841,7 +832,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/api/porcs.html">
+    <entry file="file://$PROJECT_DIR$/templates/api/procs.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="435">
           <caret line="99" column="63" selection-start-line="99" selection-start-column="63" selection-end-line="99" selection-end-column="63" />
@@ -867,16 +858,6 @@
           <caret line="34" column="22" selection-start-line="34" selection-start-column="22" selection-end-line="34" selection-end-column="22" />
           <folding>
             <element signature="e#14#42#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webui/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="511">
-          <caret line="1012" column="13" lean-forward="true" selection-start-line="1012" selection-start-column="13" selection-end-line="1012" selection-end-column="13" />
-          <folding>
-            <element signature="e#14#51#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -908,6 +889,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
           <caret line="156" column="28" lean-forward="true" selection-start-line="156" selection-start-column="28" selection-end-line="156" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webui/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="151">
+          <caret line="1000" column="30" lean-forward="true" selection-start-line="1000" selection-start-column="30" selection-end-line="1000" selection-end-column="30" />
+          <folding>
+            <element signature="e#14#51#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
