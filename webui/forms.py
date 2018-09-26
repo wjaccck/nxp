@@ -41,7 +41,12 @@ class Nginx_groupForm(forms.ModelForm):
 class AppsForm(forms.ModelForm):
 
     port = forms.CharField(label='端口', max_length=50, widget=forms.TextInput({'class': 'form-control'}))
-
+    def clean(self):
+        cleaned_data = super(AppsForm,self).clean()
+        host = cleaned_data.get('host')
+        port = cleaned_data.get('port')
+        if Apps.objects.filter(host=host,port=port).count()>0:
+            self._errors['port'] = self.error_class([u"应用已经录入"])
     class Meta:
         fields = (
                     'host',

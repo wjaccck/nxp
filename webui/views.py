@@ -78,9 +78,9 @@ class Apps_ListViewSet(Base_ListViewSet):
             pass
 
         if name:
-            return self.model.objects.filter(host__icontains=name)
+            return self.model.objects.filter(host__name__icontains=name)
         else:
-            return self.model.objects.all()
+            return self.model.objects.all().order_by("-modified_date")
 
 class Apps_CreateViewSet(Base_CreateViewSet):
     model = Apps
@@ -110,7 +110,7 @@ class Apps_group_ListViewSet(Base_ListViewSet):
         if name:
             return self.model.objects.filter(name__icontains=name)
         else:
-            return self.model.objects.all()
+            return self.model.objects.all().order_by("-modified_date")
 
 class Apps_group_CreateViewSet(Base_CreateViewSet):
     model = Apps_group
@@ -152,7 +152,7 @@ class Group_ListViewSet(Base_ListViewSet):
         if name:
             return self.model.objects.filter(name__icontains=name)
         else:
-            return self.model.objects.all()
+            return self.model.objects.all().order_by("-modified_date")
 #
 class Site_CreateViewSet(Base_CreateViewSet):
     model = Site
@@ -1009,6 +1009,6 @@ class Historyprocs_ListViewSet(Base_ListViewSet):
             pass
 
         if name:
-            return self.model.objects.filter(host=name)
+            return self.model.objects.filter(host=name).order_by("-modified_date")
         else:
-            return self.model.objects.all()
+            return self.model.objects.all().order_by("-modified_date")
